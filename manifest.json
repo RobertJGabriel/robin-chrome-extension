@@ -1,0 +1,26 @@
+{
+  "name": "Robin",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Admin Panel for Robin Browser and Flitering Software",
+  "browser_action": {
+        "default_popup": "index.html"
+  },
+     
+
+  "permissions": ["tabs","storage", "http://*/*", "https://*/*","fontSettings"],
+    
+    
+    "content_scripts": [
+    {
+        "matches": [ "http://*/*", "https://*/*", "file:///*/*"],
+        "js": ["assets/js/myScript.js"],
+        "all_frames": true
+    }
+  ],
+  "web_accessible_resources": ["assets/css/*.css","assets/css/fonts/*","assets/js/*.js"]
+}
+
+
+
+
