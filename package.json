@@ -1,0 +1,33 @@
+{
+    name: "Robin",
+    version: "1.0.0",
+    description: "Admin Panel for Robin Browser and Flitering Software",
+    main: "login.html",
+    dependencies: {
+        chalk: "^1.1.1",
+        request: "^2.65.0",
+        sanitize - html: "^1.11.1",
+        thesaurus: "0.0.0"
+    },
+    devDependencies: {},
+    scripts: {
+        test: "echo "
+        Error: no test specified " && exit 1"
+    },
+    repository: {
+        type: "git",
+        url: "git+https://github.com/Projectbird/robin-test.git"
+    },
+    keywords: [
+"flitering",
+"system",
+"robin",
+"profanity"
+],
+    author: "Robert Gabriel",
+    license: "ISC",
+    bugs: {
+        url: "https://github.com/Projectbird/profanity/issues"
+    },
+    homepage: "https://github.com/Projectbird/profanity#readme"
+}
