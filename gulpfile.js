@@ -13,8 +13,9 @@ var gulp = require('gulp'),
 
 
 
+
 gulp.task('less', function () {
-    gulp.src('./assets/css/*.less')
+    gulp.src('./assets/less/style.less')
         .pipe(less()
             .on('error', gutil.log)
             .on('error', gutil.beep)
@@ -28,9 +29,9 @@ gulp.task('less', function () {
         .pipe(minifyCSS({
             keepSpecialComments: 1
         }))
-        .pipe(gulp.dest('./assets/css/'));
+        .pipe(gulp.dest('./assets/dist/'));
 });
 
 
 // Default Task
-gulp.task('default', ['build']);
+gulp.task('default', ['less']);

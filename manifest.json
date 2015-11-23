@@ -4,11 +4,8 @@
     "manifest_version": 2,
     "description": "Admin Panel for Robin Browser and Flitering Software",
     "browser_action": {
-        "default_icon": "assets/img/logo.png",
-        "default_popup": "login.html"
-    },
-    "icons": {
-        "128": "assets/img/logo.png"
+
+        "default_popup": "index.html"
     },
 
     "permissions": ["tabs", "storage", "http://*/*", "https://*/*", "fontSettings"],
@@ -17,7 +14,7 @@
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*", "file:///*/*"],
-            "js": ["assets/js/core.js"],
+            "js": ["assets/js/test.js"],
             "all_frames": true
     }
   ],
