@@ -5,7 +5,6 @@ window.onload = function () {
         // the main firebase reference
         var rootRef = new Firebase('https://projectbird.firebaseio.com/');
 
-
         // pair our routes to our form elements and controller
         var routeMap = {
             '#/': {

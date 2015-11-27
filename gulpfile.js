@@ -29,7 +29,26 @@ gulp.task('less', function () {
         .pipe(minifyCSS({
             keepSpecialComments: 1
         }))
-        .pipe(gulp.dest('./assets/dist/'));
+        .pipe(gulp.dest('./assets/dist/css/'));
+});
+
+
+gulp.task('popless', function () {
+    gulp.src('./assets/less/popup.less')
+        .pipe(less()
+            .on('error', gutil.log)
+            .on('error', gutil.beep)
+            .on('error', function (err) {
+                console.log('err', err);
+                var pathToFile = err.fileName.split('\\');
+                file = pathToFile[pathToFile.length - 1];
+                say.speak('Albert', 'Less is fucked---' + file + '--- Line ' + err.lineNumber);
+            })
+        )
+        .pipe(minifyCSS({
+            keepSpecialComments: 1
+        }))
+        .pipe(gulp.dest('./assets/dist/css/'));
 });
 
 
