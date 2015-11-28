@@ -1,6 +1,7 @@
 window.onload = function () {
     (function (jQuery, Firebase, Path) {
         "use strict";
+        // If no current user send to register page
 
         // the main firebase reference
         var rootRef = new Firebase('https://projectbird.firebaseio.com/');
@@ -156,7 +157,7 @@ window.onload = function () {
         ////////////////////////////////////////
 
         controllers.login = function (form) {
-
+            document.getElementById('frmLogin').style.display = 'block';
             // Form submission for logging in
             form.on('submit', function (e) {
 
@@ -190,11 +191,12 @@ window.onload = function () {
 
         // logout immediately when the controller is invoked
         controllers.logout = function (form) {
+            document.getElementById('frmLogin').style.display = 'block';
             rootRef.unauth();
         };
 
         controllers.register = function (form) {
-
+            document.getElementById('frmLogin').style.display = 'none';
             // Form submission for registering
             form.on('submit', function (e) {
 
@@ -209,6 +211,7 @@ window.onload = function () {
         };
 
         controllers.profile = function (form) {
+            document.getElementById('frmLogin').style.display = 'none';
             // Check the current user
             var user = rootRef.getAuth();
             var userRef;
