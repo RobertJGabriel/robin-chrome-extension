@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <title>Robin</title>
     <!-- Bootstrap Core CSS -->
-    <link href="./assets/dist/css/popup.css" rel="stylesheet">
+    <link href="assets/dist/popup.css" rel="stylesheet">
     <style>
         .area {
             display: none;
@@ -19,50 +19,62 @@
 
 <body>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-material-light-blue shadow-z-2" ng-style="themeStyle">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-material-light-blue-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse navbar-material-light-blue-collapse">
+    <div class="navbar navbar-warning" style="margin-bottom:0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">Robin</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-warning-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#whitelist" data-toggle="tab">Whitelist</a>
+                    </li>
+                    <li><a href="#blacklist11" data-toggle="tab">Blacklist</a>
+                    </li>
+                    <li><a href="#chidlren" data-toggle="tab">Children</a>
+                    </li>
+                    <li><a href="#/logout">Log out</a>
+                    </li>
 
-            <ul class="nav navbar-nav navbar-right" method="post">
-                <li class="dropdown ">
-                    <a href="index.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><i class="mdi-action-settings"></i><b class="caret"></b></a>
-                    <ul class="dropdown-menu shadow-z-3" id="specialId">
-                        <li><a data-toggle="modal" data-target="#settings-dialog" id="settingsButton">About</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="http://www.projectbird.com" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Who Deveolped it ">Projectbird</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                </ul>
+
+            </div>
         </div>
-    </nav>
+    </div>
     <!-- End Fixed navbar -->
 
 
     <div class="container-fluid">
+
         <div class="row">
+            <!-- ALERT BOX -->
+            <div class="alert alert-dismissible alert-success" id="alert ">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h3 class="panel-title" id="alert-title">Welcome to Robin</h3>
+                <p id="alert-detail"></p>
+            </div>
+            <!-- / ALERT BOX -->
+            <!-- LOGOUT -->
+            <form id="frmLogout" role="form" class="alert alert-dismissible alert-success area">
+                <h2></h2>
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h3 class="panel-title" id="alert-title">You are logged out!</h3>
+                <p id="alert-detail"></p>
+            </form>
+            <!-- / LOGOUT -->
+
+
             <div class="col-sm-4">
             </div>
 
             <div class="col-sm-4">
 
-                <!-- ALERT BOX -->
-                <div class="alert alert-dismissible alert-success" id="alert ">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <h3 class="panel-title" id="alert-title">Welcome to Robin</h3>
-                    <p id="alert-detail"></p>
-                </div>
-                <!-- / ALERT BOX -->
-
                 <!-- LOGIN -->
-                <form id="frmLogin" role="form" class="panel panel-danger area">
+                <form id="frmLogin" role="form" class="panel panel-danger area" style="margin-top: 40px;">
                     <div class="panel-heading">
                         <h3 class="panel-title">Login</h3>
                     </div>
@@ -75,7 +87,7 @@
                             <label for="txtPass">Password</label>
                             <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
                         </div>
-                        <button type="submit" class="btn btn-default btn-block">Login</button>
+                        <button type="submit" class="btn btn-default btn-info ">Login</button>
                         <br />
                         <br />
                         <!--------------
@@ -85,22 +97,15 @@
                             <a href="#" class="btn btn-default bt-social" data-provider="github">GitHub</a>
                             <a href="#" class="btn btn-warning" id="btAnon">Anon</a>
                             ----------->
-                        <a href="#/register" class="btn btn-warning">register</a>
+                        <a href="#/register" class="btn btn-block">register</a>
                     </div>
                 </form>
                 <!-- / LOGIN -->
 
-                <!-- LOGOUT -->
-                <form id="frmLogout" role="form" class="alert alert-dismissible alert-success area">
-                    <h2></h2>
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <h3 class="panel-title" id="alert-title">You are logged out!</h3>
-                    <p id="alert-detail"></p>
-                </form>
-                <!-- / LOGOUT -->
+
 
                 <!-- REGISTER -->
-                <form id="frmRegister" class="panel panel-danger area" role="form">
+                <form id="frmRegister" class="panel panel-danger area" role="form" style="margin-top: 40px;">
                     <div class="panel-heading">
                         <h3 class="panel-title">Register</h3>
                     </div>
@@ -120,22 +125,12 @@
                 <!-- / REGISTER -->
 
                 <!-- PROFILE -->
-                <form id="frmProfile" role="form" class="panel panel-danger area">
+                <form id="frmProfile" role="form" class="panel panel-danger area" style="margin-top: 40px;">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title">My Children </h3>
+                        <h3 class="panel-title">Dashboard</h3>
                     </div>
                     <div class="panel-body">
-                        <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                            <li><a href="#whitelist" data-toggle="tab">Whitelist</a>
-                            </li>
-                            <li><a href="#blacklist11" data-toggle="tab">Blacklist</a>
-                            </li>
-                            <li><a href="#chidlren" data-toggle="tab">Children</a>
-                            </li>
-                            <li><a href="#/logout">Log out</a>
-                            </li>
-                        </ul>
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade active in" id="whitelist">
                                 <form role="form" id="whitelist2">
@@ -231,8 +226,8 @@
         </div>
     </div>
 
-    <script src="./assets/dist/js/lib/L.js"></script>
-    <script src="./assets/dist/js/app/main.js" type="application/javascript"></script>
+    <script src="assets/dist/js/lib/L.js"></script>
+    <script src="assets/dist/js/app/main.js" type="application/javascript"></script>
 </body>
 
 </html>

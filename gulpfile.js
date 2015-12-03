@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var flatten = require('gulp-flatten');
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 var less = require('gulp-less');

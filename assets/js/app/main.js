@@ -15,7 +15,5 @@ function regexUrlextensioncheck(n) {
 
     var s = document.URL,
         e = new RegExp(n);
-
-
     return e.test(s);
 }
