@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <title>Robin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/dist/popup.css" rel="stylesheet">
+    <style>
+        .area {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-warning" style="margin-bottom:0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">Robin</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-warning-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#whitelist" data-toggle="tab">Whitelist</a>
+                    </li>
+                    <li><a href="#blacklist11" data-toggle="tab">Blacklist</a>
+                    </li>
+                    <li><a href="#chidlren" data-toggle="tab">Children</a>
+                    </li>
+                    <li><a href="#/logout">Log out</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Fixed navbar -->
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <!-- ALERT BOX -->
+            <div class="alert alert-dismissible alert-success" id="alert ">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h3 class="panel-title" id="alert-title">Welcome to Robin</h3>
+                <p id="alert-detail"></p>
+            </div>
+            <!-- / ALERT BOX -->
+            <!-- LOGOUT -->
+            <form id="frmLogout" role="form" class="alert alert-dismissible alert-success area">
+                <h2></h2>
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h3 class="panel-title" id="alert-title">You are logged out!</h3>
+                <p id="alert-detail"></p>
+            </form>
+            <!-- / LOGOUT -->
+
+
+            <div class="col-sm-4">
+            </div>
+
+            <div class="col-sm-4">
+
+                <!-- LOGIN -->
+                <form id="frmLogin" role="form" class="panel panel-danger area" style="margin-top: 40px;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Login</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="txtEmail">Email address</label>
+                            <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" name="email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPass">Password</label>
+                            <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
+                        </div>
+                        <button type="submit" class="btn btn-default btn-info ">Login</button>
+                        <br />
+                        <br />
+                        <!--------------
+                            <h4>Login with</h4>
+                            <a href="#" class="btn btn-primary bt-social" data-provider="facebook">Facebook</a>
+                            <a href="#" class="btn btn-info bt-social" data-provider="twitter">Twitter</a>
+                            <a href="#" class="btn btn-default bt-social" data-provider="github">GitHub</a>
+                            <a href="#" class="btn btn-warning" id="btAnon">Anon</a>
+                            ----------->
+                        <a href="#/register" class="btn btn-block">register</a>
+                    </div>
+                </form>
+                <!-- / LOGIN -->
+
+
+
+                <!-- REGISTER -->
+                <form id="frmRegister" class="panel panel-danger area" role="form" style="margin-top: 40px;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Register</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="txtRegEmail">Email address</label>
+                            <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" name="email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegPass">Password</label>
+                            <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
+                        </div>
+                        <button type="submit" class="btn btn-default">Register</button>
+                        <a href="#/">Login</a>
+                    </div>
+                </form>
+                <!-- / REGISTER -->
+
+                <!-- PROFILE -->
+                <form id="frmProfile" role="form" class="panel panel-danger area" style="margin-top: 40px;">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Dashboard</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade active in" id="whitelist">
+                                <form role="form" id="whitelist2">
+                                    <div class="form-group">
+                                        <label for="txtName">Whitelisted </label>
+                                        <input type="text" class="form-control" id="txtName1" placeholder="http://www.example.com" name="name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtName">Whitelisted</label>
+                                        <input type="text" class="form-control" id="txtName2" placeholder="http://www.example.com" name="name" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="txtName">Whitelisted</label>
+                                        <input type="text" class="form-control" id="txtName3" placeholder="http://www.example.com" name="name" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="blacklist11">
+                                <form role="form" id="blacklist2">
+                                    <div class="form-group">
+                                        <label for="txtName">Blacklisted </label>
+                                        <input type="text" class="form-control" id="Blacklisted1" placeholder="http://www.example.com" name="name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtName">Blacklisted</label>
+                                        <input type="text" class="form-control" id="Blacklisted2" placeholder="http://www.example.com" name="name" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="txtName">Blacklisted</label>
+                                        <input type="text" class="form-control" id="Blacklisted3" placeholder="http://www.example.com" name="name" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="chidlren">
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="row-picture">
+                                            <img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/sauro/128.jpg" alt="icon">
+                                        </div>
+                                        <div class="row-content">
+                                            <h4 class="list-group-item-heading">Childone <span class="label label-success">Online</span></h4>
+                                            <input type="number" class="form-control" id="inputEmail" placeholder="30 mins">
+                                            <br>
+                                            <p class="list-group-item-text">Current URL : <span class="label label-warning">http://www.sex.com</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="list-group-separator"></div>
+                                    <div class="list-group-item">
+                                        <div class="row-picture">
+                                            <img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/davidburlton/128.jpg" alt="icon">
+                                        </div>
+                                        <div class="row-content">
+                                            <h4 class="list-group-item-heading">Childone <span class="label label-success">Online</span></h4>
+                                            <input type="number" class="form-control" id="inputEmail" placeholder="30 mins">
+                                            <br>
+                                            <p class="list-group-item-text">Current URL : http://www.projectbir.com</p>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="list-group-separator"></div>
+                                    <div class="list-group-item">
+                                        <div class="row-picture">
+                                            <img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kerem/128.jpg" alt="icon">
+                                        </div>
+                                        <div class="row-content">
+                                            <h4 class="list-group-item-heading">Child 3 <span class="label label-warning">Offline</span></h4>
+                                            <input type="number" class="form-control" id="inputEmail" placeholder="30 mins">
+                                            <br>
+                                            <p class="list-group-item-text">Current url : None</p>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-separator"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- / PROFILE -->
+                <hr />
+
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+    <script src="assets/dist/js/lib/L.js"></script>
+    <script src="assets/dist/js/app/main.js" type="application/javascript"></script>
+</body>
+
+</html>
