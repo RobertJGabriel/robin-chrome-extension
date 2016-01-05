@@ -15,12 +15,5 @@
     "background": {
         "scripts": ["assets/js/app/background.js"]
     },
-    "content_scripts": [
-        {
-            "matches": ["http://*/*", "https://*/*", "file:///*/*"],
-            "js": ["assets/js/lib/core.js"],
-            "all_frames": true
-    }
-  ],
     "web_accessible_resources": ["assets/css/bootstrap/*.css", "assets/css/fonts/*", "assets/js/*.js"]
 }

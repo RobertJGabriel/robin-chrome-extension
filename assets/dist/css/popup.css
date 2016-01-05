@@ -14650,196 +14650,24 @@ hr.on-light {
   pointer-events: none;
   color: #757575;
 }
-#frmLogin {
-  display: block;
-  height: 400px;
-}
-.fatButtons {
-  float: left;
-  height: 40px;
-  margin-left: 1%;
-  margin-top: 10px;
-  width: 31%;
-}
-#wrapper {
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  background-image: url(../img/starsBackground.png);
-  background-position: center;
-  background-size: cover;
-  min-height: 100%;
-  padding-left: 0;
-  transition: all 0.5s ease;
-}
-#wrapper.toggled {
-  padding-left: 0;
-}
-#wrapper.toggled #sidebar-wrapper {
-  width: 250px;
-  width: 0;
-}
-#wrapper.toggled #page-content-wrapper {
-  margin-right: -250px;
-  margin-right: 0;
-  position: absolute;
+.header-panel {
+  background-color: #009587;
+  height: 144px;
   position: relative;
+  z-index: 3;
 }
-#sidebar-wrapper {
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  background: #000000;
-  height: 100%;
-  left: 250px;
-  margin-left: -250px;
-  overflow-y: auto;
-  position: absolute;
-  position: fixed;
-  transition: all 0.5s ease;
-  width: 250px;
-  width: 0;
-  z-index: 1000;
-}
-#page-content-wrapper {
-  padding: 15px;
-  padding: 20px;
-  position: absolute;
-  position: relative;
-  width: 100%;
-}
-.sidebar-nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  width: 250px;
-}
-.sidebar-nav li {
-  line-height: 40px;
-  text-indent: 20px;
-}
-.sidebar-nav li a {
-  color: #999999;
-  display: block;
-  text-decoration: none;
-}
-.sidebar-nav li a:hover {
-  background: rgba(255, 255, 255, 0.2);
+.header-panel h1 {
+  bottom: 10px;
   color: #ffffff;
-  text-decoration: none;
-}
-.sidebar-nav li a:active {
-  text-decoration: none;
-}
-.sidebar-nav li a:focus {
-  text-decoration: none;
-}
-.sidebar-nav > .sidebar-brand {
-  font-size: 18px;
-  height: 65px;
-  line-height: 60px;
-}
-.sidebar-nav > .sidebar-brand a {
-  color: #999999;
-}
-.sidebar-nav > .sidebar-brand a:hover {
-  background: none;
-  color: #ffffff;
-}
-.footer {
-  display: none;
-}
-@media only screen and (max-width : 768px) {
-  .footer {
-    display: block;
-    background-color: #000000;
-    clear: both;
-    height: 60px;
-    margin-top: -60px;
-    position: relative;
-  }
-}
-.quickAdd {
-  float: right;
-  margin-top: -19px;
-}
-@media only screen and (min-width:460px) {
-  #wrapper.toggled {
-    padding-left: 0;
-  }
-  #wrapper.toggled #sidebar-wrapper {
-    width: 0;
-  }
-  #wrapper.toggled #page-content-wrapper {
-    margin-right: 0;
-    position: relative;
-  }
-  #sidebar-wrapper {
-    position: absolute;
-    width: 250px;
-  }
-  #page-content-wrapper {
-    padding: 20px;
-    position: relative;
-  }
-}
-.responsive-calendar .controls {
-  text-align: center;
-}
-.responsive-calendar .controls a {
-  cursor: pointer;
-}
-.responsive-calendar .controls h4 {
-  display: inline;
-}
-.responsive-calendar .day-headers {
-  font-size: 0;
-}
-.responsive-calendar .days {
-  font-size: 0;
-}
-.responsive-calendar .day {
-  display: inline-block;
-  font-size: 14px;
-  position: relative;
-  text-align: center;
-  width: 14.285714285714286%;
-}
-.responsive-calendar .day a {
-  color: #000000;
-  cursor: pointer;
-  display: block;
-  padding: 20% 0 20% 0;
-}
-.responsive-calendar .day a:hover {
-  background-color: #eeeeee;
-  text-decoration: none;
-}
-.responsive-calendar .day .badge {
+  font-size: 20px;
+  font-weight: 400;
+  padding-left: 35px;
   position: absolute;
-  right: 2px;
-  top: 2px;
-  z-index: 1;
 }
-.responsive-calendar .day.header {
-  border-bottom: 1px gray solid;
+.pages {
+  margin-top: -40px;
+  z-index: 4;
 }
-.responsive-calendar .day.active a {
-  background-color: #1d86c8;
-  color: #ffffff;
-}
-.responsive-calendar .day.active a:hover {
-  background-color: #36a0e2;
-}
-.responsive-calendar .day.active .not-current {
-  background-color: #8fcaef;
-  color: #ffffff;
-}
-.responsive-calendar .day.active .not-current:hover {
-  background-color: #bcdff5;
-}
-.responsive-calendar .day.not-current a {
-  color: #dddddd;
+body {
+  background-color: white !important;
 }
