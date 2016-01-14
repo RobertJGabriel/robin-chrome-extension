@@ -1,6 +1,6 @@
 (function (angular) {
     'use strict';
-    angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
+    angular.module('ngViewExample', ['ngRoute'])
         .config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
                 $routeProvider
@@ -14,16 +14,11 @@
                         controller: 'login',
                         controllerAs: 'login'
                     })
-                    .when('/signup', {
-                        templateUrl: './assets/view/signup.html',
-                        controller: 'signup',
-                        controllerAs: 'signup'
-                    })
 
-                .when('/logout', {
-                    templateUrl: './assets/view/logout.html',
-                    controller: 'logout',
-                    controllerAs: 'logout'
+                .when('/signup', {
+                    templateUrl: './assets/view/signup.html',
+                    controller: 'signup',
+                    controllerAs: 'signup'
                 });
 
                 $locationProvider.html5Mode(true);
@@ -38,13 +33,12 @@
             this.name = "login";
             this.params = $routeParams;
   }])
-        .controller('logout', ['$routeParams', function ($routeParams) {
-            this.name = "logout";
+        .controller('signup', ['$routeParams', function ($routeParams) {
+            this.name = "signup";
             this.params = $routeParams;
   }])
-
-    .controller('signup', ['$routeParams', function ($routeParams) {
-        this.name = "signup";
-        this.params = $routeParams;
+        .controller('ChapterCtrl', ['$routeParams', function ($routeParams) {
+            this.name = "ChapterCtrl";
+            this.params = $routeParams;
   }]);
 })(window.angular);
