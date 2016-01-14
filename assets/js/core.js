@@ -1,61 +1,50 @@
-var app = angular.module("opendyslexic", []);
-app.controller("core", function ($scope) {
+(function (angular) {
+    'use strict';
+    angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
+        .config(['$routeProvider', '$locationProvider',
+    function ($routeProvider, $locationProvider) {
+                $routeProvider
+                    .when('/login/', {
+                        templateUrl: './assets/view/login.html',
+                        controller: 'login',
+                        controllerAs: 'login'
+                    })
+                    .when('/', {
+                        templateUrl: './assets/view/login.html',
+                        controller: 'login',
+                        controllerAs: 'login'
+                    })
+                    .when('/signup', {
+                        templateUrl: './assets/view/signup.html',
+                        controller: 'signup',
+                        controllerAs: 'signup'
+                    })
 
+                .when('/logout', {
+                    templateUrl: './assets/view/logout.html',
+                    controller: 'logout',
+                    controllerAs: 'logout'
+                });
 
-    var sync, elem, code, style;
+                $locationProvider.html5Mode(true);
+  }])
+        .controller('MainCtrl', ['$route', '$routeParams', '$location',
+    function ($route, $routeParams, $location) {
+                this.$route = $route;
+                this.$location = $location;
+                this.$routeParams = $routeParams;
+  }])
+        .controller('login', ['$routeParams', function ($routeParams) {
+            this.name = "login";
+            this.params = $routeParams;
+  }])
+        .controller('logout', ['$routeParams', function ($routeParams) {
+            this.name = "logout";
+            this.params = $routeParams;
+  }])
 
-    $scope.init = function () {
-
-        chrome.storage.sync.get({
-            booleans: true
-        }, function (items) {
-            if (items.booleans === true) {
-                document.getElementById('like').checked = 1;
-                document.getElementById('message').innerHTML = "On";
-            } else {
-                document.getElementById('like').checked = 0;
-                document.getElementById('message').innerHTML = "Off";
-            }
-        });
-
-    };
-
-
-
-
-
-
-    /**
-     * Adds Saves the Optoins 
-     */
-    $scope.openDyslexic = function () { // Saves options to chrome.storage
-
-        checkBox = document.getElementById('like').checked;
-        chrome.storage.sync.set({
-            booleans: checkBox
-        }, function () { // Update status to let user know options were saved.
-            if (checkBox === true) {
-                document.getElementById('message').innerHTML = "On";
-            } else {
-                document.getElementById('message').innerHTML = "Off";
-            }
-            reload();
-        });
-    };
-
-
-    function reload() {
-        chrome.tabs.getSelected(null, function (tab) {
-            code = 'window.location.reload();';
-            chrome.tabs.executeScript(tab.id, {
-                code: code
-            });
-        });
-    }
-
-
-
-
-
-
-});
+    .controller('signup', ['$routeParams', function ($routeParams) {
+        this.name = "signup";
+        this.params = $routeParams;
+  }]);
+})(window.angular);
