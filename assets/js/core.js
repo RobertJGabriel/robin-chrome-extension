@@ -113,9 +113,12 @@
 
     // create a user but not login
     // returns a promsie
-    function createUser(userObj) {
+    function createUser(email, password) {
         var deferred = $.Deferred();
-        ref.createUser(userObj, function (error, userObj) {
+        ref.createUser({
+            email: $('input[name="email"]').val(),
+            password: $('input[name="password"]').val()
+        }, function (error, userObj) {
             error ? errorCodes(error) : displayMessage(userObj);
         });
 
