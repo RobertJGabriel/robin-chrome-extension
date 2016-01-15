@@ -34,8 +34,9 @@
                 this.$routeParams = $routeParams;
   }])
         .controller('login', ['$routeParams', function ($routeParams) {
-            this.name = "login";
-            this.params = $routeParams;
+            this.name = "logsssin";
+            this.params ="l";
+            $scope.prop1 = "First";
   }])
         .controller('signup', ['$routeParams', function ($routeParams) {
             this.name = "signup";
@@ -52,11 +53,9 @@
 
 
             $scope.signup = function () {
-                console.log('hj');
                 var userAndPass = $(this).serializeObject();
                 alert(userAndPass);
                 createUser(userAndPass);
-
             };
         })
 
