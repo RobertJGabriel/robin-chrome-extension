@@ -1,5 +1,6 @@
 (function (angular) {
     'use strict';
+
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
 
@@ -12,7 +13,7 @@
                         controller: 'login',
                         controllerAs: 'login'
                     })
-                    .when('/', {
+                    .when('/index.html', {
                         templateUrl: './assets/view/login.html',
                         controller: 'login',
                         controllerAs: 'login'
