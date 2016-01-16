@@ -83,7 +83,7 @@
                 password: $('input[name="password"]').val()
             }, function (error) {
 
-                error ? errorCodes(error) : displayMessage("Created User");
+                error ? errorCodes(error) : $scope.showError = null, displayMessage("Created User");
             });
 
             function errorCodes(error) {
