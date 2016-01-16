@@ -1,125 +1,100 @@
 (function (angular) {
     'use strict';
-
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
-
-    angular.module('ngViewExample', ['ngRoute'])
-        .config(['$routeProvider', '$locationProvider',
-    function ($routeProvider, $locationProvider) {
-                $routeProvider
-                    .when('/login/', {
-                        templateUrl: './assets/view/login.html',
-                        controller: 'login',
-                        controllerAs: 'login'
-                    })
-                    .when('/index.html', {
-                        templateUrl: './assets/view/login.html',
-                        controller: 'login',
-                        controllerAs: 'login'
-                    })
-                    .when('/profile/child/:childname', {
-                        templateUrl: './assets/view/profile.html',
-                        controller: 'child',
-                        controllerAs: 'child'
-                    })
-                    .when('/signup', {
-                        templateUrl: './assets/view/signup.html',
-                        controller: 'signup',
-                        controllerAs: 'signup'
-                    });
-
-                $locationProvider.html5Mode(true);
-  }])
-
-
-    .controller('MainCtrl', function ($scope, $route, $routeParams, $location) {
+    angular.module('ngViewExample', ['ngRoute']).config(['$routeProvider',
+		'$locationProvider',
+		function ($routeProvider, $locationProvider) {
+            $routeProvider.when('/login/', {
+                templateUrl: './assets/view/login.html',
+                controller: 'login',
+                controllerAs: 'login'
+            }).when('/index.html', {
+                templateUrl: './assets/view/login.html',
+                controller: 'login',
+                controllerAs: 'login'
+            }).when('/profile/child/:childname', {
+                templateUrl: './assets/view/profile.html',
+                controller: 'child',
+                controllerAs: 'child'
+            }).when('/signup', {
+                templateUrl: './assets/view/signup.html',
+                controller: 'signup',
+                controllerAs: 'signup'
+            });
+            $locationProvider.html5Mode(true);
+		}
+	]).controller('MainCtrl', function ($scope, $route, $routeParams, $location) {
         $scope.name = "ChapterController";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-    })
-
-    .controller('login', function ($scope, $route, $routeParams, $location) {
+    }).controller('login', function ($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
         $scope.showError = false;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-    })
-
-    .controller('child', function ($scope, $route, $routeParams, $location) {
+    }).controller('child', function ($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-    })
-
-    .controller('signup', function ($scope, $route, $routeParams, $location) {
+    }).controller('signup', function ($scope, $route, $routeParams, $location) {
         $scope.name = "signup";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
+    }).controller("forms", function ($scope) {
 
-    })
-
-    .controller("forms", function ($scope) {
+        $scope.logout = function () { // Saves options to chrome.storage
+            ref.unauth();
+            console.log('logged out');
+        };
 
         $scope.login = function () { // Saves options to chrome.storage
             ref.authWithPassword({
                 email: $('input[name="email"]').val(),
                 password: $('input[name="password"]').val()
-            }, authHandler);
+            }, function (error, userObj) {
+                error ? errorCodes(error) : displayMessage(userObj);
+            });
         };
 
+        function errorCodes(error) {
+            switch (error.code) {
+                case "EMAIL_TAKEN":
+                    displayMessage("The new user account cannot be created use.");
+                    break;
+                case "INVALID_EMAIL":
+                    displayMessage("The specified eeeeemail is not a valid email.");
+                    break;
+                default:
+                    displayMessage("Error creating user:", error);
+            }
+        }
+
+        function displayMessage(message) {
+            setTimeout(function () {
+                $scope.showError = true;
+                $scope.errorMessage = message;
+                $scope.$apply();
+            }, 1000)
+        }
         $scope.signup = function () {
             $scope.showError = null;
             ref.createUser({
                 email: $('input[name="email"]').val(),
                 password: $('input[name="password"]').val()
             }, function (error) {
-
-                error ? errorCodes(error) : $scope.showError = null, displayMessage("Created User");
+                error ? errorCodes(error) : displayMessage("you are logged in");
             });
-
-            function errorCodes(error) {
-
-                switch (error.code) {
-                    case "EMAIL_TAKEN":
-                        displayMessage("The new user account cannot be created use.");
-                        break;
-                    case "INVALID_EMAIL":
-                        displayMessage("The specified eeeeemail is not a valid email.");
-                        break;
-                    default:
-                        displayMessage("Error creating user:", error);
-                }
-            }
-
-
-            function displayMessage(message) {
-
-                setTimeout(function () {
-                    $scope.showError = true;
-                    $scope.errorMessage = message;
-                    $scope.$apply();
-                }, 1000)
-            }
-
         };
-
-
-
-
-
     });
-
-
-
 
     function getName(authData) {
         switch (authData.provider) {
@@ -140,19 +115,20 @@
         }
     }
 
+    ref.onAuth(authDataCallback);
 
-
-    // Create a callback to handle the result of the authentication
-    function authHandler(error, authData) {
-        if (error) {
-            console.log("Login Failed!", error);
+    function authDataCallback(authData) {
+        if (authData) {
+            console.log("User " + authData.uid + " is logged in with " + authData.provider);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            console.log("User is logged out");
         }
     }
-
-
-
+    if (authData) {
+        console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    } else {
+        console.log("User is logged out");
+    }
 
     function displayMessage(userData) {
         console.log("Successfully created user account with uid:", userData.uid);
@@ -162,5 +138,4 @@
             name: "getName(userData)"
         });
     }
-
 })(window.angular);
