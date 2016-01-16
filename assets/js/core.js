@@ -18,66 +18,108 @@
                         controller: 'login',
                         controllerAs: 'login'
                     })
-
-                .when('/signup', {
-                    templateUrl: './assets/view/signup.html',
-                    controller: 'signup',
-                    controllerAs: 'signup'
-                });
+                    .when('/profile/child/:childname', {
+                        templateUrl: './assets/view/profile.html',
+                        controller: 'child',
+                        controllerAs: 'child'
+                    })
+                    .when('/signup', {
+                        templateUrl: './assets/view/signup.html',
+                        controller: 'signup',
+                        controllerAs: 'signup'
+                    });
 
                 $locationProvider.html5Mode(true);
   }])
-        .controller('MainCtrl', ['$route', '$routeParams', '$location',
-    function ($route, $routeParams, $location) {
-                this.$route = $route;
-                this.$location = $location;
-                this.$routeParams = $routeParams;
-  }])
-        .controller('login', ['$routeParams', function ($routeParams) {
-            this.name = "logsssin";
-            this.params ="l";
-            $scope.prop1 = "First";
-  }])
-        .controller('signup', ['$routeParams', function ($routeParams) {
-            this.name = "signup";
-            this.params = $routeParams;
-  }])
-        .controller("forms", function ($scope) {
-
-            $scope.login = function () { // Saves options to chrome.storage
-                ref.authWithPassword({
-                    email: $('input[name="email"]').val(),
-                    password: $('input[name="password"]').val()
-                }, authHandler);
-            };
 
 
-            $scope.signup = function () {
-                var userAndPass = $(this).serializeObject();
-                alert(userAndPass);
-                createUser(userAndPass);
-            };
-        })
+    .controller('MainCtrl', function ($scope, $route, $routeParams, $location) {
+        $scope.name = "ChapterController";
+        $scope.params = $routeParams;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+    })
 
-    .controller('ChapterCtrl', ['$routeParams', function ($routeParams) {
-        this.name = "ChapterCtrl";
-        this.params = $routeParams;
-  }]);
+    .controller('login', function ($scope, $route, $routeParams, $location) {
+        $scope.name = "loginsss";
+        $scope.params = $routeParams;
+        $scope.showError = false;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+    })
 
+    .controller('child', function ($scope, $route, $routeParams, $location) {
+        $scope.name = "loginsss";
+        $scope.params = $routeParams;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+    })
 
+    .controller('signup', function ($scope, $route, $routeParams, $location) {
+        $scope.name = "signup";
+        $scope.params = $routeParams;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
 
-    function errorModal() {
-        var modalInstance = $modal.open({
-            templateUrl: '../view/error.html',
-            controller: 'ModalInstanceCtrl',
-            size: 'sm',
-            resolve: {
-                item: function () {
-                    return $scope.item;
+    })
+
+    .controller("forms", function ($scope) {
+
+        $scope.login = function () { // Saves options to chrome.storage
+            ref.authWithPassword({
+                email: $('input[name="email"]').val(),
+                password: $('input[name="password"]').val()
+            }, authHandler);
+        };
+
+        $scope.signup = function () {
+            $scope.showError = null;
+            ref.createUser({
+                email: $('input[name="email"]').val(),
+                password: $('input[name="password"]').val()
+            }, function (error) {
+
+                error ? errorCodes(error) : displayMessage("Created User");
+            });
+
+            function errorCodes(error) {
+
+                switch (error.code) {
+                    case "EMAIL_TAKEN":
+                        displayMessage("The new user account cannot be created use.");
+                        break;
+                    case "INVALID_EMAIL":
+                        displayMessage("The specified eeeeemail is not a valid email.");
+                        break;
+                    default:
+                        displayMessage("Error creating user:", error);
                 }
             }
-        });
-    }
+
+
+            function displayMessage(message) {
+
+                setTimeout(function () {
+                    $scope.showError = true;
+                    $scope.errorMessage = message;
+                    $scope.$apply();
+                }, 1000)
+            }
+
+        };
+
+
+
+
+
+    });
+
+
+
 
     function getName(authData) {
         switch (authData.provider) {
@@ -111,37 +153,6 @@
 
 
 
-    // create a user but not login
-    // returns a promsie
-    function createUser(email, password) {
-        var deferred = $.Deferred();
-        ref.createUser({
-            email: $('input[name="email"]').val(),
-            password: $('input[name="password"]').val()
-        }, function (error, userObj) {
-            error ? errorCodes(error) : displayMessage(userObj);
-        });
-
-        return deferred.promise();
-    }
-
-
-
-
-    function errorCodes(error) {
-        switch (error.code) {
-            case "EMAIL_TAKEN":
-                console.log("The new user account cannot be created because the email is already in use.");
-                errorModal();
-                break;
-            case "INVALID_EMAIL":
-                console.log("The specified email is not a valid email.");
-                errorModal();
-                break;
-            default:
-                console.log("Error creating user:", error);
-        }
-    }
 
     function displayMessage(userData) {
         console.log("Successfully created user account with uid:", userData.uid);
@@ -151,10 +162,5 @@
             name: "getName(userData)"
         });
     }
-
-
-
-
-
 
 })(window.angular);

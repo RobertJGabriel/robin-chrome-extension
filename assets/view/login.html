@@ -1,7 +1,8 @@
-<p>controller: {{name}}<br />
-Book Id: {{params.bookId}}<br />
-Chapter Id: {{params.chapterId}}</p>
 <form class="form-horizontal" id="login" ng-controller="forms" ng-submit="login()">
+
+    <div ng-show="showError">
+        <div ng-include src="'assets/view/error.html'"></div>
+    </div>
     <fieldset>
         <div class="form-group">
             <h5>Login</h5>

@@ -40,6 +40,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login">Login</a></li>
                     <li><a href="signup">Signup</a></li>
+                    <li><a href="profile/child/steve">Signup</a></li>
                 </ul>
             </div>
         </div>
@@ -47,33 +48,27 @@
     <div class="header-panel">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-md-12 col-xs-12 col-sm-12 ">
 
                 </div>
             </div>
         </div>
     </div>
     <div class="container ">
-        <div class="row">
-            <div class="col-md-3 col-xs-3 col-sm-3">
 
-            </div>
+
+        <div class="row">
+
+            <div class="col-md-3 col-xs-3 col-sm-3"></div>
             <div class="col-md-6 col-xs-6 col-sm-6  well pages">
 
+
                 <div ng-view></div>
-
-                    <pre>$location.path() = {{main.$location.path()}}</pre>
-   <pre>$name = {{main.$route.current.name}}</pre>
-             
-                    <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
-                    <pre>$route.current.params = {{main.$route.current.params}}</pre>
-                  
-                    <pre>$routeParams = {{main.$routeParams}}</pre>
-          
-
             </div>
             <div class="col-md-3 col-xs-3 col-sm-3">
+
             </div>
+
         </div>
     </div>
 
