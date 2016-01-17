@@ -30,6 +30,10 @@
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
+        $scope.logout = function () {
+            ref.unauth();
+            console.log('logged out');
+        };
     }).controller('login', function ($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
@@ -37,24 +41,33 @@
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
+        $scope.logout = function () {
+            ref.unauth();
+            console.log('logged out');
+        };
     }).controller('child', function ($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
+        $scope.logout = function () {
+            ref.unauth();
+            console.log('logged out');
+        };
     }).controller('signup', function ($scope, $route, $routeParams, $location) {
         $scope.name = "signup";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-    }).controller("forms", function ($scope) {
-
-        $scope.logout = function () { // Saves options to chrome.storage
+        $scope.logout = function () {
             ref.unauth();
             console.log('logged out');
         };
+    }).controller("forms", function ($scope) {
+
+
 
         $scope.login = function () { // Saves options to chrome.storage
             ref.authWithPassword({
