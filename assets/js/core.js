@@ -79,6 +79,7 @@
         };
 
         function errorCodes(error) {
+            console.log(error);
             switch (error.code) {
                 case "EMAIL_TAKEN":
                     displayMessage("The new user account cannot be created use.");
@@ -103,8 +104,8 @@
             ref.createUser({
                 email: $('input[name="email"]').val(),
                 password: $('input[name="password"]').val()
-            }, function (error) {
-                error ? errorCodes(error) : displayMessage("you are logged in");
+            }, function (error, userObj) {
+                error ? errorCodes(error) : displayMessage2(userObj, $('input[name="email"]').val(), $('input[name="password"]').val());
             });
         };
     });
@@ -143,12 +144,13 @@
         console.log("User is logged out");
     }
 
-    function displayMessage(userData) {
+    function displayMessage2(userData, email, password) {
+
         console.log("Successfully created user account with uid:", userData.uid);
         var usersRef = ref.child(userData.uid);
         usersRef.child('information').set({
-            provider: "userData.provider",
-            name: "getName(userData)"
+            email: email,
+            password: password
         });
     }
 })(window.angular);
