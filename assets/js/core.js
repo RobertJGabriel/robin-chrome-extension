@@ -73,13 +73,27 @@
             ref.authWithPassword({
                 email: $('input[name="email"]').val(),
                 password: $('input[name="password"]').val()
-            }, function (error, userObj) {
-                error ? errorCodes(error) : displayMessage(userObj);
+            }, function (error, authData) {
+                console.log(authData);
+                error ? errorCodes(error) : displayMessage("Just logging you in"), loginInformation($('input[name="email"]').val(), authData);
             });
         };
 
+
+        function loginInformation(email, id) {
+            ref.startAt(email)
+                .endAt(email)
+                .once('value', function (snapshot) {
+                    console.log(snapshot.val());
+                }, function (errorObject) {
+                    console.log("The read failed: " + errorObject.code);
+                });
+
+        }
+
         function errorCodes(error) {
-            console.log(error);
+            console.log(error.code);
+
             switch (error.code) {
                 case "EMAIL_TAKEN":
                     displayMessage("The new user account cannot be created use.");
@@ -87,8 +101,14 @@
                 case "INVALID_EMAIL":
                     displayMessage("The specified eeeeemail is not a valid email.");
                     break;
+                case "INVALID_USER":
+                    displayMessage("The email or password wasnt there ");
+                    break;
+                case "INVALID_PASSWORD":
+                    displayMessage("The email or password wasnt there ");
+                    break;
                 default:
-                    displayMessage("Error creating user:", error);
+                    displayMessage("Error :", error);
             }
         }
 
@@ -105,10 +125,22 @@
                 email: $('input[name="email"]').val(),
                 password: $('input[name="password"]').val()
             }, function (error, userObj) {
-                error ? errorCodes(error) : displayMessage2(userObj, $('input[name="email"]').val(), $('input[name="password"]').val());
+
+                error ? errorCodes(error) : displayMessage(userObj), createData(userObj, $('input[name="email"]').val(), $('input[name="password"]').val());
             });
         };
     });
+
+    function createData(userData, email, password) {
+
+        var usersRef = ref.child(userData.uid);
+        usersRef.child('information').set({
+            email: email,
+            password: password
+        });
+
+    }
+
 
     function getName(authData) {
         switch (authData.provider) {
@@ -129,6 +161,8 @@
         }
     }
 
+
+
     ref.onAuth(authDataCallback);
 
     function authDataCallback(authData) {
@@ -144,13 +178,5 @@
         console.log("User is logged out");
     }
 
-    function displayMessage2(userData, email, password) {
 
-        console.log("Successfully created user account with uid:", userData.uid);
-        var usersRef = ref.child(userData.uid);
-        usersRef.child('information').set({
-            email: email,
-            password: password
-        });
-    }
 })(window.angular);
