@@ -1,5 +1,5 @@
 
-![alt text](https://github.com/RobertJGabriel/Robin/blob/master/assets/img/banner/readme.jpg "Robin")
+![alt text](https://github.com/Projectbird/Robin-Chrome/blob/gh-pages/assets/img/icons/dev-logo.png "Robin")
 #About
 This is the Chrome Extension for Robin.Robin is light weight award winning web browser. It is designed for low-end machines and for teachers and parents to block websites and terms.We are pleased to have won Two All-Ireland Eircom Spider awards. So far it has been downloaded 40,000 times. The goal is to build a free light weight browser with a built in filtering system.
 
