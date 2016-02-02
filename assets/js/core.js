@@ -1,10 +1,10 @@
-(function (angular) {
+(function(angular) {
     'use strict';
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
     angular.module('ngViewExample', ['ngRoute']).config(['$routeProvider',
-		'$locationProvider',
-		function ($routeProvider, $locationProvider) {
+        '$locationProvider',
+        function($routeProvider, $locationProvider) {
             $routeProvider.when('/login/', {
                 templateUrl: './assets/view/login.html',
                 controller: 'login',
@@ -23,77 +23,70 @@
                 controllerAs: 'signup'
             });
             $locationProvider.html5Mode(true);
-		}
-	]).controller('MainCtrl', function ($scope, $route, $routeParams, $location) {
+        }
+    ]).controller('MainCtrl', function($scope, $route, $routeParams, $location) {
         $scope.name = "ChapterController";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function () {
+        $scope.logout = function() {
             ref.unauth();
             console.log('logged out');
         };
-    }).controller('login', function ($scope, $route, $routeParams, $location) {
+    }).controller('login', function($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
         $scope.showError = false;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function () {
+        $scope.logout = function() {
             ref.unauth();
             console.log('logged out');
         };
-    }).controller('child', function ($scope, $route, $routeParams, $location) {
+    }).controller('child', function($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function () {
+        $scope.logout = function() {
             ref.unauth();
             console.log('logged out');
         };
-    }).controller('signup', function ($scope, $route, $routeParams, $location) {
+    }).controller('signup', function($scope, $route, $routeParams, $location) {
         $scope.name = "signup";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function () {
+        $scope.logout = function() {
             ref.unauth();
             console.log('logged out');
         };
-    }).controller("forms", function ($scope) {
-
-
-
-        $scope.login = function () { // Saves options to chrome.storage
+    }).controller("forms", function($scope) {
+        $scope.login = function() { // Saves options to chrome.storage
             ref.authWithPassword({
-                email: $('input[name="email"]').val(),
-                password: $('input[name="password"]').val()
-            }, function (error, authData) {
+                email: $('input[name="loginemail"]').val(),
+                password: $('input[name="loginpassword"]').val()
+            }, function(error, authData) {
                 console.log(authData);
-                error ? errorCodes(error) : displayMessage("Just logging you in"), loginInformation($('input[name="email"]').val(), authData);
+                error ? errorCodes(error) : displayMessage("Just logging you in"),
+                    loginInformation($('input[name="loginemail"]').val(), authData);
             });
         };
 
-
         function loginInformation(email, id) {
-            ref.startAt(email)
-                .endAt(email)
-                .once('value', function (snapshot) {
-                    console.log(snapshot.val());
-                }, function (errorObject) {
-                    console.log("The read failed: " + errorObject.code);
-                });
-
+            ref.startAt(email).endAt(email).once('value', function(snapshot) {
+                console.log(snapshot.val());
+            }, function(errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
         }
 
         function errorCodes(error) {
             console.log(error.code);
-
             switch (error.code) {
                 case "EMAIL_TAKEN":
                     displayMessage("The new user account cannot be created use.");
@@ -113,34 +106,30 @@
         }
 
         function displayMessage(message) {
-            setTimeout(function () {
+            setTimeout(function() {
                 $scope.showError = true;
                 $scope.errorMessage = message;
                 $scope.$apply();
             }, 1000)
         }
-        $scope.signup = function () {
+        $scope.signup = function() {
             $scope.showError = null;
             ref.createUser({
-                email: $('input[name="email"]').val(),
-                password: $('input[name="password"]').val()
-            }, function (error, userObj) {
-
-                error ? errorCodes(error) : displayMessage(userObj), createData(userObj, $('input[name="email"]').val(), $('input[name="password"]').val());
+                email: $('input[name="signupemail"]').val(),
+                password: $('input[name="signuppassword"]').val()
+            }, function(error, userObj) {
+                error ? errorCodes(error) : displayMessage("Awesome , Your account is created"), createData(userObj, $('input[name="signupemail"]').val(), $('input[name="signuppassword"]').val());
             });
         };
     });
 
     function createData(userData, email, password) {
-
         var usersRef = ref.child(userData.uid);
         usersRef.child('information').set({
             email: email,
             password: password
         });
-
     }
-
 
     function getName(authData) {
         switch (authData.provider) {
@@ -160,9 +149,6 @@
             console.log("User is logged out");
         }
     }
-
-
-
     ref.onAuth(authDataCallback);
 
     function authDataCallback(authData) {
@@ -177,6 +163,4 @@
     } else {
         console.log("User is logged out");
     }
-
-
 })(window.angular);
