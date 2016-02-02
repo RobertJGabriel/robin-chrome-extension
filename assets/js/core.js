@@ -5,23 +5,40 @@
     angular.module('ngViewExample', ['ngRoute']).config(['$routeProvider',
         '$locationProvider',
         function($routeProvider, $locationProvider) {
-            $routeProvider.when('/login/', {
-                templateUrl: './assets/view/login.html',
-                controller: 'login',
-                controllerAs: 'login'
-            }).when('/index.html', {
-                templateUrl: './assets/view/login.html',
-                controller: 'login',
-                controllerAs: 'login'
-            }).when('/profile/child/:childname', {
-                templateUrl: './assets/view/profile.html',
-                controller: 'child',
-                controllerAs: 'child'
-            }).when('/signup', {
-                templateUrl: './assets/view/signup.html',
-                controller: 'signup',
-                controllerAs: 'signup'
-            });
+
+            if (authData) {
+               // console.log("User " + authData.uid + " is logged in with " + authData.provider);
+                $routeProvider.when('/index.html', {
+                    templateUrl: './assets/view/home.html',
+                    controller: 'login',
+                    controllerAs: 'login'
+                }).when('/logout', {
+                    templateUrl: './assets/view/logout.html',
+                    controller: 'logout',
+                    controllerAs: 'logout'
+                }).when('/profile/child/:childname', {
+                    templateUrl: './assets/view/profile.html',
+                    controller: 'child',
+                    controllerAs: 'child'
+                });
+            } else {
+                 $routeProvider.when('/login/', {
+                    templateUrl: './assets/view/login.html',
+                    controller: 'login',
+                    controllerAs: 'login'
+                }).when('/index.html', {
+                    templateUrl: './assets/view/login.html',
+                    controller: 'login',
+                    controllerAs: 'login'
+                }).when('/signup', {
+                    templateUrl: './assets/view/signup.html',
+                    controller: 'signup',
+                    controllerAs: 'signup'
+                });
+                console.log("User is logged out");
+            }
+
+        
             $locationProvider.html5Mode(true);
         }
     ]).controller('MainCtrl', function($scope, $route, $routeParams, $location) {
@@ -30,10 +47,9 @@
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function() {
-            ref.unauth();
-            console.log('logged out');
-        };
+
+
+    
     }).controller('login', function($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
@@ -41,30 +57,36 @@
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function() {
-            ref.unauth();
-            console.log('logged out');
-        };
+        $scope.loggedin = false;
+
+       
+    }).controller('logout', function($scope, $route, $routeParams, $location) {
+        $scope.name = "logout";
+        $scope.params = $routeParams;
+        $scope.showError = false;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+        $scope.loggedin = false;
+
+        ref.unauth();
+        console.log('logged out');
     }).controller('child', function($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function() {
-            ref.unauth();
-            console.log('logged out');
-        };
+        $scope.loggedin = true;
+
     }).controller('signup', function($scope, $route, $routeParams, $location) {
         $scope.name = "signup";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-        $scope.logout = function() {
-            ref.unauth();
-            console.log('logged out');
-        };
+        $scope.loggedin = false;
+
     }).controller("forms", function($scope) {
         $scope.login = function() { // Saves options to chrome.storage
             ref.authWithPassword({
@@ -118,7 +140,10 @@
                 email: $('input[name="signupemail"]').val(),
                 password: $('input[name="signuppassword"]').val()
             }, function(error, userObj) {
-                error ? errorCodes(error) : displayMessage("Awesome , Your account is created"), createData(userObj, $('input[name="signupemail"]').val(), $('input[name="signuppassword"]').val());
+                error ? errorCodes(error) : displayMessage(
+                    "Awesome , Your account is created"), createData(userObj, $(
+                    'input[name="signupemail"]').val(), $(
+                    'input[name="signuppassword"]').val());
             });
         };
     });
@@ -142,14 +167,6 @@
         }
     }
 
-    function authDataCallback(authData) {
-        if (authData) {
-            console.log("User " + authData.uid + " is logged in with " + authData.provider);
-        } else {
-            console.log("User is logged out");
-        }
-    }
-    ref.onAuth(authDataCallback);
 
     function authDataCallback(authData) {
         if (authData) {
@@ -158,9 +175,7 @@
             console.log("User is logged out");
         }
     }
-    if (authData) {
-        console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    } else {
-        console.log("User is logged out");
-    }
+
+    ref.onAuth(authDataCallback);
+
 })(window.angular);

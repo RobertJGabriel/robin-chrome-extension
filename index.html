@@ -38,9 +38,9 @@
             <div class="navbar-collapse collapse navbar-responsive-collapse">
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login">Login</a></li>
-                    <li><a href="signup">Signup</a></li>
-                    <li><a ng-click="logout()">Logout</a></li>
+                    <li ng-show="!loggedin" ><a href="login">Login</a></li>
+                    <li ng-show="!loggedin" ><a href="signup">Signup</a></li>
+                    <li ng-show="loggedin" ><a href="logout">Logout</a></li>
                 </ul>
             </div>
         </div>
