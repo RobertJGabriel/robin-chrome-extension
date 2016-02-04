@@ -14650,8 +14650,26 @@ hr.on-light {
   pointer-events: none;
   color: #757575;
 }
-body,
-html {
-  width: 400px;
-  height: 500px;
+.header-panel {
+  background-color: #009587;
+  background-image: url('../../img/banner/mountains.jpg');
+  height: 144px;
+  background-size: contain;
+  position: relative;
+  z-index: 3;
+}
+.header-panel h1 {
+  bottom: 10px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 400;
+  padding-left: 35px;
+  position: absolute;
+}
+.pages {
+  margin-top: -40px;
+  z-index: 4;
+}
+body {
+  background-color: white !important;
 }

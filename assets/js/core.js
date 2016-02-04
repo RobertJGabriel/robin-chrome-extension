@@ -2,7 +2,8 @@
     'use strict';
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
-    angular.module('ngViewExample', ['ngRoute']).config(['$routeProvider',
+
+    angular.module('robinChrome', ['ngRoute']).config(['$routeProvider',
         '$locationProvider',
         function($routeProvider, $locationProvider) {
 
@@ -10,8 +11,8 @@
                // console.log("User " + authData.uid + " is logged in with " + authData.provider);
                 $routeProvider.when('/index.html', {
                     templateUrl: './assets/view/home.html',
-                    controller: 'login',
-                    controllerAs: 'login'
+                    controller: 'main',
+                    controllerAs: 'main'
                 }).when('/logout', {
                     templateUrl: './assets/view/logout.html',
                     controller: 'logout',
@@ -28,38 +29,27 @@
                     controllerAs: 'login'
                 }).when('/index.html', {
                     templateUrl: './assets/view/login.html',
-                    controller: 'login',
-                    controllerAs: 'login'
+                    controller: 'main',
+                    controllerAs: 'main'
                 }).when('/signup', {
                     templateUrl: './assets/view/signup.html',
-                    controller: 'signup',
-                    controllerAs: 'signup'
+                    controller: 'main',
+                    controllerAs: 'main'
                 });
                 console.log("User is logged out");
             }
 
-        
             $locationProvider.html5Mode(true);
         }
-    ]).controller('MainCtrl', function($scope, $route, $routeParams, $location) {
-        $scope.name = "ChapterController";
+    ]).controller('main', function($scope, $route, $routeParams, $location) {
+        $scope.name = "robin";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
-
-
-    
-    }).controller('login', function($scope, $route, $routeParams, $location) {
-        $scope.name = "loginsss";
-        $scope.params = $routeParams;
         $scope.showError = false;
-        $scope.$route = $route;
-        $scope.$location = $location;
-        $scope.$routeParams = $routeParams;
         $scope.loggedin = false;
-
-       
+    
     }).controller('logout', function($scope, $route, $routeParams, $location) {
         $scope.name = "logout";
         $scope.params = $routeParams;
@@ -68,9 +58,8 @@
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
         $scope.loggedin = false;
-
         ref.unauth();
-        console.log('logged out');
+
     }).controller('child', function($scope, $route, $routeParams, $location) {
         $scope.name = "loginsss";
         $scope.params = $routeParams;
@@ -79,15 +68,10 @@
         $scope.$routeParams = $routeParams;
         $scope.loggedin = true;
 
-    }).controller('signup', function($scope, $route, $routeParams, $location) {
-        $scope.name = "signup";
-        $scope.params = $routeParams;
-        $scope.$route = $route;
-        $scope.$location = $location;
-        $scope.$routeParams = $routeParams;
-        $scope.loggedin = false;
-
     }).controller("forms", function($scope) {
+
+
+        
         $scope.login = function() { // Saves options to chrome.storage
             ref.authWithPassword({
                 email: $('input[name="loginemail"]').val(),
@@ -165,6 +149,20 @@
             case 'facebook':
                 return authData.facebook.displayName;
         }
+    }
+
+    function addWord(url,words){
+var usersRef = ref.child("words");
+usersRef.set({
+  alanisawesome: {
+    date_of_birth: "June 23, 1912",
+    full_name: "Alan Turing"
+  },
+  gracehop: {
+    date_of_birth: "December 9, 1906",
+    full_name: "Grace Hopper"
+  }
+});
     }
 
 

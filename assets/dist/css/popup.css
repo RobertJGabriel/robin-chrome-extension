@@ -14652,7 +14652,9 @@ hr.on-light {
 }
 .header-panel {
   background-color: #009587;
+  background-image: url('../../img/banner/mountains.jpg');
   height: 144px;
+  background-size: contain;
   position: relative;
   z-index: 3;
 }
