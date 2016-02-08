@@ -3,8 +3,11 @@
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
     var listOfVerbs = ["anal", "ran", "love"];
-
-
+var ip = null;
+   getIp("", function(response) {
+               console.log(response);
+               ip = response;
+            });
     angular.module('robinChrome', ['ngRoute']).config(['$routeProvider','$locationProvider',
         function($routeProvider, $locationProvider) {
             if (authData) {
@@ -63,12 +66,13 @@
         function loginInformation(email, id) {
 
     
-            ref.child("users").startAt(id.uid).endAt(id.uid).once('value', function(snapshot) {
+            ref.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
                     console.log(snapshot.val());
                     redirect("/index.html");
                 }, function(errorObject) {
                     console.log("The read failed: " +errorObject.code);
                 });
+            setIpAddress(id);
         }
 
         function errorCodes(error) {
@@ -147,23 +151,39 @@
     });
 
     function createData(userData, email, password) {
+
         var usersRef = ref.child(userData.uid);
         usersRef.set({
             information:{
                 email: email,
                 password: password
             },
-            ip:{
-                ip1: "s"
-            }
+            ip:{}
+            
+        });
+        setIpAddress(userData.uid);
+    }
+
+    function setIpAddress(s){
+
+        var usersRef = ref.child(s).child("ip").child(removeRegex(ip));
+        usersRef.set({
+               status:"active"
         });
     }
+
+
+
+
 
           try {
 
     // Attach an asynchronous callback to read the data at our posts reference
     ref.child(authData.uid).on("value", function(snapshot) {
       console.log(snapshot.val());
+
+
+
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -228,8 +248,8 @@ catch (e) {
             type: "GET",
             dataType: "json",
             success: function(data) {
-                console.log(data.ip);
-                return data.ip;
+               ip = data.ip;
+               return data.ip;
             }
         });
     }
