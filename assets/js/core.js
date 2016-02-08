@@ -2,7 +2,9 @@
     'use strict';
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
-    var listOfVerbs = ["anal", "ran", "love"];
+    var listOfVerbs = ["fuck", "shit", "love"];
+// addWord("batman",listOfVerbs);
+//  getProfanityWords();
     var ip = null;
     getIp(function(response) {
         console.log(response);
@@ -182,7 +184,7 @@
     function addWord(url, words) {
         for (var i = 0; i < words.length - 1; i++) {
             profanityCheck(words[i], function(response) {
-                response === "true" ? wordToFirebase(words[i]) : null;
+                response === "true" ? profanityToFirebase(words[i]) : null;
             });
         }
     }
@@ -238,6 +240,22 @@
             console.log("The read failed: " + errorObject.code);
         });
     }
+
+    /**
+    * Get profanity words
+    * @param {none} none
+    * @param {none} none
+    * @return {none} none
+    */
+    function getProfanityWords() {
+        ref.child("profanity").on('value', function(snapshot) {
+            console.log(snapshot.val());
+           
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+    }
+
 
     /**
     * Get the current IP address of the user.
