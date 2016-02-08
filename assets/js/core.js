@@ -2,13 +2,12 @@
     'use strict';
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
-
+    var listOfVerbs = ["anal", "ran", "love"];
     angular.module('robinChrome', ['ngRoute']).config(['$routeProvider',
         '$locationProvider',
         function($routeProvider, $locationProvider) {
-
             if (authData) {
-               // console.log("User " + authData.uid + " is logged in with " + authData.provider);
+                console.log("User " + authData.uid + " is logged in with " + authData.provider);
                 $routeProvider.when('/index.html', {
                     templateUrl: './assets/view/home.html',
                     controller: 'main',
@@ -23,7 +22,7 @@
                     controllerAs: 'child'
                 });
             } else {
-                 $routeProvider.when('/login/', {
+                $routeProvider.when('/login/', {
                     templateUrl: './assets/view/login.html',
                     controller: 'login',
                     controllerAs: 'login'
@@ -38,73 +37,59 @@
                 });
                 console.log("User is logged out");
             }
-
             $locationProvider.html5Mode(true);
         }
-    ]).controller('main', function($scope, $route, $routeParams, $location) {
+    ]).controller('main', function($scope, $route, $routeParams,$location) {
         $scope.name = "robin";
         $scope.params = $routeParams;
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
         $scope.showError = false;
-        $scope.loggedin = false;
-    
-    }).controller('logout', function($scope, $route, $routeParams, $location) {
-        $scope.name = "logout";
-        $scope.params = $routeParams;
-        $scope.showError = false;
-        $scope.$route = $route;
-        $scope.$location = $location;
-        $scope.$routeParams = $routeParams;
-        $scope.loggedin = false;
-        ref.unauth();
+        $scope.loggedin = authData;
 
-    }).controller('child', function($scope, $route, $routeParams, $location) {
-        $scope.name = "loginsss";
-        $scope.params = $routeParams;
-        $scope.$route = $route;
-        $scope.$location = $location;
-        $scope.$routeParams = $routeParams;
-        $scope.loggedin = true;
-
-    }).controller("forms", function($scope) {
-
-
-        
+    //    addWord("http://www.google.com", listOfVerbs);
         $scope.login = function() { // Saves options to chrome.storage
-            ref.authWithPassword({
+            ref.child("users").authWithPassword({
                 email: $('input[name="loginemail"]').val(),
                 password: $('input[name="loginpassword"]').val()
             }, function(error, authData) {
                 console.log(authData);
-                error ? errorCodes(error) : displayMessage("Just logging you in"),
-                    loginInformation($('input[name="loginemail"]').val(), authData);
+                error ? errorCodes(error) :displayMessage("Just logging you in"),loginInformation($('input[name="loginemail"]').val(), authData);
             });
         };
 
         function loginInformation(email, id) {
-            ref.startAt(email).endAt(email).once('value', function(snapshot) {
-                console.log(snapshot.val());
-            }, function(errorObject) {
-                console.log("The read failed: " + errorObject.code);
-            });
+            ref.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
+                    console.log(snapshot.val());
+                    redirect("/index.html");
+                }, function(errorObject) {
+                    console.log("The read failed: " +errorObject.code);
+                });
         }
 
         function errorCodes(error) {
             console.log(error.code);
             switch (error.code) {
                 case "EMAIL_TAKEN":
-                    displayMessage("The new user account cannot be created use.");
+                    displayMessage(
+                        "The new user account cannot be created use."
+                    );
                     break;
                 case "INVALID_EMAIL":
-                    displayMessage("The specified eeeeemail is not a valid email.");
+                    displayMessage(
+                        "The specified eeeeemail is not a valid email."
+                    );
                     break;
                 case "INVALID_USER":
-                    displayMessage("The email or password wasnt there ");
+                    displayMessage(
+                        "The email or password wasnt there "
+                    );
                     break;
                 case "INVALID_PASSWORD":
-                    displayMessage("The email or password wasnt there ");
+                    displayMessage(
+                        "The email or password wasnt there "
+                    );
                     break;
                 default:
                     displayMessage("Error :", error);
@@ -120,16 +105,41 @@
         }
         $scope.signup = function() {
             $scope.showError = null;
-            ref.createUser({
+            ref.child("users").createUser({
                 email: $('input[name="signupemail"]').val(),
-                password: $('input[name="signuppassword"]').val()
+                password: $(
+                        'input[name="signuppassword"]')
+                    .val()
             }, function(error, userObj) {
-                error ? errorCodes(error) : displayMessage(
-                    "Awesome , Your account is created"), createData(userObj, $(
-                    'input[name="signupemail"]').val(), $(
-                    'input[name="signuppassword"]').val());
+                error ? errorCodes(error) :
+                    displayMessage(
+                        "Awesome , Your account is created"
+                    ), createData(userObj, $(
+                        'input[name="signupemail"]'
+                    ).val(), $(
+                        'input[name="signuppassword"]'
+                    ).val());
             });
         };
+    }).controller('logout', function($scope, $route, $routeParams,
+        $location) {
+        $scope.name = "logout";
+        $scope.params = $routeParams;
+        $scope.showError = false;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+        $scope.loggedin = false;
+        ref.unauth();
+        redirect("/index.html");
+    }).controller('child', function($scope, $route, $routeParams,
+        $location) {
+        $scope.name = "loginsss";
+        $scope.params = $routeParams;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+        $scope.loggedin = true;
     });
 
     function createData(userData, email, password) {
@@ -151,29 +161,60 @@
         }
     }
 
-    function addWord(url,words){
-var usersRef = ref.child("words");
-usersRef.set({
-  alanisawesome: {
-    date_of_birth: "June 23, 1912",
-    full_name: "Alan Turing"
-  },
-  gracehop: {
-    date_of_birth: "December 9, 1906",
-    full_name: "Grace Hopper"
-  }
-});
+    function removeRegex(stringToReplace) {
+        var desired = stringToReplace.replace(/[^\w\s]/gi, '')
+        return desired;
     }
 
+    function addWord(url, words) {
+        for (var i = 0; i < words.length - 1; i++) {
+            profanityCheck(words[i], function(response) {
+                response === "true" ? wordToFirebase(words[i]) :null;
+            });
+        }
+    }
+
+    function getip(json){
+         console.log(json.ip); // alerts the ip address
+         return json.ip;
+    }
+
+    function redirect(url){
+
+        setTimeout(function () {
+            window.location = url;
+        }, 5000);
+    }
+
+    function profanityCheck(word, callback) {
+        $.ajax({
+            url: "http://www.wdyl.com/profanity?q=" + word,
+            async: false,
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                callback(data.response);
+            },
+            error: function(e) {
+                alert('error, try again');
+            }
+        });
+    }
+
+    function wordToFirebase(word) {
+        var usersRef = ref.child("profanity").child(word);
+        usersRef.update({
+            profanity: "true"
+        });
+    }
 
     function authDataCallback(authData) {
         if (authData) {
-            console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            console.log("User " + authData.uid + " is logged in with " +
+                authData.provider);
         } else {
             console.log("User is logged out");
         }
     }
-
     ref.onAuth(authDataCallback);
-
 })(window.angular);
