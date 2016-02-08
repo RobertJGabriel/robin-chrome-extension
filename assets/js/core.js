@@ -3,15 +3,15 @@
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
     var listOfVerbs = ["anal", "ran", "love"];
-var ip = null;
-   getIp("", function(response) {
-               console.log(response);
-               ip = response;
-            });
-    angular.module('robinChrome', ['ngRoute']).config(['$routeProvider','$locationProvider',
+    var ip = null;
+    getIp(function(response) {
+        console.log(response);
+        ip = response;
+    });
+    angular.module('robinChrome', ['ngRoute']).config(['$routeProvider',
+        '$locationProvider',
         function($routeProvider, $locationProvider) {
             if (authData) {
-                console.log("User " + authData.uid + " is logged in with " + authData.provider);
                 $routeProvider.when('/index.html', {
                     templateUrl: './assets/view/home.html',
                     controller: 'main',
@@ -39,11 +39,10 @@ var ip = null;
                     controller: 'main',
                     controllerAs: 'main'
                 });
-                console.log("User is logged out");
             }
             $locationProvider.html5Mode(true);
         }
-    ]).controller('main', function($scope, $route, $routeParams,$location) {
+    ]).controller('main', function($scope, $route, $routeParams, $location) {
         $scope.name = "robin";
         $scope.params = $routeParams;
         $scope.$route = $route;
@@ -52,57 +51,45 @@ var ip = null;
         $scope.showError = false;
         $scope.loggedin = authData;
 
-    //    addWord("http://www.google.com", listOfVerbs);
-        $scope.login = function() { // Saves options to chrome.storage
+        /**
+        * Hand the login information for the robin
+        * @param {none} none 
+        * @param {none} none
+        * @return {none} none
+        */
+        $scope.login = function() {
+            $scope.showError = null;
             ref.child("users").authWithPassword({
                 email: $('input[name="loginemail"]').val(),
                 password: $('input[name="loginpassword"]').val()
             }, function(error, authData) {
-                console.log(authData);
-                error ? errorCodes(error) :displayMessage("Just logging you in"),loginInformation($('input[name="loginemail"]').val(), authData);
+                error ? errorCodes(error) : displayMessage("Just logging you in"),loginInformation($('input[name="loginemail"]').val(), authData);
             });
         };
 
-        function loginInformation(email, id) {
 
-    
-            ref.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
-                    console.log(snapshot.val());
-                    redirect("/index.html");
-                }, function(errorObject) {
-                    console.log("The read failed: " +errorObject.code);
-                });
-            setIpAddress(id);
-        }
+        /**
+        * Hand the signup information for the robin
+        * @param {none} none 
+        * @param {none} none
+        * @return {none} none
+        */
+        $scope.signup = function() {
+            $scope.showError = null;
+            ref.child("users").createUser({
+                email: $('input[name="signupemail"]').val(),
+                password: $('input[name="signuppassword"]').val()
+            }, function(error, userObj) {
+                error ? errorCodes(error) : displayMessage( "Awesome , Your account is created"), createData(userObj, $('input[name="signupemail"]').val(), $('input[name="signuppassword"]').val());
+            });
+        };
 
-        function errorCodes(error) {
-            console.log(error.code);
-            switch (error.code) {
-                case "EMAIL_TAKEN":
-                    displayMessage(
-                        "The new user account cannot be created use."
-                    );
-                    break;
-                case "INVALID_EMAIL":
-                    displayMessage(
-                        "The specified eeeeemail is not a valid email."
-                    );
-                    break;
-                case "INVALID_USER":
-                    displayMessage(
-                        "The email or password wasnt there "
-                    );
-                    break;
-                case "INVALID_PASSWORD":
-                    displayMessage(
-                        "The email or password wasnt there "
-                    );
-                    break;
-                default:
-                    displayMessage("Error :", error);
-            }
-        }
 
+        /**
+        * Display and error or comfirm message on login
+        * @param {String} message
+        * @return {none} none
+        */
         function displayMessage(message) {
             setTimeout(function() {
                 $scope.showError = true;
@@ -110,27 +97,8 @@ var ip = null;
                 $scope.$apply();
             }, 1000)
         }
-        $scope.signup = function() {
-            $scope.showError = null;
-            ref.child("users").createUser({
-                email: $('input[name="signupemail"]').val(),
-                password: $(
-                        'input[name="signuppassword"]')
-                    .val()
-            }, function(error, userObj) {
 
-                error ? errorCodes(error) :
-                    displayMessage(
-                        "Awesome , Your account is created"
-                    ), createData(userObj, $(
-                        'input[name="signupemail"]'
-                    ).val(), $(
-                        'input[name="signuppassword"]'
-                    ).val());
-            });
-        };
-    }).controller('logout', function($scope, $route, $routeParams,
-        $location) {
+    }).controller('logout', function($scope, $route, $routeParams, $location) {
         $scope.name = "logout";
         $scope.params = $routeParams;
         $scope.showError = false;
@@ -140,92 +108,104 @@ var ip = null;
         $scope.loggedin = false;
         ref.unauth();
         redirect("/index.html");
-    }).controller('child', function($scope, $route, $routeParams,
-        $location) {
-        $scope.name = "loginsss";
-        $scope.params = $routeParams;
-        $scope.$route = $route;
-        $scope.$location = $location;
-        $scope.$routeParams = $routeParams;
-        $scope.loggedin = true;
     });
 
-    function createData(userData, email, password) {
 
+    /**
+    * Creates the user and stores it in the database
+    * @param {String} userData
+    * @param {String} email
+    * @param {String} password
+    * @return {none} none
+    */
+    function createData(userData, email, password) {
         var usersRef = ref.child(userData.uid);
         usersRef.set({
-            information:{
+            information: {
                 email: email,
                 password: password
             },
-            ip:{}
-            
+            ip: {}
         });
         setIpAddress(userData.uid);
     }
 
-    function setIpAddress(s){
 
-        var usersRef = ref.child(s).child("ip").child(removeRegex(ip));
+    /**
+    * Set the current userId in the database.
+    * @param {String} id 
+    * @return {none} none
+    */
+    function setIpAddress(id) {
+        var usersRef = ref.child(id).child("ip").child(removeRegex(ip));
         usersRef.set({
-               status:"active"
+            status: "active",
+            currentUrl: "none"
         });
     }
 
 
-
-
-
-          try {
-
-    // Attach an asynchronous callback to read the data at our posts reference
-    ref.child(authData.uid).on("value", function(snapshot) {
-      console.log(snapshot.val());
-
-
-
-    }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    });
-  
-}
-catch (e) {
-   // statements to handle any exceptions
- 
-}
-    function getName(authData) {
-        switch (authData.provider) {
-            case 'password':
-                return authData.password.email.replace(/@.*/, '');
-            case 'twitter':
-                return authData.twitter.displayName;
-            case 'facebook':
-                return authData.facebook.displayName;
-        }
+    /**
+    * Attach an asynchronous callback to read the data at our posts reference
+    * @param {none} none
+    * @param {none} none
+    * @return {none} none
+    */
+    try {
+        ref.child(authData.uid).on("value", function(snapshot) {
+            console.log(snapshot.val());
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+    } catch (e) {
+        // statements to handle any exceptions
     }
 
+
+    /**
+    * removeRegex
+    * @param {string} stringToReplace
+    * @return {string} desired
+    */
     function removeRegex(stringToReplace) {
         var desired = stringToReplace.replace(/[^\w\s]/gi, '')
         return desired;
     }
 
+
+    /**
+    * Checks each word if they profanity in an array.
+    * @param {string} url
+    * @param {object} words
+    * @return {none} none
+    */
     function addWord(url, words) {
         for (var i = 0; i < words.length - 1; i++) {
             profanityCheck(words[i], function(response) {
-                response === "true" ? wordToFirebase(words[i]) :null;
+                response === "true" ? wordToFirebase(words[i]) : null;
             });
         }
     }
 
 
-    function redirect(url){
-
-        setTimeout(function () {
+    /**
+    * redirect, rediect the user
+    * @param {string} url
+    * @return {none} none
+    */
+    function redirect(url) {
+        setTimeout(function() {
             window.location = url;
-        }, 5000);
-
+        }, 1000);
     }
 
+
+    /**
+    * Checks for profanity
+    * @param {object} callback 
+    * @param {String} word
+    * @return {profanity} returns true or false if the word is classed.
+    */
     function profanityCheck(word, callback) {
         $.ajax({
             url: "http://www.wdyl.com/profanity?q=" + word,
@@ -241,30 +221,90 @@ catch (e) {
         });
     }
 
-    function getIp(b) {
+
+    /**
+    * Sets the ipaddress and gets the user information objects,
+    * @param {string} the users email address they inputted
+    * @param {number} The firebase Id for the user.
+    * @return {none} none
+    */
+    function loginInformation(email, id) {
+        ref.child("users").startAt(email).endAt(email).once('value', function(
+            snapshot) {
+            console.log(snapshot.val());
+            setIpAddress(id);
+            redirect("/index.html");
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+    }
+
+    /**
+    * Get the current IP address of the user.
+    * @param {none} none
+    * @return {none} none
+    */
+    function getIp() {
         $.ajax({
             url: "http://jsonip.com/",
             async: false,
             type: "GET",
             dataType: "json",
             success: function(data) {
-               ip = data.ip;
-               return data.ip;
+                ip = data.ip;
+                return data.ip;
             }
         });
     }
 
-    function wordToFirebase(word) {
+
+    /**
+    * Handles and Displays the error codes
+    * @param {object} The error object thats is sent in from  firebase
+    * @return {none} none
+    */
+    function errorCodes(error) {
+        switch (error.code) {
+            case "EMAIL_TAKEN":
+                displayMessage("The new user account cannot be created use.");
+                break;
+            case "INVALID_EMAIL":
+                displayMessage("The specified eeeeemail is not a valid email.");
+                break;
+            case "INVALID_USER":
+                displayMessage("The email or password wasnt there ");
+                break;
+            case "INVALID_PASSWORD":
+                displayMessage("The email or password wasnt there ");
+                break;
+            default:
+                displayMessage("Error :", error);
+        }
+    }
+
+
+    /**
+    * Store words that are classed as profanity to the database
+    * @param {word} the stting needed to be stored
+    * @return {none} none
+    */
+    function profanityToFirebase(word) {
         var usersRef = ref.child("profanity").child(word);
         usersRef.update({
             profanity: "true"
         });
     }
 
+
+    /**
+    * Check if the user is logged in or not
+    * @param  {none} none
+    * @param  {none} none
+    * @return {none} none
+    */
     function authDataCallback(authData) {
         if (authData) {
-            console.log("User " + authData.uid + " is logged in with " +
-                authData.provider);
+            console.log("User " + authData.uid + " is logged in with " + authData.provider);
         } else {
             console.log("User is logged out");
         }
