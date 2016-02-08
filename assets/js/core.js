@@ -6,7 +6,7 @@
 // addWord("batman",listOfVerbs);
 //  getProfanityWords();
     var ip = null;
-    getIp(function(response) {
+    getIp(null,function(response) {
         console.log(response);
         ip = response;
     });
@@ -53,6 +53,7 @@
         $scope.showError = false;
         $scope.loggedin = authData;
 
+
         /**
         * Hand the login information for the robin
         * @param {none} none 
@@ -82,10 +83,34 @@
                 email: $('input[name="signupemail"]').val(),
                 password: $('input[name="signuppassword"]').val()
             }, function(error, userObj) {
-                error ? errorCodes(error) : displayMessage( "Awesome , Your account is created"), createData(userObj, $('input[name="signupemail"]').val(), $('input[name="signuppassword"]').val());
+                error ? errorCodes(error) : createData(userObj, $('input[name="signupemail"]').val(), $('input[name="signuppassword"]').val()),displayMessage( "Awesome , Your account is created"),redirect('/index.html');
             });
         };
 
+
+        /**
+        * Handles and Displays the error codes
+        * @param {object} The error object thats is sent in from  firebase
+        * @return {none} none
+        */
+        function errorCodes(error) {
+            switch (error.code) {
+                case "EMAIL_TAKEN":
+                    displayMessage("The new user account cannot be created use.");
+                    break;
+                case "INVALID_EMAIL":
+                    displayMessage("The specified eeeeemail is not a valid email.");
+                    break;
+                case "INVALID_USER":
+                    displayMessage("The email or password wasnt there ");
+                    break;
+                case "INVALID_PASSWORD":
+                    displayMessage("The email or password wasnt there ");
+                    break;
+                default:
+                    displayMessage("Error :", error);
+            }
+        }
 
         /**
         * Display and error or comfirm message on login
@@ -231,10 +256,9 @@
     * @return {none} none
     */
     function loginInformation(email, id) {
-        ref.child("users").startAt(email).endAt(email).once('value', function(
-            snapshot) {
+        ref.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
             console.log(snapshot.val());
-            setIpAddress(id);
+            setIpAddress(id.uid);
             redirect("/index.html");
         }, function(errorObject) {
             console.log("The read failed: " + errorObject.code);
@@ -262,7 +286,7 @@
     * @param {none} none
     * @return {none} none
     */
-    function getIp() {
+    function getIp(test) {
         $.ajax({
             url: "http://jsonip.com/",
             async: false,
@@ -273,31 +297,6 @@
                 return data.ip;
             }
         });
-    }
-
-
-    /**
-    * Handles and Displays the error codes
-    * @param {object} The error object thats is sent in from  firebase
-    * @return {none} none
-    */
-    function errorCodes(error) {
-        switch (error.code) {
-            case "EMAIL_TAKEN":
-                displayMessage("The new user account cannot be created use.");
-                break;
-            case "INVALID_EMAIL":
-                displayMessage("The specified eeeeemail is not a valid email.");
-                break;
-            case "INVALID_USER":
-                displayMessage("The email or password wasnt there ");
-                break;
-            case "INVALID_PASSWORD":
-                displayMessage("The email or password wasnt there ");
-                break;
-            default:
-                displayMessage("Error :", error);
-        }
     }
 
 
