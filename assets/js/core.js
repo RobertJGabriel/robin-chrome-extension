@@ -3,10 +3,9 @@
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
     var listOfVerbs = ["anal", "ran", "love"];
-getIp("h");
 
-    angular.module('robinChrome', ['ngRoute']).config(['$routeProvider',
-        '$locationProvider',
+
+    angular.module('robinChrome', ['ngRoute']).config(['$routeProvider','$locationProvider',
         function($routeProvider, $locationProvider) {
             if (authData) {
                 console.log("User " + authData.uid + " is logged in with " + authData.provider);
@@ -62,7 +61,9 @@ getIp("h");
         };
 
         function loginInformation(email, id) {
-            ref.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
+
+    
+            ref.child("users").startAt(id.uid).endAt(id.uid).once('value', function(snapshot) {
                     console.log(snapshot.val());
                     redirect("/index.html");
                 }, function(errorObject) {
@@ -113,6 +114,7 @@ getIp("h");
                         'input[name="signuppassword"]')
                     .val()
             }, function(error, userObj) {
+
                 error ? errorCodes(error) :
                     displayMessage(
                         "Awesome , Your account is created"
@@ -146,12 +148,31 @@ getIp("h");
 
     function createData(userData, email, password) {
         var usersRef = ref.child(userData.uid);
-        usersRef.child('information').set({
-            email: email,
-            password: password
+        usersRef.set({
+            information:{
+                email: email,
+                password: password
+            },
+            ip:{
+                ip1: "s"
+            }
         });
     }
 
+          try {
+
+    // Attach an asynchronous callback to read the data at our posts reference
+    ref.child(authData.uid).on("value", function(snapshot) {
+      console.log(snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  
+}
+catch (e) {
+   // statements to handle any exceptions
+ 
+}
     function getName(authData) {
         switch (authData.provider) {
             case 'password':
@@ -182,6 +203,7 @@ getIp("h");
         setTimeout(function () {
             window.location = url;
         }, 5000);
+
     }
 
     function profanityCheck(word, callback) {
@@ -199,7 +221,7 @@ getIp("h");
         });
     }
 
-        function getIp(b) {
+    function getIp(b) {
         $.ajax({
             url: "http://jsonip.com/",
             async: false,
