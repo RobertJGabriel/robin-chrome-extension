@@ -3,7 +3,7 @@
     "version": "0.10.2",
     "manifest_version": 2,
     "description": "Admin Panel for Robin Browser and Flitering Software",
-	"content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+	"content_security_policy": "script-src 'self' https://cdn.firebase.com  https://*.firebaseio.com ; object-src 'self'",
 	"browser_action": {
         "default_popup": "index.html"
     },
@@ -17,12 +17,13 @@
 	  "https://*.firebaseio-demo.com",
 	  "https://*.firebaseio.com",
 	  "https://cdn.firebase.com",
+	  "http://jsonip.com",
 	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js",
 	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js",
 	  "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700",
 	  "https://fonts.googleapis.com/icon?family=Material+Icons",
-	  "http://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.0.0/jquery.serialize-object.compiled.js"
-	  ,"https://cdn.firebase.com/js/client/2.3.2/firebase.js",
+	  "http://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.0.0/jquery.serialize-object.compiled.js",
+	  "https://cdn.firebase.com/js/client/2.3.2/firebase.js",
 	  "assets/css/bootstrap/*.css", 
 	  "assets/css/fonts/*", 
 	  "assets/js/*.js"

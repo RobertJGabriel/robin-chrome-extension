@@ -3,6 +3,8 @@
     var ref = new Firebase("https://projectbird.firebaseio.com");
     var authData = ref.getAuth();
     var listOfVerbs = ["anal", "ran", "love"];
+getIp("h");
+
     angular.module('robinChrome', ['ngRoute']).config(['$routeProvider',
         '$locationProvider',
         function($routeProvider, $locationProvider) {
@@ -174,10 +176,6 @@
         }
     }
 
-    function getip(json){
-         console.log(json.ip); // alerts the ip address
-         return json.ip;
-    }
 
     function redirect(url){
 
@@ -197,6 +195,19 @@
             },
             error: function(e) {
                 alert('error, try again');
+            }
+        });
+    }
+
+        function getIp(b) {
+        $.ajax({
+            url: "http://jsonip.com/",
+            async: false,
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                console.log(data.ip);
+                return data.ip;
             }
         });
     }

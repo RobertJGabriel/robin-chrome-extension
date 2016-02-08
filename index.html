@@ -19,7 +19,7 @@
 
 </head>
 
-<body ng-app="robinChrome" ng-controller="main" style="width:600px;height:500px">
+<body ng-app="robinChrome" ng-controller="main">
     <base href="/">
     <div class="navbar navbar-default" style="margin-bottom:0px">
         <div class="container-fluid">
@@ -32,10 +32,11 @@
                 <a class="navbar-brand" href="javascript:void(0)">Robin</a>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
-
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="!loggedin" ><a href="login">Login</a></li>
                     <li ng-show="!loggedin" ><a href="signup">Signup</a></li>
+                    <li ng-show="loggedin" ><a href="blacklist">blacklist</a></li>
+                    <li ng-show="loggedin" ><a href="whitelist">whitelist</a></li>
                     <li ng-show="loggedin" ><a href="logout">Logout</a></li>
                 </ul>
             </div>
@@ -67,7 +68,7 @@
 
         </div>
     </div>
-<script type="application/javascript" src="http://jsonip.appspot.com/?callback=getip"> </script>
+
     <script src="./assets/dist/js/jquery.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script src="./assets/js/core.js"></script>

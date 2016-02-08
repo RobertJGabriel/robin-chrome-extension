@@ -14666,6 +14666,11 @@ hr.on-light {
   padding-left: 35px;
   position: absolute;
 }
+body,
+html {
+  width: 600px;
+  height: 500px;
+}
 .pages {
   margin-top: -40px;
   z-index: 4;
