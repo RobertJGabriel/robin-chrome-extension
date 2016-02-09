@@ -1,6 +1,6 @@
 {
     "name": "Robin",
-    "version": "0.10.2",
+    "version": "0.10.8",
     "manifest_version": 2,
     "description": "Admin Panel for Robin Browser and Flitering Software",
 	"content_security_policy": "script-src 'self' https://cdn.firebase.com  https://*.firebaseio.com ; object-src 'self'",
