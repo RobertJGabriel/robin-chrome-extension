@@ -1,13 +1,13 @@
-hjk<div class="list-group" >
+<div class="list-group" >
   <div class="list-group-item" data-ng-repeat="banndedUrls2  in children">
     <div class="row-picture">
       <img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="icon">
     </div>
     <div class="row-content">
-      <h4 class="list-group-item-heading"><a href="/profile/child/{{banndedUrls2.id}}" >{{banndedUrls2.userName}}</a></h4>
+      <h4 class="list-group-item-heading"><a href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
 
-      <p class="list-group-item-text">{{ banndedUrls2.currentUrl}}</p>
-        <p class="list-group-item-text">{{ banndedUrls2.id}}</p>
-      <p class="list-group-item-text">{{ banndedUrls2.date + banndedUrls2.time }}</p>
+      <p class="list-group-item-text"><a href="child/{{banndedUrls2.currentUrl}}" >{{ banndedUrls2.currentUrl}}</a></p>
+
+      <p class="list-group-item-text">{{ banndedUrls2.date + banndedUrls2.time }} </p>
     </div>
   </div>

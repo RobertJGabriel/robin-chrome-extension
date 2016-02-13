@@ -4,8 +4,10 @@ var ref = new Firebase("https://projectbird.firebaseio.com");
 var authData = ref.getAuth();
 
 
-app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider) {
+app.config(['$routeProvider','$locationProvider','$compileProvider',function($routeProvider, $locationProvider,$compileProvider) {
 
+ 
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file):/);
     if (authData) {
         $routeProvider.when('/index.html', {
             controller: 'main',
@@ -14,7 +16,7 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider, $locat
                 // I will cause a 1 second delay
                 delay: function($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 3000);
                     return delay.promise;
                 }
             }
@@ -29,9 +31,10 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider, $locat
                     return delay.promise;
                 }
             }
-        }).when('/profile/child/:childname', {
+        }).when('/child/:bookId', {
             templateUrl: './assets/view/profile.html',
-            controller: 'logg',
+            controller: 'child',
+           /*
             resolve: {
                 // I will cause a 1 second delay
                 delay: function($q, $timeout) {
@@ -40,6 +43,7 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider, $locat
                     return delay.promise;
                 }
             }
+            */
         });
     } else {
         $routeProvider.when('/index.html', {
@@ -91,9 +95,50 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         $scope.$routeParams = $routeParams;
         $scope.showError = false;
         $scope.loggedin = authData;
+        $scope.children = [];
+
+        ref.child(authData.uid).on("value", function(snapshot) {
+            for (var f in snapshot.val()["children"]) {
+               $scope.children.push({
+                    id:f,
+                    currentUrl:removeRegex(snapshot.val()["children"][f]["currentUrl"]),
+                    time:snapshot.val()["children"][f]["time"],
+                    date:snapshot.val()["children"][f]["date"],
+                    name:snapshot.val()["children"][f]["name"]
+                });
+            }
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+
 });
 
+app.controller('child', function($scope, $route, $routeParams, $location) {
+console.log('ss');
+        $scope.name = "robin";
+        $scope.params = $routeParams;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+        $scope.showError = false;
+        $scope.loggedin = authData;
+        $scope.children = [];
 
+        ref.child(authData.uid).on("value", function(snapshot) {
+            for (var f in snapshot.val()["children"]) {
+               $scope.children.push({
+                    id:f,
+                    currentUrl:removeRegex(snapshot.val()["children"][f]["currentUrl"]),
+                    time:snapshot.val()["children"][f]["time"],
+                    date:snapshot.val()["children"][f]["date"],
+                    name:snapshot.val()["children"][f]["name"]
+                });
+            }
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+
+});
 
 
 
@@ -401,3 +446,4 @@ function authDataCallback(authData) {
         console.log("User is logged out");
     }
 }
+

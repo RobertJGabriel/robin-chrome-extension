@@ -1,3 +1,4 @@
+
 (function(angular) {
     'use strict';
     var ref = new Firebase("https://projectbird.firebaseio.com");
@@ -10,14 +11,20 @@
         console.log(response);
         ip = response;
     });
+
+    var objectLogin = null;
+
+
+    ref.onAuth(authDataCallback);
     angular.module('robinChrome', ['ngRoute']).config(['$routeProvider',
         '$locationProvider',
         function($routeProvider, $locationProvider) {
             if (authData) {
+                
                 $routeProvider.when('/index.html', {
-                    templateUrl: './assets/view/home.html',
-                    controller: 'main',
-                    controllerAs: 'main'
+                    controller: 'home',
+                    controllerAs: 'home',
+                    templateUrl: './assets/view/home.html'
                 }).when('/logout', {
                     templateUrl: './assets/view/logout.html',
                     controller: 'logout',
@@ -45,6 +52,7 @@
             $locationProvider.html5Mode(true);
         }
     ]).controller('main', function($scope, $route, $routeParams, $location) {
+         ref.onAuth(authDataCallback);
         $scope.name = "robin";
         $scope.params = $routeParams;
         $scope.$route = $route;
@@ -135,10 +143,40 @@
         $scope.loggedin = false;
         ref.unauth();
         redirect("/index.html");
+    }).controller('home', function($scope, $route, $routeParams, $location) {
+            getChildren(authData,function(response) {
+        console.log(response);
+        objectLogin = response;
+              $scope.children = objectLogin["children"];
+        console.log($scope.children);
+console.log(objectLogin);
+    });
+ref.on('child_changed', function(childSnapshot, prevChildKey) {
+  console.log
+});
+        $scope.name = "home";
+        $scope.params = $routeParams;
+        $scope.showError = false;
+        $scope.$route = $route;
+        $scope.$location = $location;
+        $scope.$routeParams = $routeParams;
+        $scope.loggedin = false;
+     
+
+
+  
+   
+
+
     });
 
 
-    /**
+
+
+
+
+
+    /*
     * Creates the user and stores it in the database
     * @param {String} userData
     * @param {String} email
@@ -154,38 +192,19 @@
             },
             ip: {}
         });
-        setIpAddress(userData.uid);
+        //setIpAddress(userData.uid);
     }
 
-
-    /**
-    * Set the current userId in the database.
+    /* Set the current userId in the database.
     * @param {String} id 
     * @return {none} none
     */
     function setIpAddress(id) {
-        var usersRef = ref.child(id).child("ip").child(removeRegex(ip));
+        var usersRef = ref.child(id).child("children").child(removeRegex(ip));
         usersRef.set({
             status: "active",
             currentUrl: "none"
         });
-    }
-
-
-    /**
-    * Attach an asynchronous callback to read the data at our posts reference
-    * @param {none} none
-    * @param {none} none
-    * @return {none} none
-    */
-    try {
-        ref.child(authData.uid).on("value", function(snapshot) {
-            console.log(snapshot.val());
-        }, function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
-    } catch (e) {
-        // statements to handle any exceptions
     }
 
 
@@ -198,6 +217,7 @@
         var desired = stringToReplace.replace(/[^\w\s]/gi, '')
         return desired;
     }
+
 
 
     /**
@@ -256,9 +276,10 @@
     * @return {none} none
     */
     function loginInformation(email, id) {
-        ref.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
+      ref.child(id.uid).on("value", function(snapshot) {
             console.log(snapshot.val());
-            setIpAddress(id.uid);
+            objectLogin = snapshot.val();
+         //   setIpAddress(id.uid);
             redirect("/index.html");
         }, function(errorObject) {
             console.log("The read failed: " + errorObject.code);
@@ -321,10 +342,27 @@
     */
     function authDataCallback(authData) {
         if (authData) {
-            console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            console.log("User " + authData.uid + " is logged in with " + authData.provider);  
+         
         } else {
             console.log("User is logged out");
         }
     }
-    ref.onAuth(authDataCallback);
+
+
+    function getChildren(authData , callback) {
+
+     
+
+
+};
+
+           
+          
+   
+        
+
+
+
 })(window.angular);
+
