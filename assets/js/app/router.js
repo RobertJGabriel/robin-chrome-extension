@@ -97,6 +97,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         $scope.loggedin = authData;
         $scope.children = [];
 
+try {
         ref.child(authData.uid).on("value", function(snapshot) {
             for (var f in snapshot.val()["children"]) {
                $scope.children.push({
@@ -110,6 +111,10 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         }, function(errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
+}catch (e) {
+   // statements to handle any exceptions
+   // pass exception object to error handler
+}
 
 });
 
