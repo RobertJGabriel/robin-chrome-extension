@@ -5,10 +5,10 @@ var authData = ref.getAuth();
 
 
 app.config(['$routeProvider','$locationProvider','$compileProvider',function($routeProvider, $locationProvider,$compileProvider) {
+   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|coui|chrome-extension):/);
 
- 
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file):/);
     if (authData) {
+
         $routeProvider.when('/index.html', {
             controller: 'main',
             templateUrl: './assets/view/home.html',
