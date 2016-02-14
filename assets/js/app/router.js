@@ -31,10 +31,10 @@ app.config(['$routeProvider','$locationProvider','$compileProvider',function($ro
                     return delay.promise;
                 }
             }
-        }).when('/child/:bookId', {
+        }).when('/child/:id', {
             templateUrl: './assets/view/profile.html',
             controller: 'child',
-           /*
+           
             resolve: {
                 // I will cause a 1 second delay
                 delay: function($q, $timeout) {
@@ -43,7 +43,7 @@ app.config(['$routeProvider','$locationProvider','$compileProvider',function($ro
                     return delay.promise;
                 }
             }
-            */
+            
         });
     } else {
         $routeProvider.when('/index.html', {
@@ -97,48 +97,51 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         $scope.loggedin = authData;
         $scope.children = [];
 
-try {
-        ref.child(authData.uid).on("value", function(snapshot) {
-            for (var f in snapshot.val()["children"]) {
-               $scope.children.push({
-                    id:f,
-                    currentUrl:removeRegex(snapshot.val()["children"][f]["currentUrl"]),
-                    time:snapshot.val()["children"][f]["time"],
-                    date:snapshot.val()["children"][f]["date"],
-                    name:snapshot.val()["children"][f]["name"]
-                });
-            }
-        }, function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
-}catch (e) {
-   // statements to handle any exceptions
-   // pass exception object to error handler
-}
+        try {
+          ref.child(authData.uid).on("value", function(snapshot) {
+              for (var f in snapshot.val()["children"]) {
+                 $scope.children.push({
+                      id:f,
+                      currentUrl:removeRegex(snapshot.val()["children"][f]["currentUrl"]),
+                      time:snapshot.val()["children"][f]["time"],
+                      date:snapshot.val()["children"][f]["date"],
+                      name:snapshot.val()["children"][f]["name"]
+                  });
+              }
+          }, function(errorObject) {
+              console.log("The read failed: " + errorObject.code);
+          });
+        }catch (e) {
+           // statements to handle any exceptions
+           // pass exception object to error handler
+        }
 
 });
 
 app.controller('child', function($scope, $route, $routeParams, $location) {
-console.log('ss');
+
         $scope.name = "robin";
         $scope.params = $routeParams;
+
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
         $scope.showError = false;
         $scope.loggedin = authData;
-        $scope.children = [];
+        $scope.child = [];
 
-        ref.child(authData.uid).on("value", function(snapshot) {
-            for (var f in snapshot.val()["children"]) {
-               $scope.children.push({
-                    id:f,
-                    currentUrl:removeRegex(snapshot.val()["children"][f]["currentUrl"]),
-                    time:snapshot.val()["children"][f]["time"],
-                    date:snapshot.val()["children"][f]["date"],
-                    name:snapshot.val()["children"][f]["name"]
-                });
-            }
+        ref.child(authData.uid).child("children").child($scope.params.id).on("value", function(snapshot) {
+    
+
+             $scope.child.push({
+                  id:$scope.params.id,
+                  currentUrl:snapshot.val()["currentUrl"],
+                  time:snapshot.val()["time"],
+                  date:snapshot.val()["date"],
+                  name:snapshot.val()["name"]
+              });
+          
+            console.log($scope.child);
         }, function(errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
