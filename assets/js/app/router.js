@@ -325,7 +325,7 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
     * @return {string} desired
     */
     function removeRegex(stringToReplace) {
-        var desired = stringToReplace.replace(/[^\w\s]/gi, '')
+        var desired = stringToReplace.replace(/['"]+/g, '');
         return desired;
     }
 
@@ -450,13 +450,19 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
     * @param  {none} none
     * @return {none} none
     */
+  function authDataCallback(authData) {
+      if (authData) {
+          console.log("User " + authData.uid + " is logged in with " +
+              authData.provider);
+      } else {
+          console.log("User is logged out");
+      }
+  }
 
-function authDataCallback(authData) {
-    if (authData) {
-        console.log("User " + authData.uid + " is logged in with " +
-            authData.provider);
-    } else {
-        console.log("User is logged out");
-    }
-}
+
+
+ $('body').on('click', '.search', function(){
+     chrome.tabs.create({url: $(this).attr('href')});
+     return false;
+   });
 
