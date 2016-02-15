@@ -105,7 +105,8 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
                       currentUrl:removeRegex(snapshot.val()["children"][f]["currentUrl"]),
                       time:snapshot.val()["children"][f]["time"],
                       date:snapshot.val()["children"][f]["date"],
-                      name:snapshot.val()["children"][f]["name"]
+                      name:snapshot.val()["children"][f]["name"],
+                      platform:snapshot.val()["platform"]
                   });
               }
           }, function(errorObject) {
@@ -140,10 +141,11 @@ app.controller('child', function($scope, $route, $routeParams, $location) {
 
              $scope.child.push({
                   id:$scope.params.id,
-                  currentUrl:snapshot.val()["currentUrl"],
+                  currentUrl:removeRegex(snapshot.val()["currentUrl"]),
                   time:snapshot.val()["time"],
                   date:snapshot.val()["date"],
-                  name:snapshot.val()["name"]
+                  name:snapshot.val()["name"],
+                  platform:snapshot.val()["platform"]
               });
           
             console.log($scope.child);
