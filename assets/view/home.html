@@ -1,17 +1,17 @@
-
 <div class="well pages slideDown" data-ng-repeat="banndedUrls2  in children">
-<div class="list-group" >
-  <div class="list-group-item" >
-    <div class="row-picture">
-           <img class="circle" src="assets/img/icons/platform/{{banndedUrls2.platform}}.png" alt="icon">
-    </div>
-    <div class="row-content">
-      <h4 class="list-group-item-heading"><a ng:href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
+    <div class="list-group">
+        <div class="list-group-item">
+            <div class="row-picture">
+                <img class="circle" src="assets/img/icons/platform/{{banndedUrls2.platform}}.png" alt="icon">
+            </div>
+            <div class="row-content">
+                <h4 class="list-group-item-heading"><a ng:href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
 
-      <p class="list-group-item-text"><a  target="_blank" ng:href="{{banndedUrls2.currentUrl}}" >{{ banndedUrls2.currentUrl}}</a></p>
+                <p class="list-group-item-text"><a target="_blank" ng:href="{{banndedUrls2.currentUrl}}">{{ banndedUrls2.currentUrl}}</a>
+                </p>
 
-      <p class="list-group-item-text">{{ banndedUrls2.date + banndedUrls2.time }} </p>
+                <p class="list-group-item-text">{{ banndedUrls2.date + banndedUrls2.time }} </p>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 </div>
