@@ -5,7 +5,8 @@ var authData = ref.getAuth();
 
 
 app.config(['$routeProvider','$locationProvider','$compileProvider',function($routeProvider, $locationProvider,$compileProvider) {
-   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|coui|chrome-extension):/);
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|coui|chrome-extension):/);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|assets|chrome-extension):|data:image\//);
 
     if (authData) {
 
@@ -16,13 +17,46 @@ app.config(['$routeProvider','$locationProvider','$compileProvider',function($ro
                 // I will cause a 1 second delay
                 delay: function($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 3000);
+                    $timeout(delay.resolve, 1000);
                     return delay.promise;
                 }
             }
         }).when('/logout', {
             templateUrl: './assets/view/logout.html',
             controller: 'logout',
+            resolve: {
+                // I will cause a 1 second delay
+                delay: function($q, $timeout) {
+                    var delay = $q.defer();
+                    $timeout(delay.resolve, 1000);
+                    return delay.promise;
+                }
+            }
+        }).when('/blacklist', {
+            templateUrl: './assets/view/blacklist.html',
+            controller: 'main',
+            resolve: {
+                // I will cause a 1 second delay
+                delay: function($q, $timeout) {
+                    var delay = $q.defer();
+                    $timeout(delay.resolve, 1000);
+                    return delay.promise;
+                }
+            }
+        }).when('/whitelist', {
+            templateUrl: './assets/view/whitelist.html',
+            controller: 'main',
+            resolve: {
+                // I will cause a 1 second delay
+                delay: function($q, $timeout) {
+                    var delay = $q.defer();
+                    $timeout(delay.resolve, 1000);
+                    return delay.promise;
+                }
+            }
+        }).when('/help', {
+            templateUrl: './assets/view/help.html',
+            controller: 'help',
             resolve: {
                 // I will cause a 1 second delay
                 delay: function($q, $timeout) {
@@ -106,7 +140,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
                       time:snapshot.val()["children"][f]["time"],
                       date:snapshot.val()["children"][f]["date"],
                       name:snapshot.val()["children"][f]["name"],
-                      platform:snapshot.val()["platform"]
+                      platform:snapshot.val()["children"][f]["platform"]
                   });
               }
           }, function(errorObject) {
@@ -168,6 +202,8 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
         $scope.$routeParams = $routeParams;
         $scope.showError = false;
         $scope.loggedin = false;
+
+
 
 
         /**
@@ -400,12 +436,12 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
     * Get profanity words
     * @param {none} none
     * @param {none} none
-    * @return {none} none
+    * @return {object} snapshot
     */
-    function getProfanityWords() {
+    function getProfanityWords(temp,callback) {
         ref.child("profanity").on('value', function(snapshot) {
             console.log(snapshot.val());
-           
+            callback(snapshot.val());
         }, function(errorObject) {
             console.log("The read failed: " + errorObject.code);
         });

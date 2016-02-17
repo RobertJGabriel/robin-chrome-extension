@@ -1,10 +1,11 @@
+
+<div class="well pages slideDown">
 <form class="form-horizontal" id="signup" name="signupForm"  ng-submit="signup()">
     <div ng-show="showError">
         <div ng-include src="'assets/view/error.html'"></div>
     </div>
     <fieldset>
         <div class="form-group">
-            <h5>Signup</h5>
             <div class="col-md-12">
                 <label for="inputEmail" class="control-label">Email </label>
                 <input type="text" class="form-control" id="inputEmail" name="signupemail" placeholder="Email">
@@ -13,7 +14,7 @@
         <div class="form-group">
             <div class="col-md-12">
                 <label for="inputEmail" class="control-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword" name="signuppassword" placeholder="Email">
+                <input type="password" class="form-control" id="inputPassword" name="signuppassword" placeholder="*******">
             </div>
         </div>
 
@@ -23,3 +24,4 @@
         </div>
     </fieldset>
 </form>
+</div>

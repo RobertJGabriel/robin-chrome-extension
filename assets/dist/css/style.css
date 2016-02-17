@@ -14651,9 +14651,7 @@ hr.on-light {
   color: #757575;
 }
 .header-panel {
-  background-color: #009587;
-  background-image: url('../../img/banner/mountains.jpg');
-  height: 144px;
+  margin-bottom: 50px;
   background-size: contain;
   position: relative;
   z-index: 3;
@@ -14672,9 +14670,8 @@ html {
   height: 500px;
 }
 .pages {
-  margin-top: -40px;
   z-index: 4;
 }
-body {
-  background-color: white !important;
+.navbar-brand {
+  font-size: 15px !important;
 }

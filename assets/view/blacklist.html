@@ -1,1 +1,28 @@
 
+<div class="well pages slideDown">
+    <h1>Blacklist</h1>
+<form class="form-horizontal" id="signup" name="signupForm"  ng-submit="signup()">
+    <div ng-show="showError">
+        <div ng-include src="'assets/view/error.html'"></div>
+    </div>
+    <fieldset>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="inputEmail" class="control-label">Email </label>
+                <input type="text" class="form-control" id="inputEmail" name="signupemail" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="inputEmail" class="control-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword" name="signuppassword" placeholder="*******">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" style="float:right;" class="btn btn-primary">signup</button>
+        </div>
+    </fieldset>
+</form>
+</div>
