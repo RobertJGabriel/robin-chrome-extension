@@ -17,7 +17,7 @@ app.config(['$routeProvider','$locationProvider','$compileProvider',function($ro
                 // I will cause a 1 second delay
                 delay: function($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 500);
                     return delay.promise;
                 }
             }
@@ -357,13 +357,55 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
     }
 
 
-    /**
+  /**
     * removeRegex
     * @param {string} stringToReplace
     * @return {string} desired
     */
     function removeRegex(stringToReplace) {
-        var desired = stringToReplace.replace(/['"]+/g, '');
+        var desired = stringToReplace.replace(/[^\w\s]/gi, '');
+            desired = desired.replace(/[^a-zA-Z ]/g, "");
+        return desired;
+    }
+
+
+    /**
+    * Sets black or white list site
+    * @param {String} userData
+    * @param {String} email
+    * @param {String} password
+    * @return {none} none
+    */
+    function addBlackOrWhite(userData,website,whiteOrBlack) {
+       var usersRef = ref.child("list").child(userData.uid).child(removeRegex(website));
+        usersRef.set({
+            type: whiteOrBlack
+        });
+   
+    }
+
+
+    /**
+    * get blacklist or whitelist
+    * @param {none} none
+    * @param {none} none
+    * @return {object} snapshot
+    */
+    function getProfanityWords(temp,callback) {
+        ref.child("list").on('value', function(snapshot) {
+            callback(snapshot.val());
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+    }
+
+   /**
+    * removeRegex for Mac
+    * @param {string} stringToReplace
+    * @return {string} desired
+    */
+    function removeRegexForMac(stringToReplace) {
+        var desired = stringToReplace.replace(/[^\w\s]/gi, '');
         return desired;
     }
 
@@ -404,7 +446,7 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
     function profanityCheck(word, callback) {
         $.ajax({
             url: "http://www.wdyl.com/profanity?q=" + word,
-            async: false,
+            async: true,
             type: "GET",
             dataType: "json",
             success: function(data) {
