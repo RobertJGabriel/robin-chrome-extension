@@ -35,9 +35,7 @@
         <div class="navbar-right" method="post" style="height: 50px;float: right;margin-top: -50px;font-size: 0.5em;">
             <a ng-show="!loggedin" class="navbar-brand" href="login">Login</a>
             <a ng-show="!loggedin" class="navbar-brand" href="signup">Signup</a>
-            <a ng-show="loggedin" class="navbar-brand" href="blacklist">BlackList</a>
-            <a ng-show="loggedin" class="navbar-brand" href="whitelist">WhiteList</a>
-            <a ng-show="loggedin" class="navbar-brand" href="help" >Help</a>
+            <a ng-show="loggedin" class="navbar-brand" href="blacklist">List</a>
             <a ng-show="!loggedin" class="navbar-brand" href="help" >Help</a>
             <a ng-show="loggedin" class="navbar-brand" href="profanity">Profanity</a>
             <a ng-show="loggedin" class="navbar-brand" href="logout">Logout</a>
@@ -58,13 +56,13 @@
 
         <div class="row">
 
-            <div class="col-md-3 col-xs-3 col-sm-3"></div>
-            <div class="col-md-6 col-xs-6 col-sm-6  ">
+            <div class="col-md-2 col-xs-2 col-sm-2"></div>
+            <div class="col-md-8 col-xs-8 col-sm-8  ">
 
 
                 <div ng-view></div>
             </div>
-            <div class="col-md-3 col-xs-3 col-sm-3">
+            <div class="col-md-2 col-xs-2 col-sm-2">
 
             </div>
 

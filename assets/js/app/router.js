@@ -130,6 +130,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         $scope.showError = false;
         $scope.loggedin = authData;
         $scope.children = [];
+        $scope.lists = [];
 
         try {
           ref.child(authData.uid).on("value", function(snapshot) {
@@ -143,9 +144,34 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
                       platform:snapshot.val()["children"][f]["platform"]
                   });
               }
+
+
+
+            for (var q in snapshot.val()["list"]) {
+                 $scope.lists.push({
+                      url:q,
+                      type:removeRegex(snapshot.val()["list"][q]["type"])
+                  });
+              }
+
           }, function(errorObject) {
               console.log("The read failed: " + errorObject.code);
           });
+
+
+ref.child("profanity").on("value", function(snapshot) {
+         for (var e in snapshot.val()) {
+                 $scope.children.push({
+                      name:e
+                  });
+              }
+
+    }, function(errorObject) {
+              console.log("The read failed: " + errorObject.code);
+          });
+
+
+
         }catch (e) {
            // statements to handle any exceptions
            // pass exception object to error handler
@@ -154,6 +180,40 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
 
 
 
+    /**
+    * Sets black or white list site
+    * @param {String} userData
+    * @param {String} email
+    * @param {String} password
+    * @return {none} none
+    */
+    $scope.addBlackOrWhite = function() {
+                $scope.showError = true;
+
+        var temp = $('input[name="blackorwhiteInputs"]').val();
+        var temp2 = $('select[name="typeee"]').val();
+         $scope.errorMessage = "Added new Url" + temp + "with type  " + temp2;
+        var usersRef = ref.child(authData.uid).child("list").child(removeRegex(temp));
+            usersRef.set({
+                type:temp2
+            });
+    }
+
+
+    /**
+    * Sets black or white list site
+    * @param {String} userData
+    * @param {String} email
+    * @param {String} password
+    * @return {none} none
+    */
+    $scope.deleteBlackOrWhite = function(event) {
+           $scope.showError = true;
+           $scope.errorMessage = "Deleted " + event.target.id ;
+       console.log(event.target.id);
+        var usersRef = ref.child(authData.uid).child("list").child(removeRegex(event.target.id)).remove();
+        console.log("remove");
+    }
 
 
 });
@@ -369,35 +429,7 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
     }
 
 
-    /**
-    * Sets black or white list site
-    * @param {String} userData
-    * @param {String} email
-    * @param {String} password
-    * @return {none} none
-    */
-    function addBlackOrWhite(userData,website,whiteOrBlack) {
-       var usersRef = ref.child("list").child(userData.uid).child(removeRegex(website));
-        usersRef.set({
-            type: whiteOrBlack
-        });
-   
-    }
 
-
-    /**
-    * get blacklist or whitelist
-    * @param {none} none
-    * @param {none} none
-    * @return {object} snapshot
-    */
-    function getProfanityWords(temp,callback) {
-        ref.child("list").on('value', function(snapshot) {
-            callback(snapshot.val());
-        }, function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
-    }
 
    /**
     * removeRegex for Mac
