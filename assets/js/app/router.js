@@ -4,6 +4,23 @@ var ref = new Firebase("https://projectbird.firebaseio.com");
 var authData = ref.getAuth();
 
 
+
+app.filter('unique', function() {
+    return function(input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for(var i = 0; i < input.length; i++){
+            if(typeof unique[input[i][key]] == "undefined"){
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});
+
+
+
 app.config(['$routeProvider','$locationProvider','$compileProvider',function($routeProvider, $locationProvider,$compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|coui|chrome-extension):/);
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|assets|chrome-extension):|data:image\//);
@@ -11,13 +28,13 @@ app.config(['$routeProvider','$locationProvider','$compileProvider',function($ro
     if (authData) {
 
         $routeProvider.when('/index.html', {
-            controller: 'main',
             templateUrl: './assets/view/home.html',
+            controller: 'main',
             resolve: {
                 // I will cause a 1 second delay
                 delay: function($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 500);
+                    $timeout(delay.resolve, 1000);
                     return delay.promise;
                 }
             }
@@ -43,8 +60,8 @@ app.config(['$routeProvider','$locationProvider','$compileProvider',function($ro
                     return delay.promise;
                 }
             }
-        }).when('/whitelist', {
-            templateUrl: './assets/view/whitelist.html',
+        }).when('/profanity', {
+            templateUrl: './assets/view/profanity.html',
             controller: 'main',
             resolve: {
                 // I will cause a 1 second delay
@@ -130,14 +147,16 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         $scope.showError = false;
         $scope.loggedin = authData;
         $scope.children = [];
-        $scope.lists = [];
+        $scope.lists    = [];
+        $scope.profanity = [];
 
         try {
           ref.child(authData.uid).on("value", function(snapshot) {
+
               for (var f in snapshot.val()["children"]) {
                  $scope.children.push({
                       id:f,
-                      currentUrl:removeRegex(snapshot.val()["children"][f]["currentUrl"]),
+                      currentUrl:snapshot.val()["children"][f]["currentUrl"].replace(/['"]+/g, ''),
                       time:snapshot.val()["children"][f]["time"],
                       date:snapshot.val()["children"][f]["date"],
                       name:snapshot.val()["children"][f]["name"],
@@ -146,38 +165,41 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
               }
 
 
-
             for (var q in snapshot.val()["list"]) {
                  $scope.lists.push({
-                      url:q,
-                      type:removeRegex(snapshot.val()["list"][q]["type"])
+                      url:q.replace(/['"]+/g, ''),
+                      type:snapshot.val()["list"][q]["type"]
                   });
               }
+        }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
 
-          }, function(errorObject) {
-              console.log("The read failed: " + errorObject.code);
-          });
 
-
-ref.child("profanity").on("value", function(snapshot) {
-         for (var e in snapshot.val()) {
-                 $scope.children.push({
+        ref.child("profanity").on("value", function(snapshot) {
+            for (var e in snapshot.val()) {
+                 $scope.profanity.push({
                       name:e
                   });
               }
-
-    }, function(errorObject) {
+        }, function(errorObject) {
               console.log("The read failed: " + errorObject.code);
-          });
-
-
+        });
 
         }catch (e) {
            // statements to handle any exceptions
            // pass exception object to error handler
         }
 
+    /**
+    * Stringify a string
+    * @param {String} String
+    * @return {String} JSON encoded string
+    */
+    function stringify(string){
 
+        return  JSON.stringify( string );
+    }
 
 
     /**
@@ -188,14 +210,13 @@ ref.child("profanity").on("value", function(snapshot) {
     * @return {none} none
     */
     $scope.addBlackOrWhite = function() {
-                $scope.showError = true;
-
+        $scope.showError = true;
         var temp = $('input[name="blackorwhiteInputs"]').val();
         var temp2 = $('select[name="typeee"]').val();
-         $scope.errorMessage = "Added new Url" + temp + "with type  " + temp2;
-        var usersRef = ref.child(authData.uid).child("list").child(removeRegex(temp));
+        $scope.errorMessage = "Added new Url" + temp + "with type  " + temp2;
+        var usersRef = ref.child(authData.uid).child("list").child(stringify(temp));
             usersRef.set({
-                type:temp2
+                type:removeRegex(temp2)
             });
     }
 
@@ -207,12 +228,11 @@ ref.child("profanity").on("value", function(snapshot) {
     * @param {String} password
     * @return {none} none
     */
-    $scope.deleteBlackOrWhite = function(event) {
-           $scope.showError = true;
-           $scope.errorMessage = "Deleted " + event.target.id ;
-       console.log(event.target.id);
-        var usersRef = ref.child(authData.uid).child("list").child(removeRegex(event.target.id)).remove();
-        console.log("remove");
+    $scope.deleteBlackOrWhite = function(index,event) {
+        $scope.showError = true;
+        $scope.errorMessage = "Deleted " + index + event.target.id;
+        $scope.lists.splice(index, 1);
+        var usersRef = ref.child(authData.uid).child("list").child('"' + event.target.id + '"').remove();
     }
 
 
@@ -235,7 +255,7 @@ app.controller('child', function($scope, $route, $routeParams, $location) {
 
              $scope.child.push({
                   id:$scope.params.id,
-                  currentUrl:removeRegex(snapshot.val()["currentUrl"]),
+                  currentUrl:snapshot.val()["currentUrl"].replace(/['"]+/g, ''),
                   time:snapshot.val()["time"],
                   date:snapshot.val()["date"],
                   name:snapshot.val()["name"],
@@ -392,7 +412,8 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
                 email: email,
                 password: password
             },
-            ip: {}
+            ip: {},
+            list:{}
         });
     }
 

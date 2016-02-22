@@ -11,7 +11,7 @@
         </thead>
         <tbody>
 
-            <tr class="info"  data-ng-repeat="banndedUrls2  in lists">
+            <tr class="info"  ng-repeat="banndedUrls2  in lists |  unique:'url'" >
 
                 <td>{{banndedUrls2.url}}</td>
 
@@ -20,7 +20,7 @@
                 </td>
                 <td>
                  
-                    <a  id="{{banndedUrls2.url}}" data-ng-click="deleteBlackOrWhite($event)" class="btn btn-raised btn-danger  btn-xs">delete</a>
+                    <a  id="{{banndedUrls2.url}}" data-ng-click="deleteBlackOrWhite($index,$event)" class="btn btn-raised btn-danger  btn-xs">delete</a>
                 </td>
             </tr>
         </tbody>
@@ -41,15 +41,15 @@
 
 
 <div class="well pages slideDown">
-    <h5>Add to Website</h5>
-    <form class="form-horizontal" id="ddd" name="ddddd" ng-submit="addBlackOrWhite()">
+    <h5>Add to list</h5>
+    <form class="form-horizontal" id="ddd" name="ddddd" ng-submit="addBlackOrWhite()" >
             <div ng-show="showError">
             <div ng-include src="'assets/view/error.html'"></div>
         </div>
         <fieldset>
             <div class="form-group">
                 <div class="col-md-12">
-                    <input type="text" class="form-control" id="dd" name="blackorwhiteInputs" placeholder="www.example.ie">
+                    <input type="text" class="form-control" id="dd" name="blackorwhiteInputs" placeholder="www.example.ie" required>
                 </div>
             </div>
             <div class="form-group">
