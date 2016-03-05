@@ -1,4 +1,4 @@
-<div class="well pages " data-ng-repeat="banndedUrls2  in children">
+<div class="well pages " data-ng-repeat="banndedUrls2  in children |  unique:'name'">
     <div class="list-group">
         <div class="list-group-item">
 
@@ -10,7 +10,14 @@
                 <p class="list-group-item-text"><b>Platform:</b> {{banndedUrls2.platform}}</p>
                 <p class="list-group-item-text"> <b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
             </div>
-            <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}" class="btn btn-warning">Stop</a>
+
+
+            <a id="{{banndedUrls2.id}}" ng-show="stopped == 'yes'" data-ng-click="stopInternet($index,$event)" class="btn btn-warning">Stop</a>
+
+
+            <a id="{{banndedUrls2.id}}" ng-show="stopped == 'no'" data-ng-click="startInternet($index,$event)" class="btn btn-warning">start</a>
+
+
             <a ng:href="child/{{banndedUrls2.id}}" class="btn warning">More</a>
         </div>
     </div>

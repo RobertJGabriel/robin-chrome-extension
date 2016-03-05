@@ -149,7 +149,7 @@ app.controller('main', function ($scope, $route, $routeParams, $location) {
     $scope.children = [];
     $scope.lists = [];
     $scope.profanity = [];
-
+    $scope.stopped = "yes";
     try {
         ref.child(authData.uid).on("value", function (snapshot) {
 
@@ -160,8 +160,10 @@ app.controller('main', function ($scope, $route, $routeParams, $location) {
                     time: snapshot.val()["children"][f]["time"],
                     date: snapshot.val()["children"][f]["date"],
                     name: snapshot.val()["children"][f]["name"],
+                    stop: snapshot.val()["children"][f]["stop"],
                     platform: snapshot.val()["children"][f]["platform"]
                 });
+
             }
 
 
@@ -237,17 +239,43 @@ app.controller('main', function ($scope, $route, $routeParams, $location) {
 
 
     /**
-     * Sets black or white list site
+     * Stop Innet
      * @param {String} userData
      * @param {String} email
      * @param {String} password
      * @return {none} none
      */
-    $scope.stopChild = function (index, event) {
-        $scope.showError = true;
-        $scope.errorMessage = "Deleted " + index + event.target.id;
-        $scope.lists.splice(index, 1);
-        var usersRef = ref.child(authData.uid).child("list").child('"' + event.target.id + '"').remove();
+    $scope.stopInternet = function (id, event) {
+
+        console.log($scope.stopped);
+        var usersRef = ref.child(authData.uid).child("children").child(event.target.id);
+        usersRef.update({
+            stop: "yes"
+        });
+        $scope.stopped = "no";
+        $scope.$apply;
+    }
+
+
+
+
+
+    /**
+     * Stop Innet
+     * @param {String} userData
+     * @param {String} email
+     * @param {String} password
+     * @return {none} none
+     */
+    $scope.startInternet = function (id, event) {
+
+        console.log($scope.stopped);
+        var usersRef = ref.child(authData.uid).child("children").child(event.target.id);
+        usersRef.update({
+            stop: "no"
+        });
+        $scope.stopped = "yes";
+        $scope.$apply;
     }
 
 });
@@ -273,6 +301,7 @@ app.controller('child', function ($scope, $route, $routeParams, $location) {
             time: snapshot.val()["time"],
             date: snapshot.val()["date"],
             name: snapshot.val()["name"],
+            stop: snapshot.val()["stop"],
             platform: snapshot.val()["platform"]
         });
 
