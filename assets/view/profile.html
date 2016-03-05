@@ -1,38 +1,21 @@
 <div class="well pages " data-ng-repeat="banndedUrls2  in child">
-
     <div class="list-group">
         <div class="list-group-item">
-            <div class="row-picture">
-                <img class="circle" src="assets/img/icons/platform/{{banndedUrls2.platform}}.png" alt="icon">
-            </div>
+
             <div class="row-content">
                 <h4 class="list-group-item-heading"><a ng:href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label for="inputEmail" class="control-label">Current Url</label>
-                        <p class="list-group-item-text"><a target="_blank" class="search" ng:href="child/{{banndedUrls2.currentUrl}}">{{ banndedUrls2.currentUrl}}</a>
-                        </p>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <p class="list-group-item-text">{{ banndedUrls2.date + banndedUrls2.time }} </p>
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <p class="list-group-item-text">{{ banndedUrls2.platform }} </p>
-                    </div>
-                </div>
+                <p class="list-group-item-text"><b>Date:</b> {{ banndedUrls2.date }} </p>
+                <p class="list-group-item-text"><b>Time:</b> {{banndedUrls2.time}}</p>
+                <p class="list-group-item-text"><b>Platform:</b> {{banndedUrls2.platform}}</p>
+                <p class="list-group-item-text"> <b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
             </div>
+            <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}" class="btn btn-warning">Stop</a>
+
         </div>
-
-
-        <ul class="pager">
-            <li class="previous "><a href="/index.html">Back</a>
-            </li>
-        </ul>
-
     </div>
+    <ul class="pager">
+        <li class="previous "><a href="/index.html">Back</a>
+        </li>
+    </ul>
+</div>

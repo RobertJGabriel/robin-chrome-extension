@@ -236,6 +236,20 @@ app.controller('main', function ($scope, $route, $routeParams, $location) {
     }
 
 
+    /**
+     * Sets black or white list site
+     * @param {String} userData
+     * @param {String} email
+     * @param {String} password
+     * @return {none} none
+     */
+    $scope.stopChild = function (index, event) {
+        $scope.showError = true;
+        $scope.errorMessage = "Deleted " + index + event.target.id;
+        $scope.lists.splice(index, 1);
+        var usersRef = ref.child(authData.uid).child("list").child('"' + event.target.id + '"').remove();
+    }
+
 });
 
 app.controller('child', function ($scope, $route, $routeParams, $location) {

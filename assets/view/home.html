@@ -8,8 +8,9 @@
                 <p class="list-group-item-text"><b>Date:</b> {{ banndedUrls2.date }} </p>
                 <p class="list-group-item-text"><b>Time:</b> {{banndedUrls2.time}}</p>
                 <p class="list-group-item-text"><b>Platform:</b> {{banndedUrls2.platform}}</p>
+                <p class="list-group-item-text"> <b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
             </div>
-            <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}" class="btn btn-warning">{{ banndedUrls2.currentUrl}}</a>
+            <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}" class="btn btn-warning">Stop</a>
             <a ng:href="child/{{banndedUrls2.id}}" class="btn warning">More</a>
         </div>
     </div>
