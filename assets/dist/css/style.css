@@ -14651,7 +14651,7 @@ hr.on-light {
   color: #757575;
 }
 .header-panel {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   background-size: contain;
   position: relative;
   z-index: 3;
@@ -14666,8 +14666,8 @@ hr.on-light {
 }
 body,
 html {
-  width: 600px;
-  height: 500px;
+  width: 340px;
+  height: 360px;
 }
 .pages {
   z-index: 4;

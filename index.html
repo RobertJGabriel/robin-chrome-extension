@@ -35,10 +35,11 @@
         <div class="navbar-right" method="post" style="height: 50px;float: right;margin-top: -50px;font-size: 0.5em;">
             <a ng-show="!loggedin" class="navbar-brand" href="login">Login</a>
             <a ng-show="!loggedin" class="navbar-brand" href="signup">Signup</a>
-            <a ng-show="loggedin" class="navbar-brand" href="blacklist">Lists</a>
-            <a ng-show="!loggedin" class="navbar-brand" href="help" >Help</a>
-            <a ng-show="loggedin" class="navbar-brand" href="profanity">Profanity</a>
-            <a ng-show="loggedin" class="navbar-brand" href="logout">Logout</a>
+            <a ng-show="loggedin" class="navbar-brand" href="blacklist">lists</a>
+
+            <a ng-show="loggedin" class="navbar-brand" href="profanity">profanity</a>
+            <a class="navbar-brand" href="help">help</a>
+            <a ng-show="loggedin" class="navbar-brand" href="logout">logout</a>
         </div>
     </nav>
 
@@ -56,14 +57,10 @@
 
         <div class="row">
 
-            <div class="col-md-2 col-xs-2 col-sm-2"></div>
-            <div class="col-md-8 col-xs-8 col-sm-8  ">
+            <div class="col-md-12 col-sm-12  ">
 
 
                 <div ng-view></div>
-            </div>
-            <div class="col-md-2 col-xs-2 col-sm-2">
-
             </div>
 
         </div>
@@ -71,7 +68,7 @@
 
 
 
-     <div id="welcome" class="modal fade" tabindex="-1">
+    <div id="welcome" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
