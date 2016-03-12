@@ -1,5 +1,5 @@
 var app = angular.module('robinChrome', ['ngRoute']);
-var ref = new Firebase("https://projectbird.firebaseio.com");
+var ref = new Firebase("https://projectbird-robin.firebaseio.com");
 ref.onAuth(authDataCallback);
 var authData = ref.getAuth();
 
