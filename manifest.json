@@ -2,7 +2,7 @@
     "name": "Robin",
     "version": "0.10.11",
     "manifest_version": 2,
-    "description": "Admin Panel for Robin Browser and Flitering Software",
+    "description": "Admifghn Panel for Robin Browser and Flitering Software",
     "content_security_policy": "script-src 'self' https://cdn.firebase.com  https://*.firebaseio.com ; object-src 'self'",
     "browser_action": {
         "default_popup": "index.html"
@@ -17,6 +17,7 @@
 	  "https://*.firebaseio-demo.com",
 	  "https://*.firebaseio.com",
 	  "https://cdn.firebase.com",
+      "http://octicons.github.com/components/octicons/octicons/octicons.css",
 	  "http://jsonip.com",
 	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js",
 	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js",
