@@ -27,22 +27,26 @@
     <nav class="navbar navbar-material-light-blue " ng-style="themeStyle">
         <div class="navbar-header">
 
-            <a class="navbar-brand" href="/index.html" style='height:100%'><img src="assets/img/icons/icon-128.png" style='height:35px' alt="logo">
+            <a class="navbar-brand"  href="/index.html"  tabindex="-1"><img src="assets/img/icons/icon-128.png" style='height:35px' alt="logo">
             </a>
 
         </div>
 
         <div class="navbar-right" method="post" style="height: 50px;float: right;margin-top: -50px;font-size: 0.5em;">
-            <a ng-show="!loggedin" class="navbar-brand" href="login">Login</a>
-            <a ng-show="!loggedin" class="navbar-brand" href="signup">Signup</a>
             <a ng-show="loggedin" class="navbar-brand" href="blacklist">lists</a>
 
             <a ng-show="loggedin" class="navbar-brand" href="profanity">profanity</a>
-            <a class="navbar-brand" href="help">help</a>
+            <a class="navbar-brand" href="help"  tabindex="-1" ><i class="material-icons">&#xE887;</i></a>
             <a ng-show="loggedin" class="navbar-brand" href="logout">logout</a>
         </div>
     </nav>
-
+<div class="alert alert-dismissible  alert-warning" style="
+    margin-top: -20px;
+">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Heads up!</strong> As you know, there might be a few bugs.
+  So please ignore them for now and enjoy :) 
+</div>
     <div class="header-panel">
         <div class="container-fluid">
             <div class="row">

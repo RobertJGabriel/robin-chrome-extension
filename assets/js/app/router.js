@@ -34,7 +34,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -45,7 +45,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -56,7 +56,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -67,7 +67,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -78,7 +78,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -90,7 +90,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -104,7 +104,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -115,7 +115,18 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
+                    return delay.promise;
+                }
+            }
+        }).when('/help', {
+            templateUrl: './assets/view/help.html',
+            controller: 'help',
+            resolve: {
+                // I will cause a 1 second delay
+                delay: function ($q, $timeout) {
+                    var delay = $q.defer();
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
@@ -126,7 +137,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function 
                 // I will cause a 1 second delay
                 delay: function ($q, $timeout) {
                     var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
+                    $timeout(delay.resolve, 2000);
                     return delay.promise;
                 }
             }
