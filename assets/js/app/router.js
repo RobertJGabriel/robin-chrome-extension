@@ -192,9 +192,12 @@ app.controller('main', function ($scope, $route, $routeParams, $location) {
         ref.child("profanity").on("value", function (snapshot) {
             for (var e in snapshot.val()) {
                 $scope.profanity.push({
-                    name: e
+                    word: snapshot.val()[e]["word"],
+                    type:snapshot.val()[e]["type"]
                 });
+
             }
+            console.log($scope.profanity);
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
