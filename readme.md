@@ -9,7 +9,7 @@ After this, the parent can easily see what the child is viewing in real time and
 The parent can see if the user (child) tried to access a high profanity site or a blacklisted website and can reset the color theme on the web browser back to the users (child) selection.
 
 ## Browser
-See the repo [here]().
+See the repo [here](https://github.com/Projectbird/Robin).
 
 # Installation
 ```
@@ -37,5 +37,3 @@ git clone https://github.com/Projectbird/Robin-Chrome.git
 
 # Built in
 ![alt text](http://www.projectbird.com/uploads/6/0/3/3/603320/7878121_orig.png "HTML5") ![alt text](http://www.projectbird.com/uploads/6/0/3/3/603320/9471244.png "Css3") ![alt text](http://www.projectbird.com/uploads/6/0/3/3/603320/7948503_orig.png "Bootstrap") ![alt text](http://www.projectbird.com/uploads/6/0/3/3/603320/4019039.png "Javascript")   ![alt text](http://www.projectbird.com/uploads/6/0/3/3/603320/2258525.png "Node.js")
-
-<br>
