@@ -1,146 +1,142 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Robin</title>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <link href="./assets/dist/css/popup.css" rel="stylesheet">
-    <!-- Mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Material Design fonts -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://www.justinaguilar.com/animations/css/animations.css">
-    <!-- Css Animation -->
-    <script src="assets/js/angular.js"></script>
-    <script src="assets/js/angular-route.js"></script>
-
-
+  <title>Robin</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <link href="./assets/dist/css/popup.css" rel="stylesheet">
+  <!-- Mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Material Design fonts -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="http://www.justinaguilar.com/animations/css/animations.css">
+  <!-- Css Animation -->
+  <script src="assets/js/angular.js"></script>
+  <script src="assets/js/angular-route.js"></script>
 </head>
 
 <body ng-app="robinChrome" ng-controller="main">
-    <base href="/">
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-material-light-blue " ng-style="themeStyle">
-        <div class="navbar-header">
+  <base href="/">
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-material-light-blue " ng-style="themeStyle">
+    <div class="navbar-header">
 
-            <a class="navbar-brand"  href="/index.html"  tabindex="-1"><i class="material-icons">&#xE88A;</i></a>
+      <a class="navbar-brand" href="/index.html" tabindex="-1"><i class="material-icons">&#xE88A;</i></a>
 
-        </div>
+    </div>
 
-        <div class="navbar-right" method="post" style="height: 50px;float: right;margin-top: -50px;font-size: 0.5em;">
-            <a ng-show="loggedin" class="navbar-brand" href="blacklist"><i class="material-icons">&#xE8B0;</i></a>
+    <div class="navbar-right" method="post" style="height: 50px;float: right;margin-top: -50px;font-size: 0.5em;">
+      <a ng-show="loggedin" class="navbar-brand" href="blacklist"><i class="material-icons">&#xE8B0;</i></a>
 
-            <a ng-show="loggedin" class="navbar-brand" href="profanity"><i class="material-icons">&#xE85A;</i></a>
-            <a class="navbar-brand" href="help"  tabindex="-1" ><i class="material-icons">&#xE887;</i></a>
-            <a ng-show="loggedin" class="navbar-brand" href="logout">logout</a>
-        </div>
-    </nav>
-<div class="alert alert-dismissible  alert-warning" style="
+      <a ng-show="loggedin" class="navbar-brand" href="profanity"><i class="material-icons">&#xE85A;</i></a>
+      <a class="navbar-brand" href="help" tabindex="-1"><i class="material-icons">&#xE887;</i></a>
+      <a ng-show="loggedin" class="navbar-brand" href="logout">logout</a>
+    </div>
+  </nav>
+  <div class="alert alert-dismissible  alert-warning" style="
     margin-top: -20px;
 ">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <strong>Heads up!</strong> As you know, there might be a few bugs.
-  So please ignore them for now and enjoy :) 
-</div>
-    <div class="header-panel">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 col-xs-12 col-sm-12 ">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container ">
-
-
-        <div class="row">
-
-            <div class="col-md-12 col-sm-12  ">
-
-
-                <div ng-view></div>
-            </div>
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Heads up!</strong> As you know, there might be a few bugs. So please ignore them for now and enjoy :)
+  </div>
+  <div class="header-panel">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12 ">
 
         </div>
+      </div>
     </div>
+  </div>
+  <div class="container ">
+
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12  ">
+
+
+        <div ng-view></div>
+      </div>
+
+    </div>
+  </div>
 
 
 
-    <div id="welcome" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type="button">&times;</button>
-                    <h4 class="modal-title">Robin Help Section </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade active in" id="home2">
-                            <div class="paragraphs">
-                                <div class="row">
-                                    <div class="span4" style="margin-right:20px;">
-                                        <div class="content-heading">
-                                            <h4>Set Up</h4>
-                                        </div>
-                                        <p>First, all requests made from external services will need an API key. To get a key log into your Teamwork Desk site and click your avatar on the bottom left of the app</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="pager">
-                                <li class="next"><a data-toggle="tab" href="#CORS3" ng-style="themeStyle">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="CORS3">
-                            <h4>CORS Enabled</h4>
-                            <p>J</p>
-                            <ul class="pager">
-                                <li class="previous"><a data-toggle="tab" href="#home2" ng-style="themeStyle">Back</a>
-                                </li>
-                                <li class="next"><a data-toggle="tab" href="#about" ng-style="themeStyle">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="about">
-                            <div class="paragraphs">
-                                <div class="row">
-                                    <div class="span4" style="margin-right:20px;">
-                                        <img style="float:left;margin-left:10px;margin-right:10px;" alt="Cinque Terre" class="img-thumbnail" height="100" src="assets/img/icons/logo.png" title="" width="190" />
-                                        <div class="content-heading">
-                                            <h4>About</h4>
-                                        </div>
-                                        <p>First, all requests made from external services will need an API key. To get a key log into your Teamwork Desk site and click your avatar on the bottom left of the app</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="pager">
-                                <li class="previous"><a data-toggle="tab" href="#CORS3" ng-style="themeStyle">Back</a>
-                                </li>
-                            </ul>
-                        </div>
+  <div id="welcome" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal" type="button">&times;</button>
+          <h4 class="modal-title">Robin Help Section </h4>
+        </div>
+        <div class="modal-body">
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active in" id="home2">
+              <div class="paragraphs">
+                <div class="row">
+                  <div class="span4" style="margin-right:20px;">
+                    <div class="content-heading">
+                      <h4>Set Up</h4>
                     </div>
+                    <p>First, all requests made from external services will need an API key. To get a key log into your Teamwork Desk site and click your avatar on the bottom left of the app</p>
+                  </div>
                 </div>
-                <div class="modal-footer">
-                </div>
+              </div>
+              <ul class="pager">
+                <li class="next"><a data-toggle="tab" href="#CORS3" ng-style="themeStyle">Next</a>
+                </li>
+              </ul>
             </div>
+            <div class="tab-pane fade" id="CORS3">
+              <h4>CORS Enabled</h4>
+              <p>J</p>
+              <ul class="pager">
+                <li class="previous"><a data-toggle="tab" href="#home2" ng-style="themeStyle">Back</a>
+                </li>
+                <li class="next"><a data-toggle="tab" href="#about" ng-style="themeStyle">Next</a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-pane fade" id="about">
+              <div class="paragraphs">
+                <div class="row">
+                  <div class="span4" style="margin-right:20px;">
+                    <img style="float:left;margin-left:10px;margin-right:10px;" alt="Cinque Terre" class="img-thumbnail" height="100" src="assets/img/icons/logo.png" title="" width="190" />
+                    <div class="content-heading">
+                      <h4>About</h4>
+                    </div>
+                    <p>First, all requests made from external services will need an API key. To get a key log into your Teamwork Desk site and click your avatar on the bottom left of the app</p>
+                  </div>
+                </div>
+              </div>
+              <ul class="pager">
+                <li class="previous"><a data-toggle="tab" href="#CORS3" ng-style="themeStyle">Back</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+        <div class="modal-footer">
+        </div>
+      </div>
     </div>
+  </div>
 
 
-    <script src="./assets/dist/js/jquery.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+  <script src="./assets/dist/js/jquery.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
-    <script src="./assets/js/app/router.js"></script>
-    <script src="./assets/dist/js/bootstrap.min.js"></script>
-    <script src="./assets/dist/js/ripples.min.js"></script>
-    <script src="./assets/dist/js/material.min.js"></script>
-    <script src="./assets/dist/js/start.min.js"></script>
+  <script src="./assets/js/app/router.js"></script>
+  <script src="./assets/dist/js/bootstrap.min.js"></script>
+  <script src="./assets/dist/js/ripples.min.js"></script>
+  <script src="./assets/dist/js/material.min.js"></script>
+  <script src="./assets/dist/js/start.min.js"></script>
 
 </body>
 
