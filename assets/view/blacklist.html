@@ -1,21 +1,21 @@
-<div class="well pages slideDown" ng-repeat="banndedUrls2  in lists |  unique:'url'">
+<div class="well pages" ng-repeat="banndedUrls2  in lists |  unique:'url'">
+  <div class="list-group" >
+    <div class="list-group-item">
+      <div class="row-picture">
+<img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg" alt="icon">
+      </div>
+      <div class="row-content">
+        <h4 class="list-group-item-heading">{{banndedUrls2.url}}</h4>
 
-    <div class="list-group">
-        <div class="list-group-item">
+        <p class="list-group-item-text"> {{banndedUrls2.type}}listed
+        </p>
 
-            <div class="row-content">
-                <h4 class="list-group-item-heading">{{banndedUrls2.url}}</h4>
-
-                <p class="list-group-item-text"> {{banndedUrls2.type}}listed
-                </p>
-
-                <a id="{{banndedUrls2.url}}" data-ng-click="deleteBlackOrWhite($index,$event)" class="btn btn-raised btn-danger  ">Remove</a>
-            </div>
-        </div>
-
+        <a id="{{banndedUrls2.url}}" data-ng-click="deleteBlackOrWhite($index,$event)" class="btn btn-raised btn-danger  btn-xs">Remove</a>
+      </div>
     </div>
 
-</div>
+  </div>  </div>
+  <hr>
 
 
 
@@ -26,32 +26,33 @@
 
 
 
-<div class="well pages slideDown">
-    <h5>Add to list</h5>
-    <form class="form-horizontal" id="ddd" name="ddddd" ng-submit="addBlackOrWhite()">
-        <div ng-show="showError">
-            <div ng-include src="'assets/view/error.html'"></div>
+
+<div class="well pages ">
+  <h5>Add to List</h5>
+  <form class="form-horizontal" id="ddd" name="ddddd" ng-submit="addBlackOrWhite()">
+    <div ng-show="showError">
+      <div ng-include src="'assets/view/error.html'"></div>
+    </div>
+    <fieldset>
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="text" class="form-control" id="dd" name="blackorwhiteInputs" placeholder="www.example.ie" required>
         </div>
-        <fieldset>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <input type="text" class="form-control" id="dd" name="blackorwhiteInputs" placeholder="www.example.ie" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12">
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
 
-                    <select name="typeee" class="form-control">
-                        <option value="black">Blacklist</option>
-                        <option value="white">Whitelist</option>
-                    </select>
-                </div>
-            </div>
+          <select name="typeee" class="form-control">
+            <option value="black">Blacklist</option>
+            <option value="white">Whitelist</option>
+          </select>
+        </div>
+      </div>
 
 
-            <div class="form-group">
-                <button type="submit" style="float:right;" class="btn btn-primary">Add</button>
-            </div>
-        </fieldset>
-    </form>
+      <div class="form-group">
+        <button type="submit" style="float:right;" class="btn btn-primary ">Add</button>
+      </div>
+    </fieldset>
+  </form>
 </div>

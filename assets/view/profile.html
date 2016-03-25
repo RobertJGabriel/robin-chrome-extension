@@ -1,21 +1,28 @@
-<div class="well pages " data-ng-repeat="banndedUrls2  in child">
-    <div class="list-group">
-        <div class="list-group-item">
+<div class="well pages " data-ng-repeat="banndedUrls2  in child |  unique:'name'">
+  <div class="list-group" >
+    <div class="list-group-item">
+      <div class="row-picture">
+        <img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg" alt="icon">
+      </div>
+      <div class="row-content">
+        <h4 class="list-group-item-heading"><a ng:href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
 
-            <div class="row-content">
-                <h4 class="list-group-item-heading"><a ng:href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
+        <p class="list-group-item-text"><b>Date:</b> {{ banndedUrls2.date }} </p>
+        <p class="list-group-item-text"><b>Time:</b> {{banndedUrls2.time}}</p>
+        <p class="list-group-item-text"><b>Platform:</b> {{banndedUrls2.platform}}</p>
+        <p class="list-group-item-text"> <b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
+        <p class="list-group-item-text">
+          <a id="{{banndedUrls2.id}}" ng-show="stopped == 'yes'" data-ng-click="stopInternet($index,$event)" class="btn btn-warning btn-xs">Stop</a>
+          <a id="{{banndedUrls2.id}}" ng-show="stopped == 'no'" data-ng-click="startInternet($index,$event)" class="btn btn-success btn-xs">start</a>
+        </p>
+      </div>
 
-                <p class="list-group-item-text"><b>Date:</b> {{ banndedUrls2.date }} </p>
-                <p class="list-group-item-text"><b>Time:</b> {{banndedUrls2.time}}</p>
-                <p class="list-group-item-text"><b>Platform:</b> {{banndedUrls2.platform}}</p>
-                <p class="list-group-item-text"> <b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
-            </div>
-            <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}" class="btn btn-warning">Stop</a>
-
-        </div>
     </div>
-    <ul class="pager">
-        <li class="previous "><a href="/index.html">Back</a>
-        </li>
-    </ul>
+
+  </div>
+
+  <ul class="pager">
+    <li class="previous "><a href="/index.html"><i class="material-icons">&#xE317;</i></a>
+    </li>
+  </ul>
 </div>

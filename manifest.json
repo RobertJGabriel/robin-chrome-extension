@@ -27,7 +27,5 @@
 	  "https://cdn.firebase.com/js/client/2.3.2/firebase.js",
 	  "assets/css/bootstrap/*.css",
 	  "assets/css/fonts/*",
-	  "assets/js/*.js"
-  ]
-
+	  "assets/js/*.js"]
 }
