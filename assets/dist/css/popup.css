@@ -7147,9 +7147,13 @@ Then, run this script to get the list.
 }
 .mdi-action-done-all:before {
   content: "\e624";
+  margin-left: 5px !important;
+  margin-top: 5px !important;
 }
 .mdi-action-done:before {
   content: "\e625";
+  margin-left: 5px !important;
+  margin-top: 5px !important;
 }
 .mdi-action-event:before {
   content: "\e626";
@@ -9317,23 +9321,40 @@ Then, run this script to get the list.
 .mdi-toggle-star:before {
   content: "\e8f5";
 }
-.shadow-z-1 {
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+.withripple {
+  position: relative;
 }
-.shadow-z-1-hover {
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+.ripple-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
 }
-.shadow-z-2 {
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1);
+  transform-origin: 50%;
+  opacity: 0;
+  pointer-events: none;
 }
-.shadow-z-3 {
-  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+.ripple.ripple-on {
+  transition: opacity 0.15s ease-in 0s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  opacity: 0.1;
 }
-.shadow-z-4 {
-  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
-}
-.shadow-z-5 {
-  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+.ripple.ripple-out {
+  transition: opacity 0.1s linear 0s !important;
+  opacity: 0;
 }
 body {
   background-color: #EEEEEE;
@@ -10110,89 +10131,89 @@ body .jumbotron-material-blue-grey,
 .btn-material-blue-grey.active:not(.btn-link):not(.btn-flat) {
   background-color: #6e8d9b;
 }
-.btn.btn-flat:hover:not(.btn-link),
-.btn-default.btn-flat:hover:not(.btn-link) {
+.btn.btn-flat:hover:not(.btn-ink),
+.btn-default.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(0, 0, 0, 0.2);
 }
-.btn-black.btn-flat:hover:not(.btn-link) {
+.btn-black.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(0, 0, 0, 0.2);
 }
-.btn-white.btn-flat:hover:not(.btn-link) {
+.btn-white.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(255, 255, 255, 0.2);
 }
-.btn-inverse.btn-flat:hover:not(.btn-link) {
+.btn-inverse.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(63, 81, 181, 0.2);
 }
-.btn-primary.btn-flat:hover:not(.btn-link) {
+.btn-primary.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(0, 150, 136, 0.2);
 }
-.btn-success.btn-flat:hover:not(.btn-link) {
+.btn-success.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(76, 175, 80, 0.2);
 }
-.btn-info.btn-flat:hover:not(.btn-link) {
+.btn-info.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(3, 169, 244, 0.2);
 }
-.btn-warning.btn-flat:hover:not(.btn-link) {
+.btn-warning.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(255, 87, 34, 0.2);
 }
-.btn-danger.btn-flat:hover:not(.btn-link) {
+.btn-danger.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(244, 67, 54, 0.2);
 }
-.btn-material-red.btn-flat:hover:not(.btn-link) {
+.btn-material-red.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(244, 67, 54, 0.2);
 }
-.btn-material-pink.btn-flat:hover:not(.btn-link) {
+.btn-material-pink.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(233, 30, 99, 0.2);
 }
-.btn-material-purple.btn-flat:hover:not(.btn-link) {
+.btn-material-purple.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(156, 39, 176, 0.2);
 }
-.btn-material-deep-purple.btn-flat:hover:not(.btn-link) {
+.btn-material-deep-purple.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(103, 58, 183, 0.2);
 }
-.btn-material-indigo.btn-flat:hover:not(.btn-link) {
+.btn-material-indigo.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(63, 81, 181, 0.2);
 }
-.btn-material-blue.btn-flat:hover:not(.btn-link) {
+.btn-material-blue.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(33, 150, 243, 0.2);
 }
-.btn-material-light-blue.btn-flat:hover:not(.btn-link) {
+.btn-material-light-blue.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(3, 169, 244, 0.2);
 }
-.btn-material-cyan.btn-flat:hover:not(.btn-link) {
+.btn-material-cyan.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(0, 188, 212, 0.2);
 }
-.btn-material-teal.btn-flat:hover:not(.btn-link) {
+.btn-material-teal.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(0, 150, 136, 0.2);
 }
-.btn-material-green.btn-flat:hover:not(.btn-link) {
+.btn-material-green.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(76, 175, 80, 0.2);
 }
-.btn-material-light-green.btn-flat:hover:not(.btn-link) {
+.btn-material-light-green.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(139, 195, 74, 0.2);
 }
-.btn-material-lime.btn-flat:hover:not(.btn-link) {
+.btn-material-lime.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(205, 220, 57, 0.2);
 }
-.btn-material-yellow.btn-flat:hover:not(.btn-link) {
+.btn-material-yellow.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(255, 235, 59, 0.2);
 }
-.btn-material-amber.btn-flat:hover:not(.btn-link) {
+.btn-material-amber.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(255, 193, 7, 0.2);
 }
-.btn-material-orange.btn-flat:hover:not(.btn-link) {
+.btn-material-orange.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(255, 152, 0, 0.2);
 }
-.btn-material-deep-orange.btn-flat:hover:not(.btn-link) {
+.btn-material-deep-orange.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(255, 87, 34, 0.2);
 }
-.btn-material-brown.btn-flat:hover:not(.btn-link) {
+.btn-material-brown.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(121, 85, 72, 0.2);
 }
-.btn-material-grey.btn-flat:hover:not(.btn-link) {
+.btn-material-grey.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(158, 158, 158, 0.2);
 }
-.btn-material-blue-grey.btn-flat:hover:not(.btn-link) {
+.btn-material-blue-grey.btn-flat:hover:not(.btn-ink) {
   background-color: rgba(96, 125, 139, 0.2);
 }
 .btn.btn-flat {
@@ -11812,6 +11833,91 @@ fieldset[disabled] .form-control.focus:disabled,
   background-image: linear-gradient(#9e9e9e, #9e9e9e), linear-gradient(#D2D2D2, #D2D2D2);
 }
 .form-group-material-blue-grey .form-control:focus {
+  background-image: linear-gradient(#607d8b, #607d8b), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group .form-control.focus,
+.form-group-default .form-control.focus {
+  background-image: linear-gradient(#009688, #009688), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-black .form-control.focus {
+  background-image: linear-gradient(#000000, #000000), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-white .form-control.focus {
+  background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-inverse .form-control.focus {
+  background-image: linear-gradient(#3f51b5, #3f51b5), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-primary .form-control.focus {
+  background-image: linear-gradient(#009688, #009688), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-success .form-control.focus {
+  background-image: linear-gradient(#4caf50, #4caf50), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-info .form-control.focus {
+  background-image: linear-gradient(#03a9f4, #03a9f4), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-warning .form-control.focus {
+  background-image: linear-gradient(#ff5722, #ff5722), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-danger .form-control.focus {
+  background-image: linear-gradient(#f44336, #f44336), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-red .form-control.focus {
+  background-image: linear-gradient(#f44336, #f44336), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-pink .form-control.focus {
+  background-image: linear-gradient(#e91e63, #e91e63), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-purple .form-control.focus {
+  background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-deep-purple .form-control.focus {
+  background-image: linear-gradient(#673ab7, #673ab7), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-indigo .form-control.focus {
+  background-image: linear-gradient(#3f51b5, #3f51b5), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-blue .form-control.focus {
+  background-image: linear-gradient(#2196f3, #2196f3), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-light-blue .form-control.focus {
+  background-image: linear-gradient(#03a9f4, #03a9f4), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-cyan .form-control.focus {
+  background-image: linear-gradient(#00bcd4, #00bcd4), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-teal .form-control.focus {
+  background-image: linear-gradient(#009688, #009688), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-green .form-control.focus {
+  background-image: linear-gradient(#4caf50, #4caf50), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-light-green .form-control.focus {
+  background-image: linear-gradient(#8bc34a, #8bc34a), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-lime .form-control.focus {
+  background-image: linear-gradient(#cddc39, #cddc39), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-yellow .form-control.focus {
+  background-image: linear-gradient(#ffeb3b, #ffeb3b), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-amber .form-control.focus {
+  background-image: linear-gradient(#ffc107, #ffc107), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-orange .form-control.focus {
+  background-image: linear-gradient(#ff9800, #ff9800), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-deep-orange .form-control.focus {
+  background-image: linear-gradient(#ff5722, #ff5722), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-brown .form-control.focus {
+  background-image: linear-gradient(#795548, #795548), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-grey .form-control.focus {
+  background-image: linear-gradient(#9e9e9e, #9e9e9e), linear-gradient(#D2D2D2, #D2D2D2);
+}
+.form-group-material-blue-grey .form-control.focus {
   background-image: linear-gradient(#607d8b, #607d8b), linear-gradient(#D2D2D2, #D2D2D2);
 }
 .form-group .control-label,
@@ -14649,6 +14755,24 @@ hr.on-light {
   -moz-osx-font-smoothing: grayscale;
   pointer-events: none;
   color: #757575;
+}
+.shadow-z-1 {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+}
+.shadow-z-1-hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.shadow-z-2 {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.shadow-z-3 {
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.shadow-z-4 {
+  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+.shadow-z-5 {
+  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
 }
 .header-panel {
   margin-bottom: 20px;
