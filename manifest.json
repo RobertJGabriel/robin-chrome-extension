@@ -18,6 +18,7 @@
 	  "https://*.firebaseio.com",
 	  "https://cdn.firebase.com",
       "http://octicons.github.com/components/octicons/octicons/octicons.css",
+            "http://www.justinaguilar.com/animations/css/animations.css",
 	  "http://jsonip.com",
 	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js",
 	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js",

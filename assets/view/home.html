@@ -1,14 +1,27 @@
-<div class="list-group" data-ng-repeat="banndedUrls2  in children |  unique:'name'">
-  <div class="list-group-item">
-    <div class="row-picture">
-      <img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg" alt="icon">
-    </div>
-    <div class="row-content">
-      <h4 class="list-group-item-heading"><a ng:href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
-      <p class="list-group-item-text">Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
-
+<div data-ng-repeat="banndedUrls2  in children |  unique:'name'">
+  <div class="card" style="height: 130px;">
+    <div class="card-content">
+      <div class="container-fluid">
+        <div class="row" style="  height: 130px;">
+          <div class=" col-xs-4 " style="   padding: 0;">
+            <div class="card-image" style="height: 130px;">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/mademyday/128.jpg" alt="Loading image...">
+            </div>
+          </div>
+          <div class="col-xs-8  " style="   height: 130px;">
+            <div>
+              <h3 class="card-image-headline">{{banndedUrls2.name}}</h3>
+              <p style="height:30px;">
+                </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
+            </div>
+            <footer class="card-footer">
+              <button class="btn btn-flat btn-sm" style="padding: 5px 16px;"><a ng:href="child/{{banndedUrls2.id}}">More</a></button>
+              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'yes'"><a id="{{banndedUrls2.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
+              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'no'"><a id="{{banndedUrls2.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
+            </footer>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>
-<hr>

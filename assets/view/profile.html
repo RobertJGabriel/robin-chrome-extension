@@ -1,28 +1,24 @@
-<div class="well pages " data-ng-repeat="banndedUrls2  in child |  unique:'name'">
-  <div class="list-group" >
-    <div class="list-group-item">
-      <div class="row-picture">
-        <img class="circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg" alt="icon">
+<div data-ng-repeat="banndedUrls2  in child |  unique:'name'">
+  <div class="card slideDown" style="height: 423px;">
+    <div class="card-content">
+      <div class="card-image" style="height: 230px;">
+        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/mademyday/128.jpg" alt="Loading image...">
+        <h3 class="card-image-headline">{{banndedUrls2.name}}</h3>
       </div>
-      <div class="row-content">
-        <h4 class="list-group-item-heading"><a ng:href="child/{{banndedUrls2.id}}" >{{banndedUrls2.name}}</a></h4>
+      <div class="card-body" style="height:140px">
 
-        <p class="list-group-item-text"><b>Date:</b> {{ banndedUrls2.date }} </p>
-        <p class="list-group-item-text"><b>Time:</b> {{banndedUrls2.time}}</p>
-        <p class="list-group-item-text"><b>Platform:</b> {{banndedUrls2.platform}}</p>
-        <p class="list-group-item-text"> <b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
-        <p class="list-group-item-text">
-          <a id="{{banndedUrls2.id}}" ng-show="stopped == 'yes'" data-ng-click="stopInternet($index,$event)" class="btn btn-warning btn-xs">Stop</a>
-          <a id="{{banndedUrls2.id}}" ng-show="stopped == 'no'" data-ng-click="startInternet($index,$event)" class="btn btn-success btn-xs">start</a>
-        </p>
+        <p><b>Date:</b> {{ banndedUrls2.date }} </p>
+        <p><b>Time:</b> {{banndedUrls2.time}}</p>
+        <p><b>Platform:</b> {{banndedUrls2.platform}}</p>
+        <p><b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
       </div>
 
+      <footer class="card-footer" style="height: 50px;padding: 27px;">
+        <button class="btn btn-flat"><a href="/index.html"><i class="material-icons">&#xE317;</i></a></button>
+        <button class="btn btn-flat btn-warning " style="padding: 5px 16px;" ng-show="stopped == 'yes'"><a id="{{banndedUrls2.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
+        <button class="btn btn-flat btn-warning " style="padding: 5px 16px;" ng-show="stopped == 'no'"><a id="{{banndedUrls2.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
+
+      </footer>
     </div>
-
   </div>
-
-  <ul class="pager">
-    <li class="previous "><a href="/index.html"><i class="material-icons">&#xE317;</i></a>
-    </li>
-  </ul>
 </div>
