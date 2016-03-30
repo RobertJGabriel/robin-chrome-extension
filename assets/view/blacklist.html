@@ -1,14 +1,28 @@
 <div ng-repeat="banndedUrls2  in lists |  unique:'url'">
-  <div class="card" style="margin-bottom:20px;">
 
-    <div class="card-body">
-      <h2 class="">{{banndedUrls2.url}}</h2>
+  <div class="card" style="height: 130px;">
+    <div class="card-content">
+      <div class="container-fluid">
+        <div class="row" style="  height: 130px;">
+          <div class=" col-xs-4 " style="   padding: 0;">
+            <div class="card-image" style="height: 130px; background-color:#FF5722;">
 
-      <p> This is {{banndedUrls2.type}}listed</p>
+            </div>
+          </div>
+          <div class="col-xs-8  " style="   height: 130px;">
+            <div>
+              <h3 class="card-image-headline">{{banndedUrls2.url}}</h3>
+              <p style="height:30px;">
+                This is {{banndedUrls2.type}}listed
+              </p>
+            </div>
+            <footer class="card-footer">
+              <button class="btn btn-flat btn-sm" style="padding: 5px 16px;"> <a id="{{banndedUrls2.url}}" data-ng-click="deleteBlackOrWhite($index,$event)">Remove</a></button>
+            </footer>
+          </div>
+        </div>
+      </div>
     </div>
-    <footer class="card-footer">
-      <a id="{{banndedUrls2.url}}" data-ng-click="deleteBlackOrWhite($index,$event)" class="btn btn-flat">Remove</a>
-    </footer>
   </div>
 
 </div>
@@ -18,22 +32,14 @@
 
 
 <div class="card" style="margin-bottom:20px;">
-
-    <div class="card-body">
-
-  <form id="ddd" name="ddddd" ng-submit="addBlackOrWhite()">
-
-
-
-    <input type="text" class="form-control" id="dd" name="blackorwhiteInputs" placeholder="www.example.ie" required>
-    <select name="typeee" class="form-control">
-      <option value="black">Blacklist</option>
-      <option value="white">Whitelist</option>
-    </select>
-
-    <button type="submit" style="float:right;" class="btn btn-primary ">Add</button>
-
-
-  </form>
-</div>
+  <div class="card-body">
+    <form id="ddd" name="ddddd" ng-submit="addBlackOrWhite()">
+      <input type="text" class="form-control" id="dd" name="blackorwhiteInputs" placeholder="www.example.ie" required>
+      <select name="typeee" class="form-control">
+        <option value="black">Blacklist</option>
+        <option value="white">Whitelist</option>
+      </select>
+      <button type="submit" style="float:right;" class="btn btn-primary ">Add</button>
+    </form>
+  </div>
 </div>
