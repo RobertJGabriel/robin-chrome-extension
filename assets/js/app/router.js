@@ -60,8 +60,8 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
           return delay.promise;
         }
       }
-    }).when('/profanity', {
-      templateUrl: './assets/view/profanity.html',
+    }).when('/settings', {
+      templateUrl: './assets/view/settings.html',
       controller: 'main',
       resolve: {
         // I will cause a 1 second delay
@@ -162,11 +162,11 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
   $scope.profanity = [];
   $scope.stopped = "yes";
   $scope.theme = (localStorage.getItem('theme') !== null) ? localStorage.getItem('theme') : "#F44336";
-$scope.themeStyle = (localStorage.getItem('theme') !== null) ? {
-  'background-color': $scope.theme
-} : {
-  'background-color': "#F44336"
-};
+  $scope.themeStyle = (localStorage.getItem('theme') !== null) ? {
+    'background-color': $scope.theme
+  } : {
+    'background-color': "#F44336"
+  };
 
   try {
     ref.child(authData.uid).on("value", function(snapshot) {
@@ -195,38 +195,39 @@ $scope.themeStyle = (localStorage.getItem('theme') !== null) ? {
       console.log("The read failed: " + errorObject.code);
     });
 
-    $scope.getClass = function (path) {
+    $scope.getClass = function(path) {
       return ($location.path().substr(0, path.length) === path) ? 'active' : '';
     }
 
-    $scope.getAddress = function (path) {
-      return ($location.path().substr(0, path.length) === path) ? 'true' : '';
-  
-    }
-      /**
-       * sets current color or theme
-       * @param {String} color
-       * @return {none} none
-       */
-      $scope.setColor = function(colors) {
+    $scope.getAddress = function(path) {
+        return ($location.path().substr(0, path.length) === path) ? 'true' : '';
 
-        $scope.removeLocalStorage('theme');
-        $scope.theme = colors;
-        localStorage.setItem('theme', $scope.theme);
-        $scope.themeStyle = {
-          'background-color': colors
-        };
-         $scope.$apply();
-      };
+      }
+    /**
+     * sets current color or theme
+     * @param {String} color
+     * @return {none} none
+     */
+    $scope.setColor = function(colors) {
 
-      /**
-       * Remove localstorage by key
-       * @param {String} Key
-       * @return {none} none
-       */
-      $scope.removeLocalStorage = function(key) {
-        localStorage.removeItem(key);
+      $scope.removeLocalStorage('theme');
+      $scope.theme = colors;
+      localStorage.setItem('theme', $scope.theme);
+      $scope.themeStyle = {
+        'background-color': colors
       };
+      $scope.$apply();
+    };
+
+
+    /**
+     * Remove localstorage by key
+     * @param {String} Key
+     * @return {none} none
+     */
+    $scope.removeLocalStorage = function(key) {
+      localStorage.removeItem(key);
+    };
 
     ref.child("profanity").on("value", function(snapshot) {
       for (var e in snapshot.val()) {
