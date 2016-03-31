@@ -14788,6 +14788,9 @@ hr.on-light {
   padding-left: 35px;
   position: absolute;
 }
+.active {
+  border-bottom: 1px solid white;
+}
 body,
 html {
   width: 340px;

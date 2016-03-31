@@ -187,6 +187,10 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
+    
+    $scope.getClass = function (path) {
+      return ($location.path().substr(0, path.length) === path) ? 'active' : '';
+    }
 
 
     ref.child("profanity").on("value", function(snapshot) {
