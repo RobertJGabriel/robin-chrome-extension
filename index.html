@@ -33,20 +33,20 @@
     <div class="navbar-right" method="post" style="height: 50px;float: right;margin-top: -50px;font-size: 0.5em;">
 
 
-      <a ng-show="loggedin" class="navbar-brand"  tabindex="-1" href="logout">logout</a>
+      <a ng-show="loggedin" class="navbar-brand" tabindex="-1" href="logout">logout</a>
     </div>
   </nav>
 
 
-  <div class="header-panel shadow-z-2" style="background-color:#3498DB;     z-index: 3;">
+  <div class="header-panel shadow-z-2" ng-style="themeStyle" style="background-color:#3498DB;     z-index: 3;">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4 col-xs-4 col-sm-4 ">
-          <a  style="color: white;" tabindex="-1" ng-class="getClass('/index.html')" ng-show="loggedin" class="navbar-brand withripple" href="/index.html"><i class="material-icons">&#xE87C;</i></a>
+          <a style="color: white;" tabindex="-1" ng-class="getClass('/index.html')" ng-show="loggedin" class="navbar-brand withripple" href="/index.html"><i class="material-icons">&#xE87C;</i></a>
 
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4 ">
-          <a style="color: white;" ng-show="loggedin"tabindex="-1"  ng-class="getClass('/blacklist')" class="navbar-brand withripple" href="blacklist"><i class="material-icons">&#xE8B0;</i></a>
+          <a style="color: white;" ng-show="loggedin" tabindex="-1" ng-class="getClass('/blacklist')" class="navbar-brand withripple" href="blacklist"><i class="material-icons">&#xE8B0;</i></a>
 
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4 ">

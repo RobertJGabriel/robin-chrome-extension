@@ -161,6 +161,13 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
   $scope.lists = [];
   $scope.profanity = [];
   $scope.stopped = "yes";
+  $scope.theme = (localStorage.getItem('theme') !== null) ? localStorage.getItem('theme') : "#F44336";
+$scope.themeStyle = (localStorage.getItem('theme') !== null) ? {
+  'background-color': $scope.theme
+} : {
+  'background-color': "#F44336"
+};
+
   try {
     ref.child(authData.uid).on("value", function(snapshot) {
 
@@ -187,11 +194,39 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
-    
+
     $scope.getClass = function (path) {
       return ($location.path().substr(0, path.length) === path) ? 'active' : '';
     }
 
+    $scope.getAddress = function (path) {
+      return ($location.path().substr(0, path.length) === path) ? 'true' : '';
+  
+    }
+      /**
+       * sets current color or theme
+       * @param {String} color
+       * @return {none} none
+       */
+      $scope.setColor = function(colors) {
+
+        $scope.removeLocalStorage('theme');
+        $scope.theme = colors;
+        localStorage.setItem('theme', $scope.theme);
+        $scope.themeStyle = {
+          'background-color': colors
+        };
+         $scope.$apply();
+      };
+
+      /**
+       * Remove localstorage by key
+       * @param {String} Key
+       * @return {none} none
+       */
+      $scope.removeLocalStorage = function(key) {
+        localStorage.removeItem(key);
+      };
 
     ref.child("profanity").on("value", function(snapshot) {
       for (var e in snapshot.val()) {
