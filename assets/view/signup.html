@@ -1,32 +1,38 @@
-<div class="well pages slideDown">
+
+
+
+
+
+
+<div class="card">
+
+  <div class="card-height-indicator"></div>
   <form class="form-horizontal" id="signup" name="signupForm" ng-submit="signup()">
-    <div ng-show="showError">
-      <div ng-include src="'assets/view/error.html'"></div>
+    <div class="card-content">
+
+
+
+      <div class="card-body" style="height: 90%;">
+        <h3 style="    padding-bottom: 10px;">Signup</h3>
+        <div ng-show="showError">
+          <div ng-include src="'assets/view/error.html'"></div>
+        </div>
+        <label for="inputEmail" class="control-label">Email </label>
+        <input type="text" class="form-control" id="inputEmail" name="signupemail" placeholder="Email">
+
+
+        <label for="inputEmail" class="control-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword" name="signuppassword" placeholder="*******">
+
+
+      </div>
+
+      <footer class="card-footer">
+
+        <button class="btn btn-flat"><a href="login" style="box-shadow: none;">login</a></button>
+        <button type="submit" style="float: right;" class="btn btn-flat btn-warning">Signup</button>
+      </footer>
+
     </div>
-    <fieldset>
-      <div class="form-group">
-        <div class="col-md-12">
-          <label for="inputEmail" class="control-label">Email </label>
-          <input type="text" class="form-control" id="inputEmail" name="signupemail" placeholder="Email">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-12">
-          <label for="inputEmail" class="control-label">Password</label>
-          <input type="password" class="form-control" id="inputPassword" name="signuppassword" placeholder="*******">
-        </div>
-      </div>
-
-
-      <div class="form-group">
-        <div class="col-md-10 col-md-offset-2">
-          <a href="login" class="btn btn-raised btn-link" style="
-    box-shadow: none;
-">login</a>
-
-          <button type="submit" style="float:right;" class="btn btn-primary">signup</button>
-        </div>
-      </div>
-    </fieldset>
   </form>
 </div>
