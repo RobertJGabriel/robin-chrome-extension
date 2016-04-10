@@ -1,32 +1,33 @@
 {
-    "name": "Robin",
-    "version": "0.11.0",
-    "manifest_version": 2,
-    "description": "See what your child is doing on web. Made easy with Robin",
-    "content_security_policy": "script-src 'self' https://cdn.firebase.com  https://*.firebaseio.com ; object-src 'self'",
-    "browser_action": {
-        "default_popup": "index.html"
-    },
-    "permissions": ["tabs", "storage", "http://*/*", "https://*/*", "fontSettings"],
-    "icons": {
-        "128": "assets/img/icons/icon-128.png",
-        "16": "assets/img/icons/icon-16.png",
-        "48": "assets/img/icons/icon-48.png"
-    },
-    "web_accessible_resources": [
-	  "https://*.firebaseio-demo.com",
-	  "https://*.firebaseio.com",
-	  "https://cdn.firebase.com",
-      "http://octicons.github.com/components/octicons/octicons/octicons.css",
-            "http://www.justinaguilar.com/animations/css/animations.css",
-	  "http://jsonip.com",
-	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js",
-	  "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js",
-	  "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700",
-	  "https://fonts.googleapis.com/icon?family=Material+Icons",
-	  "http://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.0.0/jquery.serialize-object.compiled.js",
-	  "https://cdn.firebase.com/js/client/2.3.2/firebase.js",
-	  "assets/css/bootstrap/*.css",
-	  "assets/css/fonts/*",
-	  "assets/js/*.js"]
+  "name": "Robin",
+  "version": "0.12.0",
+  "manifest_version": 2,
+  "description": "See what your child is doing on web. Made easy with Robin",
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com  https://*.firebaseio.com ; object-src 'self'",
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["tabs", "storage", "http://*/*", "https://*/*", "fontSettings"],
+  "icons": {
+    "128": "assets/img/icons/icon-128.png",
+    "16": "assets/img/icons/icon-16.png",
+    "48": "assets/img/icons/icon-48.png"
+  },
+  "web_accessible_resources": [
+    "https://*.firebaseio-demo.com",
+    "https://*.firebaseio.com",
+    "https://cdn.firebase.com",
+    "http://octicons.github.com/components/octicons/octicons/octicons.css",
+    "http://www.justinaguilar.com/animations/css/animations.css",
+    "http://jsonip.com",
+    "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js",
+    "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js",
+    "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700",
+    "https://fonts.googleapis.com/icon?family=Material+Icons",
+    "http://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.0.0/jquery.serialize-object.compiled.js",
+    "https://cdn.firebase.com/js/client/2.3.2/firebase.js",
+    "assets/css/bootstrap/*.css",
+    "assets/css/fonts/*",
+    "assets/js/*.js"
+  ]
 }
