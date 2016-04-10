@@ -14802,6 +14802,9 @@ html {
 .navbar-brand {
   font-size: 15px !important;
 }
+a:focus {
+  outline: 0 !important;
+}
 #pick_colors {
   height: 167px;
   list-style: none;

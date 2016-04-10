@@ -30,6 +30,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     $routeProvider.when('/index.html', {
       templateUrl: './assets/view/home.html',
       controller: 'main',
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -41,6 +42,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     }).when('/logout', {
       templateUrl: './assets/view/logout.html',
       controller: 'logout',
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -52,6 +54,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     }).when('/blacklist', {
       templateUrl: './assets/view/blacklist.html',
       controller: 'main',
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -63,6 +66,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     }).when('/settings', {
       templateUrl: './assets/view/settings.html',
       controller: 'main',
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -74,6 +78,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     }).when('/help', {
       templateUrl: './assets/view/help.html',
       controller: 'help',
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -85,7 +90,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     }).when('/child/:id', {
       templateUrl: './assets/view/profile.html',
       controller: 'child',
-
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -99,6 +104,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
   } else {
     $routeProvider.when('/index.html', {
       controller: 'logg',
+      cache: false,
       templateUrl: './assets/view/login.html',
       resolve: {
         // I will cause a 1 second delay
@@ -110,6 +116,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
       }
     }).when('/login', {
       controller: 'logg',
+      cache: false,
       templateUrl: './assets/view/login.html',
       resolve: {
         // I will cause a 1 second delay
@@ -122,6 +129,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     }).when('/help', {
       templateUrl: './assets/view/help.html',
       controller: 'help',
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -133,6 +141,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     }).when('/signup', {
       templateUrl: './assets/view/signup.html',
       controller: 'logg',
+      cache: false,
       resolve: {
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
@@ -203,11 +212,11 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         return ($location.path().substr(0, path.length) === path) ? 'true' : '';
 
       }
-    /**
-     * sets current color or theme
-     * @param {String} color
-     * @return {none} none
-     */
+      /**
+       * sets current color or theme
+       * @param {String} color
+       * @return {none} none
+       */
     $scope.setColor = function(colors) {
 
       $scope.removeLocalStorage('theme');
@@ -216,8 +225,9 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
       $scope.themeStyle = {
         'background-color': colors
       };
-      $scope.$apply();
     };
+
+
 
 
     /**
@@ -382,7 +392,29 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
 
 
 
+  /**
+   * reset users password
+   * @param {none} none
+   * @return {none} none
+   */
+  $scope.resetPasswords = function() {
 
+    ref.resetPassword({
+      email: $('input[name="inputemail"]').val()
+    }, function(error) {
+      if (error) {
+        switch (error.code) {
+          case "INVALID_USER":
+            $scope.errorMessage = "no users";
+            break;
+          default:
+            $scope.errorMessage = "Error resetting password:" + error;
+        }
+      } else {
+        $scope.errorMessage = "Password reset email sent successfully!";
+      }
+    });
+  };
   /**
    * Hand the login information for the robin
    * @param {none} none

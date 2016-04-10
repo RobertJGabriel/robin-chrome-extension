@@ -68,25 +68,28 @@
   </div>
 
 </div>
-<div class="card">
 
-  <div class="card-height-indicator"></div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>See the Words</h3>
+          <p>These are the words, that we are helping us to classify pages. Its always changing!!</p>
 
-  <div class="card-content">
+          <table class="table table-striped table-hover ">
+            <thead>
+              <tr>
+                <th>Word</th>
+                <th>Classed As</th>
 
-    <div class="card-body">
-      <h3>List of Profanity Words</h3>
-      <p>These are the words, that we classed as profanity. Its always changing!!</p>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="profanity2  in profanity">
+                <td>{{profanity2.word}}</td>
+                <td>{{profanity2.type}}</td>
 
-      <ul ng-repeat="profanity2  in profanity ">
-        <li>{{profanity2.word}}</li>
-      </ul>
-    </div>
+              </tr>
 
-    <footer class="card-footer">
-
-    </footer>
-
-  </div>
-
-</div>
+            </tbody>
+          </table>
+        </div>
+      </div>
