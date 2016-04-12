@@ -4,28 +4,21 @@
   <form class="form-horizontal" id="login" ng-submit="login()">
     <div class="card-content">
 
-
-
       <div class="card-body" style="height: 90%;">
-        <h3 style="    padding-bottom: 10px;">Login</h3>
+
+        <input type="text" style="margin-bottom: 35px;margin-top: 3.9em;" class="form-control" id="inputEmail" name="loginemail" placeholder="Email">
+        <input type="password" style="margin-bottom: 2.6em;" class="form-control" id="inputPassword" name="loginpassword" placeholder="*******">
+        <button type="submit" style="margin-bottom: 0.6em; width:100%;" ng-style="themeStyle" class="btn btn-raised btn-warning">Login</button>
+        <div class="other">
+          <a  style="text-align:center;" href="signup">signup</a>
+        </div>
+      </div>
+
+      <footer class="card-footer">
         <div ng-show="showError">
           <div ng-include src="'assets/view/error.html'"></div>
         </div>
 
-        <label for="inputEmail" class="control-label">Email</label>
-        <input type="text" class="form-control" id="inputEmail" name="loginemail" placeholder="Email">
-
-
-        <label for="inputEmail" class="control-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword" name="loginpassword" placeholder="*******">
-
-
-      </div>
-
-      <footer class="card-footer">
-
-        <button class="btn btn-flat"><a href="signup" style="box-shadow: none;">signup</a></button>
-        <button type="submit" class="btn btn-flat btn-warning" style="float: right;" >Login</button>
       </footer>
 
     </div>

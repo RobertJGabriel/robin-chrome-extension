@@ -1,36 +1,26 @@
 
 
-
-
-
-
 <div class="card">
 
   <div class="card-height-indicator"></div>
-  <form class="form-horizontal" id="signup" name="signupForm" ng-submit="signup()">
+    <form class="form-horizontal" id="signup" name="signupForm" ng-submit="signup()">
     <div class="card-content">
 
-
-
       <div class="card-body" style="height: 90%;">
-        <h3 style="    padding-bottom: 10px;">Signup</h3>
-        <div ng-show="showError">
-          <div ng-include src="'assets/view/error.html'"></div>
+
+        <input type="text" style="margin-bottom: 35px;margin-top: 3.9em;" class="form-control" id="inputEmail" name="signupemail" placeholder="Email">
+        <input type="password" style="margin-bottom: 2.6em;" class="form-control" id="inputPassword" name="signuppassword" placeholder="*******">
+        <button type="submit" style="margin-bottom: 0.6em; width:100%;" ng-style="themeStyle" class="btn btn-raised btn-warning">signup</button>
+        <div class="other">
+          <a  style="text-align:center;" href="login">login</a>
         </div>
-        <label for="inputEmail" class="control-label">Email </label>
-        <input type="text" class="form-control" id="inputEmail" name="signupemail" placeholder="Email">
-
-
-        <label for="inputEmail" class="control-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword" name="signuppassword" placeholder="*******">
-
-
       </div>
 
       <footer class="card-footer">
+        <div ng-show="showError">
+          <div ng-include src="'assets/view/error.html'"></div>
+        </div>
 
-        <button class="btn btn-flat"><a href="login" style="box-shadow: none;">login</a></button>
-        <button type="submit" style="float: right;" class="btn btn-flat btn-warning">Signup</button>
       </footer>
 
     </div>
