@@ -1,3 +1,4 @@
+
 <div id="clouds">
 	<div class="cloud x1"></div>
 	<!-- Time for multiple clouds to dance around -->
@@ -6,12 +7,14 @@
 	<div class="cloud x4"></div>
 	<div class="cloud x5"></div>
 </div>
+<div ng-show="showError">
+	<div ng-include src="'assets/view/error.html'"></div>
+</div>
 <div class="card">
 
   <div class="card-height-indicator"></div>
   <form class="form-horizontal" id="login" ng-submit="login()">
     <div class="card-content">
-
       <div class="card-body" style="height: 90%;">
 
         <input type="text" style="margin-bottom: 35px;margin-top: 3.9em;" class="form-control" id="inputEmail" name="loginemail" placeholder="Email">
@@ -23,9 +26,7 @@
       </div>
 
       <footer class="card-footer">
-        <div ng-show="showError">
-          <div ng-include src="'assets/view/error.html'"></div>
-        </div>
+
 
       </footer>
 

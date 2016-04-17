@@ -9,11 +9,12 @@
 }
 body {
   /*To hide the horizontal scroller appearing during the animation*/
-  overflow: hidden;
+
 }
 #clouds {
   height: 128px;
   position: absolute;
+    overflow: hidden;
   width: 100%;
   margin-left: -15px;
   margin-top: -44px;
@@ -28,7 +29,7 @@ body {
   border-radius: 100px;
   -moz-border-radius: 100px;
   -webkit-border-radius: 100px;
-  position: relative;
+  position: fixed;
 }
 .cloud:before, .cloud:after {
   content: '';

@@ -122,7 +122,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
           var delay = $q.defer();
-          $timeout(delay.resolve, 1000);
+          $timeout(delay.resolve, 2000);
           return delay.promise;
         }
       }
@@ -146,7 +146,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
         // I will cause a 1 second delay
         delay: function($q, $timeout) {
           var delay = $q.defer();
-          $timeout(delay.resolve, 1000);
+          $timeout(delay.resolve, 2000);
           return delay.promise;
         }
       }
@@ -422,7 +422,7 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
    * @return {none} none
    */
   $scope.login = function() {
-    $scope.showError = null;
+
     ref.child("users").authWithPassword({
       email: $('input[name="loginemail"]').val(),
       password: $('input[name="loginpassword"]').val()
@@ -439,7 +439,7 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
    * @return {none} none
    */
   $scope.signup = function() {
-    $scope.showError = null;
+
     ref.child("users").createUser({
       email: $('input[name="signupemail"]').val(),
       password: $('input[name="signuppassword"]').val()
@@ -479,10 +479,12 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
    * @return {none} none
    */
   function displayMessage(message) {
+    $scope.showError = true;
+    $scope.errorMessage = message;
+    $scope.$apply();
     setTimeout(function() {
-      $scope.showError = true;
-      $scope.errorMessage = message;
-      $scope.$apply();
+
+      $scope.showError = null;
     }, 1000)
   }
 
