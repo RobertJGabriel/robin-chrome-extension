@@ -32,6 +32,12 @@ git clone https://github.com/Projectbird/Robin-Chrome.git
   ```
   gulp build
   ```
+## Add to Chrome
+
+-  If you downloaded the code, unzip the file.
+-  Open (chrome://extensions/) or select the menu Window > Extensions.
+-  Enable the developer mode at top right.
+-  Click Load unpacked extension... and select the source code folder.
 
 # Example
 ![alt text](http://www.projectbird.com/uploads/6/0/3/3/603320/7222865_orig.png "HTML5")
