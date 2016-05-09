@@ -1,39 +1,32 @@
 <div data-ng-repeat="children  in children |  unique:'name'">
-  <div class="card" style="height: 130px;margin-bottom:10px;">
-    <div class="card-content">
-      <div class="container-fluid">
-        <div class="row" style="  height: 130px;">
-          <div class=" col-xs-4 " style="   padding: 0;">
-            <div class="card-image" style="height: 130px;">
-              <i class="material-icons" style="font-size: 6.1em;width: 83px;height: 85px;margin-left: 10px;margin-top: 20px;">&#xE87C;</i>
+    <div class="card" style="height: 130px;margin-bottom:10px;">
+        <div class="card-content">
+            <div class="container-fluid">
+                <div class="row" style="  height: 130px;">
+                    <div class=" col-xs-4 " style="   padding: 0;">
+                        <div class="card-image" style="height: 130px;">
+                            <i class="material-icons" style="font-size: 6.1em;width: 83px;height: 85px;margin-left: 10px;margin-top: 20px;color:{{children.color}};">&#xE815;</i>
+                        </div>
+                    </div>
+                    <div class="col-xs-8  " style="height: 130px;">
+                        <div>
+                            <h3 class="card-image-headline">{{children.name}}</h3>
+                            <p style="height:30px;">
+                            </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{children.currentUrl}}">{{children.currentUrl}}</a></p>
+                        </div>
+                        <footer class="card-footer">
+                            <button class="btn btn-flat btn-sm" style="padding: 5px 16px;"><a ng:href="child/{{children.id}}">More</a></button>
+                            <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="children.stop == 'yes'"><a id="{{children.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
+                            <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="children.stop == 'no'"><a id="{{children.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
+                        </footer>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-xs-8  " style="height: 130px;">
-            <div>
-              <h3 class="card-image-headline">{{children.name}}</h3>
-              <p style="height:30px;">
-                </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{children.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
-            </div>
-            <footer class="card-footer">
-              <button class="btn btn-flat btn-sm" style="padding: 5px 16px;"><a ng:href="child/{{children.id}}">More</a></button>
-              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'yes'"><a id="{{children.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
-              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'no'"><a id="{{children.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
-            </footer>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <div ng-hide="children.length">
-  <i class="material-icons" style="font-size: 6.1em;
-    width: 100px;
-    /* height: 85px; */
-    /* margin-left: 10px; */
-    /* margin-top: 20px; */
-    margin-left: 110px;">&#xE7F3;</i>
-
-    <h2 style="
-        text-align: center;
-    ">No <br>Devices</h2>
+    <i class="material-icons" style="font-size: 6.1em;width: 100px;margin-left: 110px;">&#xE7F3;</i>
+    <h2 style="text-align: center;">No <br>Devices</h2>
+    <p style="text-align: center;">Download the browser onto your childs computer and sign in. To get started.</p>
 </div>
