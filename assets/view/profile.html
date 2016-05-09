@@ -1,23 +1,23 @@
-<div data-ng-repeat="banndedUrls2  in child |  unique:'name'">
+<div data-ng-repeat="children  in child |  unique:'name'">
   <div class="card slideDown" style="height: 423px;">
     <div class="card-content">
       <div class="card-image" ng-style="themeStyle" style="height: 230px;">
         <i class="material-icons"  style="font-size: 11.1em;width: 310px;margin-top:10px;text-align: center;">&#xE87C;</i>
 
-        <h3 class="card-image-headline">{{banndedUrls2.name}}</h3>
+        <h3 class="card-image-headline">{{children.name}}</h3>
       </div>
       <div class="card-body" style="height:140px">
 
-        <p><b>Date:</b> {{ banndedUrls2.date }} </p>
-        <p><b>Time:</b> {{banndedUrls2.time}}</p>
-        <p><b>Platform:</b> {{banndedUrls2.platform}}</p>
-        <p><b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
+        <p><b>Date:</b> {{ children.date }} </p>
+        <p><b>Time:</b> {{children.time}}</p>
+        <p><b>Platform:</b> {{children.platform}}</p>
+        <p><b>Just Searched: </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{children.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
       </div>
 
       <footer class="card-footer" style="height: 50px;padding: 27px;">
         <button class="btn btn-flat"><a href="/index.html"><i class="material-icons">&#xE317;</i></a></button>
-        <button class="btn btn-flat btn-warning " style="padding: 5px 16px;" ng-show="stopped == 'yes'"><a id="{{banndedUrls2.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
-        <button class="btn btn-flat btn-warning " style="padding: 5px 16px;" ng-show="stopped == 'no'"><a id="{{banndedUrls2.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
+        <button class="btn btn-flat btn-warning " style="padding: 5px 16px;" ng-show="stopped == 'yes'"><a id="{{children.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
+        <button class="btn btn-flat btn-warning " style="padding: 5px 16px;" ng-show="stopped == 'no'"><a id="{{children.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
 
       </footer>
     </div>

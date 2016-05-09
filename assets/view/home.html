@@ -1,4 +1,4 @@
-<div data-ng-repeat="banndedUrls2  in children |  unique:'name'">
+<div data-ng-repeat="children  in children |  unique:'name'">
   <div class="card" style="height: 130px;margin-bottom:10px;">
     <div class="card-content">
       <div class="container-fluid">
@@ -10,18 +10,30 @@
           </div>
           <div class="col-xs-8  " style="height: 130px;">
             <div>
-              <h3 class="card-image-headline">{{banndedUrls2.name}}</h3>
+              <h3 class="card-image-headline">{{children.name}}</h3>
               <p style="height:30px;">
-                </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{banndedUrls2.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
+                </b> <a target="_blank" ng:href="https://duckduckgo.com/?q={{children.currentUrl}}">{{banndedUrls2.currentUrl}}</a></p>
             </div>
             <footer class="card-footer">
-              <button class="btn btn-flat btn-sm" style="padding: 5px 16px;"><a ng:href="child/{{banndedUrls2.id}}">More</a></button>
-              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'yes'"><a id="{{banndedUrls2.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
-              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'no'"><a id="{{banndedUrls2.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
+              <button class="btn btn-flat btn-sm" style="padding: 5px 16px;"><a ng:href="child/{{children.id}}">More</a></button>
+              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'yes'"><a id="{{children.id}}" data-ng-click="stopInternet($index,$event)">Stop</a></button>
+              <button class="btn btn-flat btn-warning btn-sm" style="padding: 5px 16px;" ng-show="stopped == 'no'"><a id="{{children.id}}" data-ng-click="startInternet($index,$event)">start</a></button>
             </footer>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div ng-hide="children.length">
+  <i class="material-icons" style="font-size: 6.1em;
+    width: 100px;
+    /* height: 85px; */
+    /* margin-left: 10px; */
+    /* margin-top: 20px; */
+    margin-left: 110px;">&#xE7F3;</i>
+
+    <h2 style="
+        text-align: center;
+    ">No <br>Devices</h2>
 </div>
