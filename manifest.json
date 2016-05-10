@@ -1,6 +1,6 @@
 {
   "name": "Robin",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "manifest_version": 2,
   "description": "See what your child is doing on web. Made easy with Robin",
   "content_security_policy": "script-src 'self' https://cdn.firebase.com  https://*.firebaseio.com ; object-src 'self'",
