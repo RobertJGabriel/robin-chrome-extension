@@ -5,7 +5,14 @@
                 <div class="row" style="  height: 130px;">
                     <div class=" col-xs-4 " style="   padding: 0;">
                         <div class="card-image" style="height: 130px;">
+
+                          <div ng-show="children.color == '#000'">
+                            <i class="material-icons" style="font-size: 6.1em;width: 83px;height: 85px;margin-left: 10px;margin-top: 20px;color:{{children.color}};">&#xE814;</i>
+                          </div>
+                          <div ng-show="children.color != '#000'">
                             <i class="material-icons" style="font-size: 6.1em;width: 83px;height: 85px;margin-left: 10px;margin-top: 20px;color:{{children.color}};">&#xE815;</i>
+                          </div>
+
                         </div>
                     </div>
                     <div class="col-xs-8  " style="height: 130px;">
