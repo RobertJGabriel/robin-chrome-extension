@@ -1,7 +1,39 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyD-BSYLMr_fOt2RYWlbYObsnjbrossxaqE",
+    authDomain: "robin-5b03b.firebaseapp.com",
+    databaseURL: "https://robin-5b03b.firebaseio.com",
+    storageBucket: "robin-5b03b.appspot.com",
+    messagingSenderId: "372560081336"
+};
 var app = angular.module('robinChrome', ['ngRoute']);
-var ref = new Firebase("https://projectbird-robin.firebaseio.com");
-ref.onAuth(authDataCallback);
-var authData = ref.getAuth();
+
+firebase.initializeApp(config);
+
+var rootRef = firebase.database().ref();
+
+var authData = firebase.auth();
+
+authData.onAuthStateChanged(authDataCallback);
+
+/**
+* Check if the user is logged in or not
+* @param  {none} none
+* @param  {none} none
+* @return {none} none
+*/
+function authDataCallback(user) {
+    console.log(user);
+    if (user) {
+        console.log("User " + user.uid + " is logged in with " +
+            user.provider);
+    } else {
+        console.log("User is logged out");
+    }
+}
+
+
+
 
 
 
@@ -24,7 +56,7 @@ app.filter('unique', function() {
 app.config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|coui|chrome-extension):/);
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|assets|chrome-extension):|data:image\//);
-
+    console.log(authData);
     if (authData) {
 
         $routeProvider.when('/index.html', {
@@ -178,9 +210,9 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
     };
 
     try {
-        ref.child(authData.uid).on("value", function(snapshot) {
+       rootRef.child(authData.uid).on("value", function(snapshot) {
 
-            for (var f in snapshot.val()["children"]) {
+            for (var f in snapshot.val().children) {
                 $scope.children.push({
                     id: f,
                     currentUrl: snapshot.val()["children"][f]["currentUrl"].replace(/['"]+/g, '').slice(26),
@@ -210,14 +242,14 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         }
 
         $scope.getAddress = function(path) {
-                return ($location.path().substr(0, path.length) === path) ? 'true' : '';
+            return ($location.path().substr(0, path.length) === path) ? 'true' : '';
 
-            }
-            /**
-             * sets current color or theme
-             * @param {String} color
-             * @return {none} none
-             */
+        }
+        /**
+         * sets current color or theme
+         * @param {String} color
+         * @return {none} none
+         */
         $scope.setColor = function(colors) {
 
             $scope.removeLocalStorage('theme');
@@ -240,7 +272,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
             localStorage.removeItem(key);
         };
 
-        ref.child("profanity").on("value", function(snapshot) {
+       rootRef.child("profanity").on("value", function(snapshot) {
             for (var e in snapshot.val()) {
                 $scope.profanity.push({
                     word: snapshot.val()[e]["word"],
@@ -281,7 +313,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         var temp = $('input[name="blackorwhiteInputs"]').val();
         var temp2 = $('select[name="typeee"]').val();
         $scope.errorMessage = "Added new Url" + temp + "with type  " + temp2;
-        var usersRef = ref.child(authData.uid).child("list").child(stringify(temp));
+        var usersRef =rootRef.child(authData.uid).child("list").child(stringify(temp));
         usersRef.set({
             type: removeRegex(temp2)
         });
@@ -299,7 +331,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         $scope.showError = true;
         $scope.errorMessage = "Deleted " + index + event.target.id;
         $scope.lists.splice(index, 1);
-        var usersRef = ref.child(authData.uid).child("list").child('"' + event.target.id + '"').remove();
+        var usersRef =rootRef.child(authData.uid).child("list").child('"' + event.target.id + '"').remove();
     }
 
 
@@ -315,7 +347,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
         console.log($scope.children[id].stop);
         $scope.children[id].stop = "no";
 
-        var usersRef = ref.child(authData.uid).child("children").child(event.target.id);
+        var usersRef =rootRef.child(authData.uid).child("children").child(event.target.id);
         usersRef.update({
             stop: "yes"
         });
@@ -337,7 +369,7 @@ app.controller('main', function($scope, $route, $routeParams, $location) {
     $scope.startInternet = function(id, event) {
 
         console.log($scope.children[id].stop);
-        var usersRef = ref.child(authData.uid).child("children").child(event.target.id);
+        var usersRef =rootRef.child(authData.uid).child("children").child(event.target.id);
         usersRef.update({
             stop: "no"
         });
@@ -359,7 +391,7 @@ app.controller('child', function($scope, $route, $routeParams, $location) {
     $scope.loggedin = authData;
     $scope.child = [];
 
-    ref.child(authData.uid).child("children").child($scope.params.id).on("value", function(snapshot) {
+   rootRef.child(authData.uid).child("children").child($scope.params.id).on("value", function(snapshot) {
 
 
         $scope.child.push({
@@ -370,7 +402,7 @@ app.controller('child', function($scope, $route, $routeParams, $location) {
             name: snapshot.val()["name"],
             color: snapshot.val()["color"],
             stop: snapshot.val()["stop"],
-            status:snapshot.val()["status"],
+            status: snapshot.val()["status"],
             platform: snapshot.val()["platform"]
         });
 
@@ -380,47 +412,47 @@ app.controller('child', function($scope, $route, $routeParams, $location) {
     });
 
 
-        /**
-         * Stop Innet
-         * @param {String} userData
-         * @param {String} email
-         * @param {String} password
-         * @return {none} none
-         */
-        $scope.stopInternetChild = function(id, event) {
+    /**
+     * Stop Innet
+     * @param {String} userData
+     * @param {String} email
+     * @param {String} password
+     * @return {none} none
+     */
+    $scope.stopInternetChild = function(id, event) {
 
-            console.log($scope.child[id].stop);
-            $scope.child[id].stop = "no";
+        console.log($scope.child[id].stop);
+        $scope.child[id].stop = "no";
 
-            var usersRef = ref.child(authData.uid).child("children").child(event.target.id);
-            usersRef.update({
-                stop: "yes"
-            });
+        var usersRef =rootRef.child(authData.uid).child("children").child(event.target.id);
+        usersRef.update({
+            stop: "yes"
+        });
 
-            $scope.$apply;
-        }
-
-
+        $scope.$apply;
+    }
 
 
 
-        /**
-         * Stop Innet
-         * @param {String} userData
-         * @param {String} email
-         * @param {String} password
-         * @return {none} none
-         */
-        $scope.startInternetChild = function(id, event) {
 
-            console.log($scope.child[id].stop);
-            var usersRef = ref.child(authData.uid).child("children").child(event.target.id);
-            usersRef.update({
-                stop: "no"
-            });
-            $scope.child[id].stop = "yes";
-            $scope.$apply;
-        }
+
+    /**
+     * Stop Innet
+     * @param {String} userData
+     * @param {String} email
+     * @param {String} password
+     * @return {none} none
+     */
+    $scope.startInternetChild = function(id, event) {
+
+        console.log($scope.child[id].stop);
+        var usersRef =rootRef.child(authData.uid).child("children").child(event.target.id);
+        usersRef.update({
+            stop: "no"
+        });
+        $scope.child[id].stop = "yes";
+        $scope.$apply;
+    }
 
 });
 
@@ -447,7 +479,7 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
      */
     $scope.resetPasswords = function() {
 
-        ref.resetPassword({
+       rootRef.resetPassword({
             email: $('input[name="inputemail"]').val()
         }, function(error) {
             if (error) {
@@ -471,7 +503,7 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
      */
     $scope.login = function() {
 
-        ref.child("users").authWithPassword({
+       rootRef.child("users").authWithPassword({
             email: $('input[name="loginemail"]').val(),
             password: $('input[name="loginpassword"]').val()
         }, function(error, authData) {
@@ -488,7 +520,7 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
      */
     $scope.signup = function() {
 
-        ref.child("users").createUser({
+       rootRef.child("users").createUser({
             email: $('input[name="signupemail"]').val(),
             password: $('input[name="signuppassword"]').val()
         }, function(error, userObj) {
@@ -533,7 +565,7 @@ app.controller('logg', function($scope, $route, $routeParams, $location) {
         setTimeout(function() {
 
             $scope.showError = null;
-        }, 1000)
+        }, 1000);
     }
 
 });
@@ -548,7 +580,7 @@ app.controller('logout', function($scope, $route, $routeParams, $location) {
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
     $scope.loggedin = false;
-    ref.unauth();
+   rootRef.unauth();
     redirect("/index.html");
 });
 
@@ -585,7 +617,7 @@ app.controller('home', function($scope, $route, $routeParams, $location) {
  * @return {none} none
  */
 function createData(userData, email, password) {
-    var usersRef = ref.child(userData.uid);
+    var usersRef =rootRef.child(userData.uid);
     usersRef.set({
         information: {
             email: email,
@@ -607,7 +639,7 @@ function createData(userData, email, password) {
  * @return {none} none
  */
 try {
-    ref.child(authData.uid).on("value", function(snapshot) {
+   rootRef.child(authData.uid).on("value", function(snapshot) {
         console.log(snapshot.val());
     }, function(errorObject) {
         console.log("The read failed: " + errorObject.code);
@@ -698,7 +730,7 @@ function profanityCheck(word, callback) {
  * @return {none} none
  */
 function loginInformation(email, id) {
-    ref.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
+   rootRef.child("users").startAt(email).endAt(email).once('value', function(snapshot) {
         console.log(snapshot.val());
         redirect("/index.html");
     }, function(errorObject) {
@@ -713,7 +745,7 @@ function loginInformation(email, id) {
  * @return {object} snapshot
  */
 function getProfanityWords(temp, callback) {
-    ref.child("profanity").on('value', function(snapshot) {
+   rootRef.child("profanity").on('value', function(snapshot) {
         console.log(snapshot.val());
         callback(snapshot.val());
     }, function(errorObject) {
@@ -747,7 +779,7 @@ function getIp(test) {
  * @return {none} none
  */
 function profanityToFirebase(word) {
-    var usersRef = ref.child("profanity").child(word);
+    var usersRef =rootRef.child("profanity").child(word);
     usersRef.update({
         profanity: "true"
     });
@@ -755,21 +787,7 @@ function profanityToFirebase(word) {
 
 
 
-/**
 
-* Check if the user is logged in or not
-* @param  {none} none
-* @param  {none} none
-* @return {none} none
-*/
-function authDataCallback(authData) {
-    if (authData) {
-        console.log("User " + authData.uid + " is logged in with " +
-            authData.provider);
-    } else {
-        console.log("User is logged out");
-    }
-}
 
 
 

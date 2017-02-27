@@ -2,7 +2,7 @@ var chrome, elem, code, style;
 
 
 var openDyslexic = {
-    Init: function () {
+    Init: function() {
         checkStatus(); // Check if the check box is set.
     }
 };
@@ -11,7 +11,7 @@ openDyslexic.Init();
 function checkStatus() {
     chrome.storage.sync.get({
         booleans: true
-    }, function (items) {
+    }, function(items) {
         if (items.booleans === true) {
             turnOnOpenDyslexic();
             setLike(1);
@@ -60,7 +60,7 @@ function turnOnOpenDyslexic() {
 }
 
 function reloadPage() {
-    chrome.tabs.getSelected(null, function (tab) {
+    chrome.tabs.getSelected(null, function(tab) {
         code = 'window.location.reload();';
         chrome.tabs.executeScript(tab.id, {
             code: code

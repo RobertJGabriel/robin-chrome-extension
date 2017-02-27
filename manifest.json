@@ -16,6 +16,10 @@
   "web_accessible_resources": [
     "https://*.firebaseio-demo.com",
     "https://*.firebaseio.com",
+    "https://*.firebaseio.com",
+    "https://*.firebase.com",
+  "https://*.gstatic.com",
+  "https://www.gstatic.com/firebasejs/3.6.10/firebase.js",
     "https://cdn.firebase.com",
     "http://octicons.github.com/components/octicons/octicons/octicons.css",
     "http://www.justinaguilar.com/animations/css/animations.css",
